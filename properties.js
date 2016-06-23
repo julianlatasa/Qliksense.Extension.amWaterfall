@@ -28,7 +28,7 @@ define([], function() {
         ref: "props.design.fontFamily",
         label: "Font Family",
         type: "string",
-        component: "text"
+        defaultValue: "Verdana"
     };
     var design = {
         type: "items",

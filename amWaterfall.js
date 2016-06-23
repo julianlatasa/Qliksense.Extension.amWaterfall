@@ -93,6 +93,7 @@ define([
                 var chart = AmCharts.makeChart($element[0], {
                     "type": "serial",
                     "theme": "none",
+                    "fontFamily": layout.props.design.fontFamily,
                     "dataProvider": dataProvider,
                     "valueAxes": [{
                         "axisAlpha": 0,
