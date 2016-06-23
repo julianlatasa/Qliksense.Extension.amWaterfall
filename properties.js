@@ -37,10 +37,9 @@ define([], function() {
         defaultValue: "13px"
     };
     var handDrawn = {
-        ref: "props.design.handDrawn",
-        label: "Hand Drawn",
         type: "boolean",
-        component: "switch",
+        label: "Hand Drawn",
+        ref: "props.design.handDrawn",
         defaultValue: false
     };
     var design = {

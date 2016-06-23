@@ -93,7 +93,6 @@ define([
                 }
             },
             paint: function($element, layout) {
-                console.log(layout);
                 var hc = layout.qHyperCube;
                 var dataProvider = [];
                 var trendLines = [];
@@ -154,6 +153,7 @@ define([
                 var chart = AmCharts.makeChart($element[0], {
                     "type": "serial",
                     "theme": "none",
+                    "handDrawn": layout.props.design.handDrawn,
                     "dataProvider": dataProvider,
                     "valueAxes": [{
                         "axisAlpha": 0,
