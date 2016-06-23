@@ -30,11 +30,26 @@ define([], function() {
         type: "string",
         defaultValue: "Verdana"
     };
+    var fontSize = {
+        ref: "props.design.fontSize",
+        label: "Font Size",
+        type: "string",
+        defaultValue: "13px"
+    };
+    var handDrawn = {
+        ref: "props.design.handDrawn",
+        label: "Hand Drawn",
+        type: "boolean",
+        component: "switch",
+        defaultValue: false
+    };
     var design = {
         type: "items",
         label: "Design",
         items: {
-            fontFamily: fontFamily
+            fontFamily: fontFamily,
+            fontSize: fontSize,
+            handDrawn: handDrawn
         }
     };
 

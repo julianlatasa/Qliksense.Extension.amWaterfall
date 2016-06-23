@@ -15,24 +15,85 @@ requirejs.config({
 });
 
 define([
-    'jquery',
-    './properties',
-    'amcharts.serial'],
+        'jquery',
+        './properties',
+        'amcharts.serial'
+    ],
     function($, props) {
+        var defaultDimension = "=valuelist('start', '1', '2', '3', 'end')";
+        var defaultMeasure1 = "pick(match(valuelist('start', '1', '2', '3', 'end'),'start', '1', '2', '3', 'end'),2,-1,-0.5,3,4)";
+        var defaultMeasure2 = "pick(match(valuelist('start', '1', '2', '3', 'end'),'start', '1', '2', '3', 'end'),'desc1','desc2','desc3','desc4','desc5')";
+        var defaultDimensionArr = {
+            qLibraryId: "",
+            qNullSuprresion: false,
+            qDef: {
+                qGrouping: "N",
+                qFieldDefs: [defaultDimension]
+            }
+        };
+        var defMeasure1 = {
+            "qLibraryId": "",
+            "qSortBy": {
+              "qSortByState": 0,
+              "qSortByFrequency": 0,
+              "qSortByNumeric": 0,
+              "qSortByAscii": 0,
+              "qSortByLoadOrder": 1,
+              "qSortByExpression": 0,
+              "qExpression": {
+                "qv": ""
+              }
+            },
+            "qDef": {
+              "qLabel": "defMeasure1",
+              "qDescription": "",
+              "qTags": [
+                "tags"
+              ],
+              "qGrouping": "N",
+              "qDef": defaultMeasure1,
+              "cId": "defaultMeasure1"
+            }
+          };
+        var defMeasure2 = {
+            "qLibraryId": "",
+            "qSortBy": {
+              "qSortByState": 0,
+              "qSortByFrequency": 0,
+              "qSortByNumeric": 0,
+              "qSortByAscii": 0,
+              "qSortByLoadOrder": 1,
+              "qSortByExpression": 0,
+              "qExpression": {
+                "qv": ""
+              }
+            },
+            "qDef": {
+              "qLabel": "defMeasure2",
+              "qDescription": "",
+              "qTags": [
+                "tags"
+              ],
+              "qGrouping": "N",
+              "qDef": defaultMeasure2,
+              "cId": "defaultMeasure2"
+            }
+          };
+
         return {
             definition: props,
             initialProperties: {
                 qHyperCubeDef: {
-                    qDimensions: [],
-                    qMeasures: [],
+                    qDimensions: [defaultDimensionArr],
+                    qMeasures: [defMeasure1, defMeasure2],
                     qInitialDataFetch: [{
-                        qWidth: 4,
+                        qWidth: 3,
                         qHeight: 2500
                     }]
                 }
             },
             paint: function($element, layout) {
-
+                console.log(layout);
                 var hc = layout.qHyperCube;
                 var dataProvider = [];
                 var trendLines = [];
@@ -43,13 +104,13 @@ define([
                     var open;
                     var color;
                     var name = row[0].qText;
-                    if (index > 0 && index < hc.qSize.qcy -1) {
+                    if (index > 0 && index < hc.qSize.qcy - 1) {
                         open = previous;
                     } else {
                         open = 0;
                     }
                     var close = open + row[1].qNum;
-                    if (index === 0 || index == hc.qSize.qcy-1) {
+                    if (index === 0 || index == hc.qSize.qcy - 1) {
                         color = "#1c8ceb";
                     } else {
                         if (open > close) {
@@ -68,10 +129,10 @@ define([
                         "balloonValue": row[2].qText
                     });
 
-                    if(index > 0) {
+                    if (index > 0) {
                         var initValue;
                         var closeValue;
-                        if(index == hc.qSize.qcy-1) {
+                        if (index == hc.qSize.qcy - 1) {
                             initValue = previous;
                             closeValue = close;
                         } else {
@@ -79,12 +140,12 @@ define([
                             closeValue = open;
                         }
                         trendLines.push({
-                        "dashLength": 3,
-                        "finalCategory": name,
-                        "finalValue": closeValue,
-                        "initialCategory": previousCategory,
-                        "initialValue": initValue,
-                        "lineColor": "#888888"
+                            "dashLength": 3,
+                            "finalCategory": name,
+                            "finalValue": closeValue,
+                            "initialCategory": previousCategory,
+                            "initialValue": initValue,
+                            "lineColor": "#888888"
                         });
                     }
                     previous = close;
@@ -93,7 +154,6 @@ define([
                 var chart = AmCharts.makeChart($element[0], {
                     "type": "serial",
                     "theme": "none",
-                    "fontFamily": layout.props.design.fontFamily,
                     "dataProvider": dataProvider,
                     "valueAxes": [{
                         "axisAlpha": 0,
@@ -109,7 +169,8 @@ define([
                         "lineColor": "#BBBBBB",
                         "openField": "open",
                         "type": "column",
-                        "valueField": "close"
+                        "valueField": "close",
+                        "fontFamily": layout.props.design.fontFamily
                     }],
                     "trendLines": trendLines,
                     "columnWidth": 0.6,
@@ -123,6 +184,8 @@ define([
                         "enabled": true
                     }
                 });
+                $element.find('tspan').css("font-family", layout.props.design.fontFamily);
+                $element.find('tspan').css("font-size", layout.props.design.fontSize);
             }
         };
     });
