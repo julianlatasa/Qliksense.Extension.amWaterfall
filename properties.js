@@ -81,8 +81,16 @@ define([], function() {
     };
     var handDrawn = {
         type: "boolean",
+        component: "switch",
         label: "Hand Drawn",
         ref: "props.design.handDrawn",
+        options: [{
+            value: true,
+            label: "On"
+        }, {
+            value: false,
+            label: "Off"
+        }],
         defaultValue: false
     };
     var titleString = {
@@ -91,17 +99,53 @@ define([], function() {
         ref: "props.design.titleString",
         defaultValue: "Title Waterfall"
     };
+    var categoryTitle = {
+        type: "boolean",
+        component: "switch",
+        label: "Category Title",
+        ref: "props.design.categoryTitle",
+        options: [{
+            value: true,
+            label: "On"
+        }, {
+            value: false,
+            label: "Off"
+        }],
+        defaultValue: true
+    };
+    var chartTitle = {
+        type: "boolean",
+        component: "switch",
+        label: "Chart Title",
+        ref: "props.design.chartTitle",
+        options: [{
+            value: true,
+            label: "On"
+        }, {
+            value: false,
+            label: "Off"
+        }],
+        defaultValue: true
+    };
+    var valueAxisTitle = {
+        type: "boolean",
+        component: "switch",
+        label: "Value Axis Title",
+        ref: "props.design.valueAxisTitle",
+        options: [{
+            value: true,
+            label: "On"
+        }, {
+            value: false,
+            label: "Off"
+        }],
+        defaultValue: true
+    };
     var titleSize = {
         type: "number",
         label: "Font Size",
         ref: "props.design.titleSize",
         defaultValue: 10
-    };
-    var titleBold = {
-        type: "boolean",
-        label: "Bold",
-        ref: "props.design.titleBold",
-        defaultValue: true
     };
     var title = {
         type: "items",
@@ -109,15 +153,39 @@ define([], function() {
         items: {
             titleString: titleString,
             titleSize: titleSize,
-            titleBold: titleBold
+            chartTitle: chartTitle,
+            valueAxisTitle: valueAxisTitle,
+            categoryTitle: categoryTitle
         }
+    };
+    var depth = {
+        type: "number",
+        component: "slider",
+        label: "Depth",
+        ref: "props.design.depth",
+        min: 0,
+        max: 100,
+        step: 1,
+        defaultValue: 0
+    };
+    var angle = {
+        type: "number",
+        component: "slider",
+        label: "Angle",
+        ref: "props.design.angle",
+        min: 0,
+        max: 100,
+        step: 1,
+        defaultValue: 0
     };
     var design = {
         type: "items",
         label: "Design",
         items: {
             handDrawn: handDrawn,
-            valueAxis: valueAxis
+            valueAxis: valueAxis,
+            depth: depth,
+            angle: angle
         }
     };
 

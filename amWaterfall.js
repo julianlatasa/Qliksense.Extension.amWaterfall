@@ -152,18 +152,30 @@ define([
                     }
                     previous = close;
                     previousCategory = name;
-                    console.log(layout);
                 });
                 var design = layout.props.design;
+                var chartTitle;
+                var valueAxisTitle;
+                var categoryTitle;
+                if(design.chartTitle) {
+                    chartTitle = [{
+                        "text": design.titleString
+                    }];
+                }
+                if(design.valueAxisTitle) {
+                    valueAxisTitle = hc.qMeasureInfo[0].qFallbackTitle;
+                }
+                if(design.categoryTitle) {
+                    categoryTitle = hc.qDimensionInfo[0].qFallbackTitle;
+                }
                 var chart = AmCharts.makeChart($element[0], {
                     "type": "serial",
                     "theme": "none",
+                    "depth3D": design.depth,
+                    "angle": design.angle,
                     "fontFamily": design.fontFamily,
                     "fontSize": design.titleSize,
-                    "titles": [{
-                        "text": design.titleString,
-                        "bold": design.titleBold
-                    }],
+                    "titles": chartTitle,
                     "handDrawn": design.handDrawn,
                     "dataProvider": dataProvider,
                     "valueAxes": [{
@@ -171,7 +183,7 @@ define([
                         "gridAlpha": 0.1,
                         "position": design.valueAxis,
                         "fontSize": design.fontSizeY,
-                        "title": hc.qMeasureInfo[0].qFallbackTitle
+                        "title": valueAxisTitle
                     }],
                     balloon: {
                         fontSize: design.fontSizeBalloon,
@@ -197,7 +209,7 @@ define([
                         "axisAlpha": 0,
                         "gridAlpha": 0.1,
                         "fontSize": design.fontSizeDim,
-                        "title": hc.qDimensionInfo[0].qFallbackTitle
+                        "title": categoryTitle
                     },
                     "export": {
                         "enabled": true
