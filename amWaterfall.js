@@ -20,71 +20,74 @@ define([
         'amcharts.serial'
     ],
     function($, props) {
-        var defaultDimension = "=valuelist('start', '1', '2', '3', 'end')";
+        var defaultDimensionString = "=valuelist('start', '1', '2', '3', 'end')";
         var defaultMeasure1 = "pick(match(valuelist('start', '1', '2', '3', 'end'),'start', '1', '2', '3', 'end'),2,-1,-0.5,3,4)";
         var defaultMeasure2 = "pick(match(valuelist('start', '1', '2', '3', 'end'),'start', '1', '2', '3', 'end'),'desc1','desc2','desc3','desc4','desc5')";
-        var defaultDimensionArr = {
+        var defaultDimension = {
             qLibraryId: "",
             qNullSuprresion: false,
             qDef: {
                 qGrouping: "N",
-                qFieldDefs: [defaultDimension]
+                qFieldDefs: [defaultDimensionString],
+                cId: "defaultDimension",
+                qFieldLabels: ["Category Axis Label"]
+
             }
         };
         var defMeasure1 = {
             "qLibraryId": "",
             "qSortBy": {
-              "qSortByState": 0,
-              "qSortByFrequency": 0,
-              "qSortByNumeric": 0,
-              "qSortByAscii": 0,
-              "qSortByLoadOrder": 1,
-              "qSortByExpression": 0,
-              "qExpression": {
-                "qv": ""
-              }
+                "qSortByState": 0,
+                "qSortByFrequency": 0,
+                "qSortByNumeric": 0,
+                "qSortByAscii": 0,
+                "qSortByLoadOrder": 1,
+                "qSortByExpression": 0,
+                "qExpression": {
+                    "qv": ""
+                }
             },
             "qDef": {
-              "qLabel": "defMeasure1",
-              "qDescription": "",
-              "qTags": [
-                "tags"
-              ],
-              "qGrouping": "N",
-              "qDef": defaultMeasure1,
-              "cId": "defaultMeasure1"
+                "qLabel": "Value Axis Label",
+                "qDescription": "",
+                "qTags": [
+                    "tags"
+                ],
+                "qGrouping": "N",
+                "qDef": defaultMeasure1,
+                "cId": "defaultMeasure1"
             }
-          };
+        };
         var defMeasure2 = {
             "qLibraryId": "",
             "qSortBy": {
-              "qSortByState": 0,
-              "qSortByFrequency": 0,
-              "qSortByNumeric": 0,
-              "qSortByAscii": 0,
-              "qSortByLoadOrder": 1,
-              "qSortByExpression": 0,
-              "qExpression": {
-                "qv": ""
-              }
+                "qSortByState": 0,
+                "qSortByFrequency": 0,
+                "qSortByNumeric": 0,
+                "qSortByAscii": 0,
+                "qSortByLoadOrder": 1,
+                "qSortByExpression": 0,
+                "qExpression": {
+                    "qv": ""
+                }
             },
             "qDef": {
-              "qLabel": "defMeasure2",
-              "qDescription": "",
-              "qTags": [
-                "tags"
-              ],
-              "qGrouping": "N",
-              "qDef": defaultMeasure2,
-              "cId": "defaultMeasure2"
+                "qLabel": "defMeasure2",
+                "qDescription": "",
+                "qTags": [
+                    "tags"
+                ],
+                "qGrouping": "N",
+                "qDef": defaultMeasure2,
+                "cId": "defaultMeasure2"
             }
-          };
+        };
 
         return {
             definition: props,
             initialProperties: {
                 qHyperCubeDef: {
-                    qDimensions: [defaultDimensionArr],
+                    qDimensions: [defaultDimension],
                     qMeasures: [defMeasure1, defMeasure2],
                     qInitialDataFetch: [{
                         qWidth: 3,
@@ -149,17 +152,31 @@ define([
                     }
                     previous = close;
                     previousCategory = name;
+                    console.log(layout);
                 });
+                var design = layout.props.design;
                 var chart = AmCharts.makeChart($element[0], {
                     "type": "serial",
                     "theme": "none",
-                    "handDrawn": layout.props.design.handDrawn,
+                    "fontFamily": design.fontFamily,
+                    "fontSize": design.titleSize,
+                    "titles": [{
+                        "text": design.titleString,
+                        "bold": design.titleBold
+                    }],
+                    "handDrawn": design.handDrawn,
                     "dataProvider": dataProvider,
                     "valueAxes": [{
                         "axisAlpha": 0,
                         "gridAlpha": 0.1,
-                        "position": "left"
+                        "position": design.valueAxis,
+                        "fontSize": design.fontSizeY,
+                        "title": hc.qMeasureInfo[0].qFallbackTitle
                     }],
+                    balloon: {
+                        fontSize: design.fontSizeBalloon,
+                        fontFamily: design.fontFamily
+                    },
                     "startDuration": 1,
                     "graphs": [{
                         "balloonText": "<span style='color:[[color]]'><b>[[category]]</b></span><br>[[balloonValue]]",
@@ -170,7 +187,7 @@ define([
                         "openField": "open",
                         "type": "column",
                         "valueField": "close",
-                        "fontFamily": layout.props.design.fontFamily
+                        "fontSize": design.fontSizeVal
                     }],
                     "trendLines": trendLines,
                     "columnWidth": 0.6,
@@ -178,14 +195,20 @@ define([
                     "categoryAxis": {
                         "gridPosition": "start",
                         "axisAlpha": 0,
-                        "gridAlpha": 0.1
+                        "gridAlpha": 0.1,
+                        "fontSize": design.fontSizeDim,
+                        "title": hc.qDimensionInfo[0].qFallbackTitle
                     },
                     "export": {
                         "enabled": true
                     }
                 });
-                $element.find('tspan').css("font-family", layout.props.design.fontFamily);
-                $element.find('tspan').css("font-size", layout.props.design.fontSize);
+                if (design.handDrawn) {
+                    $element.find("*").css("font-family", "Kristen ITC");
+                } else {
+                    $element.find("*").css("font-family", design.fontFamily);
+                }
             }
+
         };
     });
