@@ -5,8 +5,14 @@ module.exports = function(grunt) {
                 files: [{
                     expand: false,
                     cwd: '',
-                    src: ['amWaterfall.js','amWaterfall.qext', 'properties.js'],
-                    dest: 'C:/Users/Niels/Documents/Qlik/Sense/Extensions/amWaterfall/'
+                    src: ['amWaterfall/amWaterfall.js','amWaterfall/amWaterfall.qext', 'amWaterfall/properties.js', 'amWaterfall/wbFolder.wbl'],
+                    dest: 'C:/Users/Niels/Documents/Qlik/Sense/Extensions/'
+                },
+                {
+                    expand: false,
+                    cwd: '',
+                    src: ['amCombo/amCombo.js','amCombo/amCombo.qext', 'amCombo/properties.js', 'amCombo/wbFolder.wbl'],
+                    dest: 'C:/Users/Niels/Documents/Qlik/Sense/Extensions/'
                 }
                 ]
             }

@@ -6,6 +6,8 @@ This project is a work in progress extension, for integrating the
 [amCharts](https://www.amcharts.com/) into a Qliksense extension.
 At the moment the project is an implementation of a waterfall chart, however emphasis is made on making a connection between the custom properties settings in Qliksense and the API in amCharts, that are not specific to the waterfall type, but are mostly generic API properties or at most specific to the 'serial' type chart.
 
+EDIT: Have begun including a bullet/line combo chart. Which is in the amCombo folder.
+
 ## Screenshots
 ### Standard Look
 ![Standard Look](standardLook.PNG)
@@ -16,8 +18,10 @@ At the moment the project is an implementation of a waterfall chart, however emp
 ### Font Styling
 ![Font Styling And Balloon](fontStylingAndBalloon.PNG)
 ### Hand Drawn Effects
-![Hand Drawn Effect](HandDrawnEffect.PNG)
+![Hand Drawn Effect](ComboChartWIP.PNG)
 
+### WIP - Bullet / line combo chart.
+![Bullet / line combo chart]()
 ## Further implementation
 ### More charts!
 Implement other serial charts (mostly I have to change the way the dataProvider & trendlines objects are created, settings will hopefully be reusable atleast to a 90% degree or similar). Implement a selector on chart type.
