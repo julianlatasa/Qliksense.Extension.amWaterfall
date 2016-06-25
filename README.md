@@ -18,10 +18,10 @@ EDIT: Have begun including a bullet/line combo chart. Which is in the amCombo fo
 ### Font Styling
 ![Font Styling And Balloon](fontStylingAndBalloon.PNG)
 ### Hand Drawn Effects
-![Hand Drawn Effect](ComboChartWIP.PNG)
-
+![Hand Drawn Effect](HandDrawnEffect.PNG)
 ### WIP - Bullet / line combo chart.
-![Bullet / line combo chart]()
+![Bullet / line combo chart](comboChartWIP.PNG)
+
 ## Further implementation
 ### More charts!
 Implement other serial charts (mostly I have to change the way the dataProvider & trendlines objects are created, settings will hopefully be reusable atleast to a 90% degree or similar). Implement a selector on chart type.
