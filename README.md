@@ -1,5 +1,4 @@
 # Qliksense Extension integrating amCharts.
-## Work in progress
 
 ## Introduction
 This project is a work in progress extension, for integrating the
