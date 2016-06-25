@@ -7,11 +7,16 @@ This project is a work in progress extension, for integrating the
 At the moment the project is an implementation of a waterfall chart, however emphasis is made on making a connection between the custom properties settings in Qliksense and the API in amCharts, that are not specific to the waterfall type, but are mostly generic API properties or at most specific to the 'serial' type chart.
 
 ## Screenshots
+### Standard Look
 ![Standard Look](standardLook.PNG)
+### Title Settings
 ![Title Settings](TitleSettings.PNG)
+### 3D Effects
 ![3D Effects](3DEffects.PNG)
+### Font Styling
 ![Font Styling And Balloon](fontStylingAndBalloon.PNG)
-![Hand Drawn Effect](handDrawnEffect.PNG)
+### Hand Drawn Effects
+![Hand Drawn Effect](HandDrawnEffect.PNG)
 
 ## Further implementation
 ### More charts!
@@ -20,7 +25,7 @@ Implement other serial charts (mostly I have to change the way the dataProvider 
 ### Optimization!
 Not much thought has been put into optimization at the moment, will have to look through the code and others too see if e.g. the way i create the dataProvider is optimal.
 
-### including .zippin in Grunt build.
+### Include .zippin in Grunt build.
 Include a zip creating for the grunt buil file to create onclick importable .zip extension projects.
 
 ## How to use
