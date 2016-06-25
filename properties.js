@@ -188,16 +188,6 @@ define([], function() {
         step: 45,
         defaultValue: 0
     };
-    var rotateVal = {
-        type: "number",
-        component: "slider",
-        label: "Rotate Value Labels",
-        ref: "props.design.rotateVal",
-        min: 0,
-        max: 90,
-        step: 45,
-        defaultValue: 0
-    };
     var rotateGraph = {
         type: "boolean",
         component: "switch",
@@ -210,7 +200,7 @@ define([], function() {
             value: false,
             label: "Off"
         }],
-        defaultValue: true
+        defaultValue: false
     };
     var design = {
         type: "items",
@@ -221,8 +211,7 @@ define([], function() {
             depth: depth,
             angle: angle,
             rotateGraph: rotateGraph,
-            rotateDim: rotateDim,
-            rotateVal: rotateVal
+            rotateDim: rotateDim
         }
     };
 

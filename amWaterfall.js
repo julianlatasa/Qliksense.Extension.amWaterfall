@@ -173,7 +173,7 @@ define([
                     "theme": "none",
                     "depth3D": design.depth,
                     "angle": design.angle,
-                    "rotate":
+                    "rotate": design.rotateGraph,
                     "fontFamily": design.fontFamily,
                     "fontSize": design.titleSize,
                     "titles": chartTitle,
@@ -184,8 +184,7 @@ define([
                         "gridAlpha": 0.1,
                         "position": design.valueAxis,
                         "fontSize": design.fontSizeY,
-                        "title": valueAxisTitle,
-                        "labelRotation": design.rotateVal
+                        "title": valueAxisTitle
                     }],
                     balloon: {
                         fontSize: design.fontSizeBalloon,
