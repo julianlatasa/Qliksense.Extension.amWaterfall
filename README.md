@@ -7,7 +7,7 @@ This project is a work in progress extension, for integrating the
 At the moment the project is an implementation of a waterfall chart, however emphasis is made on making a connection between the customer properties settings in Qliksense and the API in amCharts, that are not specific to the waterfall type, but are mostly generic API properties or at most specific to the 'serial' type chart.
 
 ## Screenshots
-![Standard Look](StandardLook.PNG)
+![Standard Look](standardLook.PNG)
 ![Title Settings](TitleSettings.PNG)
 ![3D Effects](3DEffects.PNG)
 ![Font Styling And Balloon](fontStylingAndBalloon.PNG)
