@@ -178,6 +178,40 @@ define([], function() {
         step: 1,
         defaultValue: 0
     };
+    var rotateDim = {
+        type: "number",
+        component: "slider",
+        label: "Rotate Dimension Labels",
+        ref: "props.design.rotateDim",
+        min: 0,
+        max: 90,
+        step: 45,
+        defaultValue: 0
+    };
+    var rotateVal = {
+        type: "number",
+        component: "slider",
+        label: "Rotate Value Labels",
+        ref: "props.design.rotateVal",
+        min: 0,
+        max: 90,
+        step: 45,
+        defaultValue: 0
+    };
+    var rotateGraph = {
+        type: "boolean",
+        component: "switch",
+        label: "rotateGraph",
+        ref: "props.design.rotateGraph",
+        options: [{
+            value: true,
+            label: "On"
+        }, {
+            value: false,
+            label: "Off"
+        }],
+        defaultValue: true
+    };
     var design = {
         type: "items",
         label: "Design",
@@ -185,7 +219,10 @@ define([], function() {
             handDrawn: handDrawn,
             valueAxis: valueAxis,
             depth: depth,
-            angle: angle
+            angle: angle,
+            rotateGraph: rotateGraph,
+            rotateDim: rotateDim,
+            rotateVal: rotateVal
         }
     };
 
