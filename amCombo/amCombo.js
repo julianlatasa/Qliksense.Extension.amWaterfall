@@ -21,10 +21,10 @@ define([
     ],
     function($, props) {
         var defaultDimensionString = "=valuelist('dim1val1', 'dim1val2', 'dim1val3', 'dim1val4', 'dim1val5')";
-        var defaultMeasure1 = "pick(match(valuelist('dim1val1', 'dim1val2', 'dim1val3', 'dim1val4', 'dim1val5'),'dim1val1', 'dim1val2', 'dim1val3', 'dim1val4', 'dim1val5'),10,20,30,40,50)";
+        var defaultMeasure1 = "pick(match(valuelist('dim1val1', 'dim1val2', 'dim1val3', 'dim1val4', 'dim1val5'),'dim1val1', 'dim1val2', 'dim1val3', 'dim1val4', 'dim1val5'),35,20,60,15,40)";
         var defaultMeasure2 = "pick(match(valuelist('dim1val1', 'dim1val2', 'dim1val3', 'dim1val4', 'dim1val5'),'dim1val1', 'dim1val2', 'dim1val3', 'dim1val4', 'dim1val5'),15,10,5,45,60)";
         var defaultMeasure3 = "pick(match(valuelist('dim1val1', 'dim1val2', 'dim1val3', 'dim1val4', 'dim1val5'),'dim1val1', 'dim1val2', 'dim1val3', 'dim1val4', 'dim1val5'),100,200,300,400,500)";
-        var defaultMeasure4 = "pick(match(valuelist('dim1val1', 'dim1val2', 'dim1val3', 'dim1val4', 'dim1val5'),'dim1val1', 'dim1val2', 'dim1val3', 'dim1val4', 'dim1val5'),150,100,50,450,600)";
+        var defaultMeasure4 = "pick(match(valuelist('dim1val1', 'dim1val2', 'dim1val3', 'dim1val4', 'dim1val5'),'dim1val1', 'dim1val2', 'dim1val3', 'dim1val4', 'dim1val5'),250,37,430,220,330)";
         var measureArr = [];
         var defaultDimension = {
             qLibraryId: "",
@@ -43,11 +43,10 @@ define([
                 "qLabel": "Measure1",
                 "cId": "defaultMes1",
                 "props": {
-                    "type": "column",
-                    "axis": "v1",
-                    "width": 0.5,
-                    "lineColor": "#e1ede9",
-                    "fillColors": "#e1ede9"
+                    "measureType": "column",
+                    "measureAxis": "v1",
+                    "barWidth": 0.5,
+                    "measureColor": "#e1ede9"
                 }
             }
         });
@@ -58,11 +57,10 @@ define([
                 "qLabel": "Measure2",
                 "cId": "defaultMes2",
                 "props": {
-                    "type": "column",
-                    "axis": "v1",
-                    "width": 0.3,
-                    "lineColor": "#62cf73",
-                    "fillColors": "#62cf73"
+                    "measureType": "column",
+                    "measureAxis": "v1",
+                    "barWidth": 0.3,
+                    "measureColor": "#62cf73"
                 }
             }
         });
@@ -73,9 +71,10 @@ define([
                 "qLabel": "Measure3",
                 "cId": "defaultMes3",
                 "props": {
-                    "type": "smoothedLine",
-                    "axis": "v2",
-                    "lineColor": "#20acd4"
+                    "measureType": "smoothedLine",
+                    "measureAxis": "v2",
+                    "lineThickness": 2,
+                    "measureColor": "#20acd4"
                 }
             }
         });
@@ -86,9 +85,10 @@ define([
                 "qLabel": "Measure4",
                 "cId": "defaultMes4",
                 "props": {
-                    "type": "smoothedLine",
-                    "axis": "v2",
-                    "lineColor": "#e1ede9"
+                    "measureType": "smoothedLine",
+                    "measureAxis": "v2",
+                    "lineThickness": 2,
+                    "measureColor": "#e1ede9"
                 }
             }
         });
@@ -110,6 +110,7 @@ define([
                 var dataProvider = [];
                 var measureDefinition = [];
                 var data = hc.qDataPages[0].qMatrix;
+                console.log(layout);
                 data.forEach(function(row, index) {
                     dataProvider.push({
                         "dim1": row[0].qText,
@@ -120,34 +121,34 @@ define([
                     });
                 });
                 hc.qMeasureInfo.forEach(function(measureDef, index) {
-                    if (measureDef.props.type == "column") {
+                    if (measureDef.props.measureType == "column") {
                         measureDefinition.push({
                             "id": "measure" + index,
-                            "valueAxis": measureDef.props.axis,
-                            "lineColor": measureDef.props.lineColor,
-                            "fillColors": measureDef.props.fillColors,
+                            "valueAxis": measureDef.props.measureAxis,
+                            "lineColor": measureDef.props.measureColor,
+                            "fillColors": measureDef.props.measureColor,
                             "fillAlphas": 1,
-                            "type": measureDef.props.type,
+                            "type": measureDef.props.measureType,
                             "title": hc.qMeasureInfo[index].qFallbackTitle,
                             "valueField": "mes" + (index + 1),
                             "clustered": false,
-                            "columnWidth": measureDef.props.width,
+                            "columnWidth": measureDef.props.barWidth,
                             "legendValueText": "[[value]]",
                             "balloonText": "<b>[[title]]</b><br/>[[value]]"
                         });
                     }
-                    if (measureDef.props.type == "smoothedLine") {
+                    if (measureDef.props.measureType == "smoothedLine") {
                         measureDefinition.push({
                             "id": "measure" + index,
-                            "valueAxis": measureDef.props.axis,
+                            "valueAxis": measureDef.props.measureAxis,
                             "bullet": "round",
                             "bulletBorderAlpha": 1,
                             "bulletColor": "#FFFFFF",
                             "bulletSize": 5,
                             "hideBulletsCount": 50,
-                            "lineThickness": 2,
-                            "lineColor": measureDef.props.lineColor,
-                            "type": measureDef.props.type,
+                            "lineThickness": measureDef.props.lineThickness,
+                            "lineColor": measureDef.props.measureColor,
+                            "type": measureDef.props.measureType,
                             "title": hc.qMeasureInfo[index].qFallbackTitle,
                             "useLineColorForBulletBorder": true,
                             "valueField": "mes" + (index + 1),
@@ -155,6 +156,7 @@ define([
                         });
                     }
                 });
+                console.log(measureDefinition);
                 var chart = AmCharts.makeChart($element[0], {
                     "type": "serial",
                     "theme": "none",

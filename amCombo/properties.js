@@ -10,10 +10,96 @@ define([], function() {
         max: 1
     };
 
+    var measureType = {
+        type: "string",
+        component: "dropdown",
+        label: "Type",
+        ref: "qDef.props.measureType",
+        options: [{
+            value: "column",
+            label: "Bar"
+        }, {
+            value: "Line",
+            label: "Line"
+        }, {
+            value: "smoothedLine",
+            label: "Smoothed Line"
+        }]
+    };
+    var measureAxis = {
+        type: "string",
+        component: "dropdown",
+        label: "Axis",
+        ref: "qDef.props.measureAxis",
+        options: [{
+            value: "v1",
+            label: "left"
+        }, {
+            value: "v2",
+            label: "right"
+        }],
+        deaultValue: "v1"
+    };
+    var measureColor = {
+        type: "string",
+        label: "Color",
+        ref: "qDef.props.measureColor",
+        defaultValue: "#000000"
+    };
+
+    var lineThickness = {
+        type: "number",
+        component: "slider",
+        label: "Line Thickness",
+        ref: "qDef.props.lineThickness",
+        min: 0.5,
+        max: 10,
+        step: 0.5,
+        defaultValue: 2
+    };
+
+    var measureLine = {
+        type: "items",
+        items: {
+            lineThickness: lineThickness
+        }
+    };
+
+    var columnWidth = {
+        type: "number",
+        component: "slider",
+        label: "Bar Width",
+        ref: "qDef.props.barWidth",
+        min: 0.1,
+        max: 1,
+        step: 0.1,
+        defaultValue: 0.5
+    };
+
+    var measureColumn = {
+        type: "items",
+        items: {
+            columnWidth: columnWidth
+        }
+    };
+
+    var measureTypeSettings = {
+        type: "items",
+        items: {
+            measureLine: measureLine,
+            measureColumn: measureColumn
+        }
+    };
+
     var measures = {
         uses: "measures",
-        min: 2,
-        max: 2
+        min: 1,
+        items: {
+            measureType: measureType,
+            measureColor: measureColor,
+            measureAxis: measureAxis,
+            measureTypeSettings: measureTypeSettings
+        }
     };
 
     var sorting = {
