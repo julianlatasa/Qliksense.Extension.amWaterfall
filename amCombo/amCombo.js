@@ -13,7 +13,16 @@ requirejs.config({
         }
     }
 });
-
+// *****************************************************************************
+// Color palette for initial colors
+// *****************************************************************************
+    var cheerUpEmoKid = [
+    "#556270",
+    "#4ECDC4",
+    "#C7F464",
+    "#FF6B6B",
+    "#C44D58"
+    ];
 define([
         'jquery',
         './properties',
@@ -46,7 +55,7 @@ define([
                     "measureType": "column",
                     "measureAxis": "v1",
                     "barWidth": 0.5,
-                    "measureColor": "#e1ede9"
+                    "measureColor": cheerUpEmoKid[0]
                 }
             }
         });
@@ -60,7 +69,7 @@ define([
                     "measureType": "column",
                     "measureAxis": "v1",
                     "barWidth": 0.3,
-                    "measureColor": "#62cf73"
+                    "measureColor": cheerUpEmoKid[1]
                 }
             }
         });
@@ -74,7 +83,7 @@ define([
                     "measureType": "smoothedLine",
                     "measureAxis": "v2",
                     "lineThickness": 2,
-                    "measureColor": "#20acd4"
+                    "measureColor": cheerUpEmoKid[2]
                 }
             }
         });
@@ -88,7 +97,7 @@ define([
                     "measureType": "smoothedLine",
                     "measureAxis": "v2",
                     "lineThickness": 2,
-                    "measureColor": "#e1ede9"
+                    "measureColor": cheerUpEmoKid[3]
                 }
             }
         });
@@ -110,7 +119,21 @@ define([
                 var dataProvider = [];
                 var measureDefinition = [];
                 var data = hc.qDataPages[0].qMatrix;
-                console.log(layout);
+                var design = layout.props.design;
+                var chartTitle;
+                var valueAxisTitle;
+                var categoryTitle;
+                if(design.chartTitle) {
+                    chartTitle = [{
+                        "text": design.titleString
+                    }];
+                }
+                if(design.valueAxisTitle) {
+                    valueAxisTitle = hc.qMeasureInfo[0].qFallbackTitle;
+                }
+                if(design.categoryTitle) {
+                    categoryTitle = hc.qDimensionInfo[0].qFallbackTitle;
+                }
                 data.forEach(function(row, index) {
                     var dataProviderObj = {};
                     row.forEach(function(cell, index) {
@@ -128,7 +151,6 @@ define([
                     });
                     dataProvider.push(dataProviderObj);
                 });
-                console.log(dataProvider);
                 hc.qMeasureInfo.forEach(function(measureDef, index) {
                     if (measureDef.props.measureType == "column") {
                         measureDefinition.push({
@@ -140,8 +162,9 @@ define([
                             "type": measureDef.props.measureType,
                             "title": hc.qMeasureInfo[index].qFallbackTitle,
                             "valueField": measureDef.cId,
-                            "clustered": false,
+                            "clustered": design.columnClustered,
                             "columnWidth": measureDef.props.barWidth,
+                            "fontSize": design.fontSizeVal,
                             "legendValueText": "[[value]]",
                             "balloonText": "<b>[[title]]</b><br/>[[value]]"
                         });
@@ -161,6 +184,25 @@ define([
                             "title": hc.qMeasureInfo[index].qFallbackTitle,
                             "useLineColorForBulletBorder": true,
                             "valueField": measureDef.cId,
+                            "fontSize": design.fontSizeVal,
+                            "balloonText": "<b>[[title]]</b><br/>[[value]]"
+                        });
+                    }
+                    if (measureDef.props.measureType == "Line") {
+                        measureDefinition.push({
+                            "id": measureDef.cId,
+                            "valueAxis": measureDef.props.measureAxis,
+                            "bullet": "round",
+                            "bulletBorderAlpha": 1,
+                            "bulletColor": "#FFFFFF",
+                            "bulletSize": 5,
+                            "hideBulletsCount": 50,
+                            "lineThickness": measureDef.props.lineThickness,
+                            "lineColor": measureDef.props.measureColor,
+                            "title": hc.qMeasureInfo[index].qFallbackTitle,
+                            "useLineColorForBulletBorder": true,
+                            "valueField": measureDef.cId,
+                            "fontSize": design.fontSizeVal,
                             "balloonText": "<b>[[title]]</b><br/>[[value]]"
                         });
                     }
@@ -168,17 +210,26 @@ define([
                 var chart = AmCharts.makeChart($element[0], {
                     "type": "serial",
                     "theme": "none",
+                    "depth3D": design.depth,
+                    "angle": design.angle,
+                    "rotate": design.rotateGraph,
+                    "fontFamily": design.fontFamily,
+                    "fontSize": design.titleSize,
+                    "titles": chartTitle,
+                    "handDrawn": design.handDrawn,
                     "precision": 2,
                     "valueAxes": [{
                         "id": "v1",
-                        "title": "Temp title",
                         "position": "left",
-                        "autoGridCount": false
+                        "autoGridCount": false,
+                        "fontSize": design.fontSizeY,
+                        "title": valueAxisTitle
                     }, {
                         "id": "v2",
-                        "title": "Temp title",
                         "position": "right",
-                        "autoGridCount": false
+                        "autoGridCount": false,
+                        "fontSize": design.fontSizeY,
+                        "title": valueAxisTitle
                     }],
                     "graphs": measureDefinition,
                     "chartCursor": {
@@ -192,7 +243,10 @@ define([
                     "categoryAxis": {
                         "parseDates": false,
                         "dashLength": 1,
-                        "minorGridEnabled": true
+                        "minorGridEnabled": true,
+                        "labelRotation": design.rotateDim,
+                        "fontSize": design.fontSizeDim,
+                        "title": categoryTitle
                     },
                     "legend": {
                         "useGraphSettings": true,
@@ -200,13 +254,20 @@ define([
                     },
                     "balloon": {
                         "borderThickness": 1,
-                        "shadowAlpha": 0
+                        "shadowAlpha": 0,
+                        fontSize: design.fontSizeBalloon,
+                        fontFamily: design.fontFamily
                     },
                     "export": {
                         "enabled": true
                     },
                     "dataProvider": dataProvider
                 });
+                if (design.handDrawn) {
+                    $element.find("*").css("font-family", "Kristen ITC");
+                } else {
+                    $element.find("*").css("font-family", design.fontFamily);
+                }
             }
         };
     });

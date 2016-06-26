@@ -6,6 +6,7 @@ This project is a work in progress qliksense visual extension, for integrating t
 At the moment the project is an implementation of a waterfall chart in the amWaterfall folder and a work in progress bullet / line combo chart in the amCombo folder.
 
 ### Latest Change
+* Made the connection between all the appearance settings & the chart API (you can now 3d, choose clustered bars, handrawn, change fontsize/family etc. etc.)
 * Fixed an error that made the combo only work with precisly 4 measures.
 
 ### Next Change

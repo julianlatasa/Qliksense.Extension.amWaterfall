@@ -1,6 +1,15 @@
 define([], function() {
     'use strict';
-
+    // *****************************************************************************
+// Color palette for initial colors
+// *****************************************************************************
+    var cheerUpEmoKid = [
+    "#556270",
+    "#4ECDC4",
+    "#C7F464",
+    "#FF6B6B",
+    "#C44D58"
+    ];
     // *****************************************************************************
     // Dimensions & Measures & Sorting
     // *****************************************************************************
@@ -44,7 +53,7 @@ define([], function() {
         type: "string",
         label: "Color",
         ref: "qDef.props.measureColor",
-        defaultValue: "#000000"
+        defaultValue: cheerUpEmoKid[Math.floor(Math.random()*cheerUpEmoKid.length)]
     };
 
     var lineThickness = {
@@ -62,6 +71,17 @@ define([], function() {
         type: "items",
         items: {
             lineThickness: lineThickness
+        },
+        show: function(m, d, s, k) {
+            console.log(m);
+            console.log(d);
+            console.log(s);
+            console.log(k);
+            if(m.qDef.props.measureType == "smoothedLine" || m.qDef.props.measureType == "Line") {
+                return true;
+            } else {
+                return false;
+            }
         }
     };
 
@@ -75,11 +95,17 @@ define([], function() {
         step: 0.1,
         defaultValue: 0.5
     };
-
     var measureColumn = {
         type: "items",
         items: {
             columnWidth: columnWidth
+        },
+        show: function(m) {
+            if(m.qDef.props.measureType == "column") {
+                return true;
+            } else {
+                return false;
+            }
         }
     };
 
@@ -91,13 +117,20 @@ define([], function() {
         }
     };
 
+    var commonSettings = {
+        type: "items",
+        items: {
+            measureColor: measureColor,
+            measureAxis: measureAxis,
+            measureType: measureType
+        }
+    };
+
     var measures = {
         uses: "measures",
         min: 1,
         items: {
-            measureType: measureType,
-            measureColor: measureColor,
-            measureAxis: measureAxis,
+            commonSettings: commonSettings,
             measureTypeSettings: measureTypeSettings
         }
     };
@@ -108,7 +141,6 @@ define([], function() {
     // *****************************************************************************
     // Appearance Section
     // *****************************************************************************
-    // Text box definition
 
     var fontFamily = {
         ref: "props.design.fontFamily",
@@ -140,20 +172,21 @@ define([], function() {
         type: "number",
         defaultValue: "10"
     };
-    var valueAxis = {
-        type: "string",
-        component: "dropdown",
-        label: "Value Axis",
-        ref: "props.design.valueAxis",
+    var columnClustered = {
+        type: "boolean",
+        component: "switch",
+        label: "Clustered",
+        ref: "props.design.columnClustered",
         options: [{
-            value: "left",
-            label: "left"
+            value: true,
+            label: "On"
         }, {
-            value: "right",
-            label: "right"
+            value: false,
+            label: "Off"
         }],
-        defaultValue: "left"
+        defaultValue: false
     };
+
     var font = {
         type: "items",
         label: "Font styling",
@@ -274,29 +307,15 @@ define([], function() {
         step: 45,
         defaultValue: 0
     };
-    var rotateGraph = {
-        type: "boolean",
-        component: "switch",
-        label: "rotateGraph",
-        ref: "props.design.rotateGraph",
-        options: [{
-            value: true,
-            label: "On"
-        }, {
-            value: false,
-            label: "Off"
-        }],
-        defaultValue: false
-    };
+
     var design = {
         type: "items",
         label: "Design",
         items: {
             handDrawn: handDrawn,
-            valueAxis: valueAxis,
+            columnClustered: columnClustered,
             depth: depth,
             angle: angle,
-            rotateGraph: rotateGraph,
             rotateDim: rotateDim
         }
     };
