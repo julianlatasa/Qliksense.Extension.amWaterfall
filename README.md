@@ -24,3 +24,6 @@ At the moment the project is an implementation of a waterfall chart in the amWat
 At the moment, transfer the amWaterfall.js, amWaterfall.qext, wbFolder.wbl files to your extension folder.
 
 I've included some default 'synthetic' dimensions and expressions that should help you understand how dimensions and measures are used in the chart. If you don't know how the valuelist & pick & match functions work, especially in relation to synthetic dimensions google it (ill find a link here for later on).
+
+## Known issues
+> The axis rotation API settings doesn't seem to work if you rotate the whole graph via the rotate graph setting.
