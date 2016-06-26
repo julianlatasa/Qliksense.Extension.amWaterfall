@@ -15,6 +15,7 @@ requirejs.config({
 });
 // *****************************************************************************
 // Color palette for initial colors
+// credits: http://www.colourlovers.com/palette/1930/cheer_up_emo_kid
 // *****************************************************************************
     var cheerUpEmoKid = [
     "#556270",
@@ -121,15 +122,17 @@ define([
                 var data = hc.qDataPages[0].qMatrix;
                 var design = layout.props.design;
                 var chartTitle;
-                var valueAxisTitle;
+                var leftValueAxisTitle;
+                var rightValueAxisTitle;
                 var categoryTitle;
                 if(design.chartTitle) {
                     chartTitle = [{
                         "text": design.titleString
                     }];
                 }
-                if(design.valueAxisTitle) {
-                    valueAxisTitle = hc.qMeasureInfo[0].qFallbackTitle;
+                if(design.showValueAxisTitle) {
+                    leftValueAxisTitle = design.leftValueAxisTitle;
+                    rightValueAxisTitle = design.rightValueAxisTitle;
                 }
                 if(design.categoryTitle) {
                     categoryTitle = hc.qDimensionInfo[0].qFallbackTitle;
@@ -165,7 +168,6 @@ define([
                             "clustered": design.columnClustered,
                             "columnWidth": measureDef.props.barWidth,
                             "fontSize": design.fontSizeVal,
-                            "legendValueText": "[[value]]",
                             "balloonText": "<b>[[title]]</b><br/>[[value]]"
                         });
                     }
@@ -223,13 +225,13 @@ define([
                         "position": "left",
                         "autoGridCount": false,
                         "fontSize": design.fontSizeY,
-                        "title": valueAxisTitle
+                        "title": leftValueAxisTitle
                     }, {
                         "id": "v2",
                         "position": "right",
                         "autoGridCount": false,
                         "fontSize": design.fontSizeY,
-                        "title": valueAxisTitle
+                        "title": rightValueAxisTitle
                     }],
                     "graphs": measureDefinition,
                     "chartCursor": {
@@ -249,8 +251,9 @@ define([
                         "title": categoryTitle
                     },
                     "legend": {
+                        "enabled": design.showLegends,
                         "useGraphSettings": true,
-                        "position": "top"
+                        "position": design.legendPosition
                     },
                     "balloon": {
                         "borderThickness": 1,

@@ -2,6 +2,7 @@ define([], function() {
     'use strict';
     // *****************************************************************************
 // Color palette for initial colors
+// credits: http://www.colourlovers.com/palette/1930/cheer_up_emo_kid
 // *****************************************************************************
     var cheerUpEmoKid = [
     "#556270",
@@ -52,8 +53,7 @@ define([], function() {
     var measureColor = {
         type: "string",
         label: "Color",
-        ref: "qDef.props.measureColor",
-        defaultValue: cheerUpEmoKid[Math.floor(Math.random()*cheerUpEmoKid.length)]
+        ref: "qDef.props.measureColor"
     };
 
     var lineThickness = {
@@ -72,11 +72,7 @@ define([], function() {
         items: {
             lineThickness: lineThickness
         },
-        show: function(m, d, s, k) {
-            console.log(m);
-            console.log(d);
-            console.log(s);
-            console.log(k);
+        show: function(m) {
             if(m.qDef.props.measureType == "smoothedLine" || m.qDef.props.measureType == "Line") {
                 return true;
             } else {
@@ -216,7 +212,7 @@ define([], function() {
         type: "string",
         label: "Title",
         ref: "props.design.titleString",
-        defaultValue: "Title Waterfall"
+        defaultValue: "Wombo Combo Chart"
     };
     var categoryTitle = {
         type: "boolean",
@@ -246,11 +242,11 @@ define([], function() {
         }],
         defaultValue: true
     };
-    var valueAxisTitle = {
+    var showLegends = {
         type: "boolean",
         component: "switch",
-        label: "Value Axis Title",
-        ref: "props.design.valueAxisTitle",
+        label: "Show Legends",
+        ref: "props.design.showLegends",
         options: [{
             value: true,
             label: "On"
@@ -259,6 +255,75 @@ define([], function() {
             label: "Off"
         }],
         defaultValue: true
+    };
+        var legendPosition = {
+        type: "string",
+        component: "dropdown",
+        label: "Legend position",
+        ref: "props.design.legendPosition",
+        options: [{
+            value: "top",
+            label: "Top"
+        }, {
+            value: "bottom",
+            label: "Bottom"
+        },
+        {
+            value: "left",
+            label: "Left"
+        },
+        {
+            value: "right",
+            label: "Right"
+        }],
+        defaultValue: "top",
+
+    };
+
+    var conLegendPosition = {
+        type: "items",
+        items: {
+            legendPosition: legendPosition
+        },
+        show: function(d) {
+            return d.props.design.showLegends;
+        }
+    };
+    var showValueAxisTitle = {
+        type: "boolean",
+        component: "switch",
+        label: "Value Axis Title",
+        ref: "props.design.showValueAxisTitle",
+        options: [{
+            value: true,
+            label: "On"
+        }, {
+            value: false,
+            label: "Off"
+        }],
+        defaultValue: true
+    };
+    var leftValueAxisTitle = {
+        type: "string",
+        label: "Left Value Axis Title",
+        ref: "props.design.leftValueAxisTitle",
+        defaultValue: "Left Value Axis"
+    };
+    var rightValueAxisTitle = {
+        type: "string",
+        label: "Right Value Axis Title",
+        ref: "props.design.rightValueAxisTitle",
+        defaultValue: "Right Value Axis"
+    };
+    var conValueAxisTitle =  {
+        type: "items",
+        items: {
+            valueAxisTitle: leftValueAxisTitle,
+            valueAxisTitle2: rightValueAxisTitle
+        },
+        show: function(d) {
+           return d.props.design.showValueAxisTitle;
+        }
     };
     var titleSize = {
         type: "number",
@@ -273,7 +338,8 @@ define([], function() {
             titleString: titleString,
             titleSize: titleSize,
             chartTitle: chartTitle,
-            valueAxisTitle: valueAxisTitle,
+            showValueAxisTitle: showValueAxisTitle,
+            conValueAxisTitle: conValueAxisTitle,
             categoryTitle: categoryTitle
         }
     };
@@ -312,11 +378,13 @@ define([], function() {
         type: "items",
         label: "Design",
         items: {
-            handDrawn: handDrawn,
+            showLegends: showLegends,
+            conLegendPosition: conLegendPosition,
             columnClustered: columnClustered,
+            rotateDim: rotateDim,
+            handDrawn: handDrawn,
             depth: depth,
-            angle: angle,
-            rotateDim: rotateDim
+            angle: angle
         }
     };
 
