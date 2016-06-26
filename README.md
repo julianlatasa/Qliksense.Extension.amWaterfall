@@ -23,7 +23,7 @@ At the moment the project is an implementation of a waterfall chart in the amWat
 ## How to use
 At the moment, transfer the amWaterfall.js, amWaterfall.qext, wbFolder.wbl files to your extension folder.
 
-I've included some default 'synthetic' dimensions and expressions that should help you understand how dimensions and measures are used in the chart. If you don't know how the valuelist & pick & match functions work, especially in relation to synthetic dimensions google it (ill find a link here for later on).
+I've included some default 'synthetic' dimensions and expressions that should help you understand how dimensions and measures are used in the chart. If you don't know how the valuelist & pick & match functions work, especially in relation to synthetic dimensions there is a post [here](https://community.qlik.com/blogs/qlikviewdesignblog/2013/07/01/valuelist-for-those-tricky-situations) by Alexander Karlsson explaining valuelist together with an IF statement. The pick(match()) setup is another structure if doing the same thing the If structure does in this case.
 
 ## Known issues
-> The axis rotation API settings doesn't seem to work if you rotate the whole graph via the rotate graph setting.
+* The axis rotation API settings doesn't seem to work if you rotate the whole graph via the rotate graph setting.
