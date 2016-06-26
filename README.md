@@ -1,11 +1,9 @@
 # Qliksense Extension integrating amCharts.
 
 ## Introduction
-This project is a work in progress extension, for integrating the
-[amCharts](https://www.amcharts.com/) into a Qliksense extension.
-At the moment the project is an implementation of a waterfall chart, however emphasis is made on making a connection between the custom properties settings in Qliksense and the API in amCharts, that are not specific to the waterfall type, but are mostly generic API properties or at most specific to the 'serial' type chart.
-
-EDIT: Have begun including a bullet/line combo chart. Which is in the amCombo folder.
+This project is a work in progress qliksense visual extension, for integrating the
+[amCharts](https://www.amcharts.com/) charting library.
+At the moment the project is an implementation of a waterfall chart in the amWaterfall folder and a work in progress bullet / line combo chart in the amCombo folder.
 
 ## Screenshots
 ### Standard Look
@@ -21,15 +19,6 @@ EDIT: Have begun including a bullet/line combo chart. Which is in the amCombo fo
 ### WIP - Bullet / line combo chart.
 ![Bullet / line combo chart](comboChartWIP.PNG)
 
-## Further implementation
-### More charts!
-Implement other serial charts (mostly I have to change the way the dataProvider & trendlines objects are created, settings will hopefully be reusable atleast to a 90% degree or similar). Implement a selector on chart type.
-
-### Optimization!
-Not much thought has been put into optimization at the moment, will have to look through the code and others too see if e.g. the way i create the dataProvider is optimal.
-
-### Include .zippin in Grunt build.
-Include a zip creating for the grunt buil file to create onclick importable .zip extension projects.
 
 ## How to use
 At the moment, transfer the amWaterfall.js, amWaterfall.qext, wbFolder.wbl files to your extension folder.
