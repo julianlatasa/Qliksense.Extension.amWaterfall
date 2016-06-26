@@ -11,7 +11,7 @@ At the moment the project is an implementation of a waterfall chart in the amWat
 ### Next Change
 * Try out type setting for bar charts: 'stacked' & 'clustered'.
 * Hide bar settings from line type and visa versa.
-* Implement the appearance section properties on the chart.
+* Implement the appearance section properties on the combo chart.
 
 ## Screenshots
 ### Standard Look
