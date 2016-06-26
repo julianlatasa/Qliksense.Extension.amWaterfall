@@ -9,10 +9,6 @@ At the moment the project is an implementation of a waterfall chart in the amWat
 * Made the connection between all the appearance settings & the chart API (you can now 3d, choose clustered bars, handrawn, change fontsize/family etc. etc.)
 * Fixed an error that made the combo only work with precisly 4 measures.
 
-### Next Change
-* Try out type setting for bar charts: 'stacked' & 'clustered'.
-* Hide bar settings from line type and visa versa.
-* Implement the appearance section properties on the combo chart.
 
 ## Screenshots
 ### Standard Look
