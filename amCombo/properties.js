@@ -53,7 +53,7 @@ define([], function() {
     var measureColor = {
         type: "string",
         label: "Color",
-        ref: "qDef.props.measureColor"
+        ref: "qDef.props.measureColor" /* cheerUpEmoKid[measureIndex] */
     };
 
     var lineThickness = {

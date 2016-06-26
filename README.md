@@ -6,11 +6,14 @@ This project is a work in progress qliksense visual extension, for integrating t
 At the moment the project is an implementation of a waterfall chart in the amWaterfall folder and a work in progress bullet / line combo chart in the amCombo folder.
 
 ### Latest Change
+* Added new screeenshots of the combo chart, which should be functional now, albeit not very tested.
 * Made the connection between all the appearance settings & the chart API (you can now 3d, choose clustered bars, handrawn, change fontsize/family etc. etc.)
 * Fixed an error that made the combo only work with precisly 4 measures.
 
 
 ## Screenshots
+### Combo Chart
+![Combo Chart Screens](/comboPictures/womboCombo.PNG)
 ### Standard Look
 ![Standard Look](standardLook.PNG)
 ### Title Settings
@@ -21,8 +24,6 @@ At the moment the project is an implementation of a waterfall chart in the amWat
 ![Font Styling And Balloon](fontStylingAndBalloon.PNG)
 ### Hand Drawn Effects
 ![Hand Drawn Effect](HandDrawnEffect.PNG)
-### WIP - Bullet / line combo chart.
-![Bullet / line combo chart](comboChartWIP.PNG)
 
 
 ## How to use
