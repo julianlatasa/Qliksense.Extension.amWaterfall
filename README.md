@@ -6,7 +6,7 @@ This project is a work in progress qliksense visual extension, for integrating t
 At the moment the project is an implementation of a waterfall chart in the amWaterfall folder and a work in progress bullet / line combo chart in the amCombo folder.
 
 ### Latest Change
-* The combo chart now works with changing measure expressions & settings.
+* Fixed an error that made the combo only work with precisly 4 measures.
 
 ### Next Change
 * Try out type setting for bar charts: 'stacked' & 'clustered'.

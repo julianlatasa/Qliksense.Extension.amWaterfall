@@ -112,25 +112,34 @@ define([
                 var data = hc.qDataPages[0].qMatrix;
                 console.log(layout);
                 data.forEach(function(row, index) {
-                    dataProvider.push({
-                        "dim1": row[0].qText,
-                        "mes1": row[1].qNum,
-                        "mes2": row[2].qNum,
-                        "mes3": row[3].qNum,
-                        "mes4": row[4].qNum
+                    var dataProviderObj = {};
+                    row.forEach(function(cell, index) {
+                        var cId;
+                        if (index < hc.qDimensionInfo.length) {
+                            cId = hc.qDimensionInfo[index].cId;
+                        } else {
+                            cId = hc.qMeasureInfo[index - hc.qDimensionInfo.length].cId;
+                        }
+                        if (cell.qNum == 'NaN') {
+                            dataProviderObj[cId] = cell.qText;
+                        } else {
+                            dataProviderObj[cId] = cell.qNum;
+                        }
                     });
+                    dataProvider.push(dataProviderObj);
                 });
+                console.log(dataProvider);
                 hc.qMeasureInfo.forEach(function(measureDef, index) {
                     if (measureDef.props.measureType == "column") {
                         measureDefinition.push({
-                            "id": "measure" + index,
+                            "id": measureDef.cId,
                             "valueAxis": measureDef.props.measureAxis,
                             "lineColor": measureDef.props.measureColor,
                             "fillColors": measureDef.props.measureColor,
                             "fillAlphas": 1,
                             "type": measureDef.props.measureType,
                             "title": hc.qMeasureInfo[index].qFallbackTitle,
-                            "valueField": "mes" + (index + 1),
+                            "valueField": measureDef.cId,
                             "clustered": false,
                             "columnWidth": measureDef.props.barWidth,
                             "legendValueText": "[[value]]",
@@ -139,7 +148,7 @@ define([
                     }
                     if (measureDef.props.measureType == "smoothedLine") {
                         measureDefinition.push({
-                            "id": "measure" + index,
+                            "id": measureDef.cId,
                             "valueAxis": measureDef.props.measureAxis,
                             "bullet": "round",
                             "bulletBorderAlpha": 1,
@@ -151,25 +160,23 @@ define([
                             "type": measureDef.props.measureType,
                             "title": hc.qMeasureInfo[index].qFallbackTitle,
                             "useLineColorForBulletBorder": true,
-                            "valueField": "mes" + (index + 1),
+                            "valueField": measureDef.cId,
                             "balloonText": "<b>[[title]]</b><br/>[[value]]"
                         });
                     }
                 });
-                console.log(measureDefinition);
                 var chart = AmCharts.makeChart($element[0], {
                     "type": "serial",
                     "theme": "none",
                     "precision": 2,
                     "valueAxes": [{
                         "id": "v1",
-                        "title": hc.qMeasureInfo[0].qFallbackTitle,
+                        "title": "Temp title",
                         "position": "left",
                         "autoGridCount": false
-                    },
-                    {
+                    }, {
                         "id": "v2",
-                        "title": hc.qMeasureInfo[2].qFallbackTitle,
+                        "title": "Temp title",
                         "position": "right",
                         "autoGridCount": false
                     }],
@@ -181,7 +188,7 @@ define([
                         "cursorAlpha": 0,
                         "valueLineAlpha": 0.2
                     },
-                    "categoryField": "dim1",
+                    "categoryField": hc.qDimensionInfo[0].cId,
                     "categoryAxis": {
                         "parseDates": false,
                         "dashLength": 1,
