@@ -13,7 +13,7 @@ At the moment the project is an implementation of a waterfall chart in the amWat
 
 ## Screenshots
 ### Combo Chart
-![Combo Chart Screens](/comboPictures/womboCombo.PNG)
+![Combo Chart Screens](comboPictures/womboCombo.PNG)
 ### Standard Look
 ![Standard Look](standardLook.PNG)
 ### Title Settings
