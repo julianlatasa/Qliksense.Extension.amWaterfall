@@ -5,10 +5,10 @@ This project is a work in progress qliksense visual extension, for integrating t
 [amCharts](https://www.amcharts.com/) charting library.
 At the moment the project is an implementation of a waterfall chart in the amWaterfall folder and a work in progress bullet / line combo chart in the amCombo folder.
 
-## Latest Change
+### Latest Change
 * The combo chart now works with changing measure expressions & settings.
 
-## Next Change
+### Next Change
 * Try out type setting for bar charts: 'stacked' & 'clustered'.
 * Hide bar settings from line type and visa versa.
 * Implement the appearance section properties on the chart.
