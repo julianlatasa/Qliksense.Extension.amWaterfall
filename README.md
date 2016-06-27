@@ -18,7 +18,7 @@ At the moment the project is an implementation of a waterfall chart in the amWat
 ![Waterfall Chart Screens](waterfallPictures/waterFall.png)
 
 ## How to use
-Import amCombo.zip & amWaterfall.zip into your qliksense dev-hub.
+Import amCombo.zip & amWaterfall.zip into your qliksense dev-hub extensions folder.
 
 I've included some default 'synthetic' dimensions and expressions that should help you understand how dimensions and measures are used in the chart. If you don't know how the valuelist & pick & match functions work, especially in relation to synthetic dimensions there is a post [here](https://community.qlik.com/blogs/qlikviewdesignblog/2013/07/01/valuelist-for-those-tricky-situations) by Alexander Karlsson explaining valuelist together with an IF statement.
 
