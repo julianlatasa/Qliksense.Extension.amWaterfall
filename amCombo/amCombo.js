@@ -176,7 +176,6 @@ define([
                             "clustered": design.columnClustered,
                             "columnWidth": measureDef.props.barWidth,
                             "fontSize": design.fontSizeVal,
-                            "stackable": measureDef.props.stackable,
                             "balloonText": "<b>[[title]]</b><br/>[[value]]"
                         });
                     }
@@ -199,7 +198,6 @@ define([
                             "useLineColorForBulletBorder": true,
                             "valueField": measureDef.cId,
                             "fontSize": design.fontSizeVal,
-                            "stackable": measureDef.props.stackable,
                             "balloonText": "<b>[[title]]</b><br/>[[value]]"
                         });
                     }

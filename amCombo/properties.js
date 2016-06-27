@@ -156,20 +156,6 @@ define([], function() {
         step: 0.1,
         defaultValue: 0.5
     };
-    var stackable = {
-        type: "boolean",
-        component: "switch",
-        label: "Stackable",
-        ref: "qDef.props.stackable",
-        options: [{
-            value: true,
-            label: "On"
-        }, {
-            value: false,
-            label: "Off"
-        }],
-        defaultValue: true
-    };
     var measureColumn = {
         type: "items",
         items: {
@@ -198,8 +184,7 @@ define([], function() {
         items: {
             measureColor: measureColor,
             measureAxis: measureAxis,
-            measureType: measureType,
-            stackable: stackable
+            measureType: measureType
         }
     };
 
