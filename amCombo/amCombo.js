@@ -56,6 +56,7 @@ define([
                     "measureType": "column",
                     "measureAxis": "v1",
                     "barWidth": 0.5,
+                    "columnAreaAlpha": 1,
                     "measureColor": cheerUpEmoKid[0]
                 }
             }
@@ -70,6 +71,7 @@ define([
                     "measureType": "column",
                     "measureAxis": "v1",
                     "barWidth": 0.3,
+                    "columnAreaAlpha": 1,
                     "measureColor": cheerUpEmoKid[1]
                 }
             }
@@ -161,7 +163,7 @@ define([
                             "valueAxis": measureDef.props.measureAxis,
                             "lineColor": measureDef.props.measureColor,
                             "fillColors": measureDef.props.measureColor,
-                            "fillAlphas": 1,
+                            "fillAlphas": measureDef.props.columnAreaAlpha,
                             "type": measureDef.props.measureType,
                             "title": hc.qMeasureInfo[index].qFallbackTitle,
                             "valueField": measureDef.cId,
@@ -182,6 +184,8 @@ define([
                             "hideBulletsCount": 50,
                             "lineThickness": measureDef.props.lineThickness,
                             "lineColor": measureDef.props.measureColor,
+                            "fillColor": measureDef.props.measureColor,
+                            "fillAlphas": measureDef.props.lineAreaAlpha,
                             "type": measureDef.props.measureType,
                             "title": hc.qMeasureInfo[index].qFallbackTitle,
                             "useLineColorForBulletBorder": true,
@@ -201,6 +205,8 @@ define([
                             "hideBulletsCount": 50,
                             "lineThickness": measureDef.props.lineThickness,
                             "lineColor": measureDef.props.measureColor,
+                            "fillColor": measureDef.props.measureColor,
+                            "fillAlphas": measureDef.props.lineAreaAlpha,
                             "title": hc.qMeasureInfo[index].qFallbackTitle,
                             "useLineColorForBulletBorder": true,
                             "valueField": measureDef.cId,

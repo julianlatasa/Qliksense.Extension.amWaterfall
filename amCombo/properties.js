@@ -55,7 +55,26 @@ define([], function() {
         label: "Color",
         ref: "qDef.props.measureColor" /* cheerUpEmoKid[measureIndex] */
     };
-
+    var lineAreaAlpha = {
+        type: "number",
+        component: "slider",
+        label: "Area fill Opacity",
+        ref: "qDef.props.lineAreaAlpha",
+        min: 0,
+        max: 1,
+        step: 0.1,
+        defaultValue: 0
+    };
+    var columnAreaAlpha = {
+        type: "number",
+        component: "slider",
+        label: "Bar Opacity",
+        ref: "qDef.props.columnAreaAlpha",
+        min: 0,
+        max: 1,
+        step: 0.1,
+        defaultValue: 1
+    };
     var lineThickness = {
         type: "number",
         component: "slider",
@@ -70,7 +89,8 @@ define([], function() {
     var measureLine = {
         type: "items",
         items: {
-            lineThickness: lineThickness
+            lineThickness: lineThickness,
+            lineAreaAlpha: lineAreaAlpha
         },
         show: function(m) {
             if(m.qDef.props.measureType == "smoothedLine" || m.qDef.props.measureType == "Line") {
@@ -80,7 +100,6 @@ define([], function() {
             }
         }
     };
-
     var columnWidth = {
         type: "number",
         component: "slider",
@@ -94,7 +113,8 @@ define([], function() {
     var measureColumn = {
         type: "items",
         items: {
-            columnWidth: columnWidth
+            columnWidth: columnWidth,
+            columnAreaAlpha: columnAreaAlpha
         },
         show: function(m) {
             if(m.qDef.props.measureType == "column") {
