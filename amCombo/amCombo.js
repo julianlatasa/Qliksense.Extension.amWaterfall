@@ -86,6 +86,9 @@ define([
                     "measureType": "smoothedLine",
                     "measureAxis": "v2",
                     "lineThickness": 2,
+                    "lineBulletType": "round",
+                    "lineBulletSize": 5,
+                    "lineBulletColor": "#FFFFFF",
                     "measureColor": cheerUpEmoKid[2]
                 }
             }
@@ -100,6 +103,9 @@ define([
                     "measureType": "smoothedLine",
                     "measureAxis": "v2",
                     "lineThickness": 2,
+                    "lineBulletType": "round",
+                    "lineBulletSize": 5,
+                    "lineBulletColor": "#FFFFFF",
                     "measureColor": cheerUpEmoKid[3]
                 }
             }
@@ -177,10 +183,10 @@ define([
                         measureDefinition.push({
                             "id": measureDef.cId,
                             "valueAxis": measureDef.props.measureAxis,
-                            "bullet": "round",
+                            "bullet": measureDef.props.lineBulletType,
                             "bulletBorderAlpha": 1,
-                            "bulletColor": "#FFFFFF",
-                            "bulletSize": 5,
+                            "bulletColor": measureDef.props.lineBulletColor,
+                            "bulletSize": measureDef.props.lineBulletSize,
                             "hideBulletsCount": 50,
                             "lineThickness": measureDef.props.lineThickness,
                             "lineColor": measureDef.props.measureColor,
@@ -198,10 +204,10 @@ define([
                         measureDefinition.push({
                             "id": measureDef.cId,
                             "valueAxis": measureDef.props.measureAxis,
-                            "bullet": "round",
+                            "bullet": measureDef.props.lineBulletType,
                             "bulletBorderAlpha": 1,
-                            "bulletColor": "#FFFFFF",
-                            "bulletSize": 5,
+                            "bulletColor": measureDef.props.lineBulletColor,
+                            "bulletSize": measureDef.props.lineBulletSize,
                             "hideBulletsCount": 50,
                             "lineThickness": measureDef.props.lineThickness,
                             "lineColor": measureDef.props.measureColor,

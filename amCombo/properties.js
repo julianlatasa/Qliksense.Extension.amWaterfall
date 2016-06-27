@@ -80,17 +80,63 @@ define([], function() {
         component: "slider",
         label: "Line Thickness",
         ref: "qDef.props.lineThickness",
-        min: 0.5,
+        min: 0,
         max: 10,
         step: 0.5,
         defaultValue: 2
+    };
+    var lineBulletType = {
+        type: "string",
+        component: "dropdown",
+        label: "Bullet Icon",
+        ref: "qDef.props.lineBulletType",
+        options: [{
+            value: "none",
+            label: "None"
+        },
+        {
+            value: "round",
+            label: "Round"
+        },{
+            value: "square",
+            label: "Square"
+        },{
+            value: "triangleUp",
+            label: "Triangle Up"
+        },{
+            value: "triangleDown",
+            label: "Triangle Down"
+        },{
+            value: "bubble",
+            label: "Bubble"
+        }],
+        defaultValue: "round"
+    };
+    var lineBulletSize = {
+        type: "number",
+        component: "slider",
+        label: "Bullet Size",
+        ref: "qDef.props.lineBulletSize",
+        min: 0,
+        max: 10,
+        step: 1,
+        defaultValue: 5
+    };
+    var lineBulletColor = {
+        type: "string",
+        label: "Bullet Color",
+        ref: "qDef.props.lineBulletColor",
+        defaultValue: "#FFFFFF"
     };
 
     var measureLine = {
         type: "items",
         items: {
             lineThickness: lineThickness,
-            lineAreaAlpha: lineAreaAlpha
+            lineAreaAlpha: lineAreaAlpha,
+            lineBulletType: lineBulletType,
+            lineBulletSize: lineBulletSize,
+            lineBulletColor: lineBulletColor
         },
         show: function(m) {
             if(m.qDef.props.measureType == "smoothedLine" || m.qDef.props.measureType == "Line") {
