@@ -5,6 +5,9 @@ This is a work in progress project for integrating [amCharts](https://www.amchar
 
 At the moment the project is an implementation of a waterfall chart in the amWaterfall folder and a combo chart in the amCombo folder.
 
+## Disclaimer
+I'm in no way affiliated with amcharts.com. Their library is free to use for commercial purposes with the caveate that you must include the link to their website in the charts (as seen on the top left of the chart screenshots). If you would want a version without links to amcharts.com they would have to implement a solution to market.qlik.
+
 ### Latest Change
 * Cleaned up folders & added zipping to build functionality.
 * Added new screeenshots of the combo chart, which should be functional now, albeit not very tested.
