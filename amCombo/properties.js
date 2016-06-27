@@ -262,6 +262,50 @@ define([], function() {
         }],
         defaultValue: true
     };
+    var leftAxisStackType = {
+        type: "string",
+        component: "dropdown",
+        label: "Left Axis Stack Type",
+        ref: "props.design.leftAxisStackType",
+        options: [{
+            value: "none",
+            label: "None"
+        },
+        {
+            value: "regular",
+            label: "Regular"
+        },
+        {
+            value: "100%",
+            label: "100%"
+        },{
+            value: "3d",
+            label: "3d"
+        }],
+        defaultValue: "none"
+    };
+    var rightAxisStackType = {
+        type: "string",
+        component: "dropdown",
+        label: "Right Axis Stack Type",
+        ref: "props.design.rightAxisStackType",
+        options: [{
+            value: "none",
+            label: "None"
+        },
+        {
+            value: "regular",
+            label: "Regular"
+        },
+        {
+            value: "100%",
+            label: "100%"
+        },{
+            value: "3d",
+            label: "3d"
+        }],
+        defaultValue: "none"
+    };
     var showLegends = {
         type: "boolean",
         component: "switch",
@@ -401,6 +445,8 @@ define([], function() {
             showLegends: showLegends,
             conLegendPosition: conLegendPosition,
             columnClustered: columnClustered,
+            leftValueAxisStackType: leftAxisStackType,
+            rightValueAxisStackType: rightAxisStackType,
             rotateDim: rotateDim,
             handDrawn: handDrawn,
             depth: depth,

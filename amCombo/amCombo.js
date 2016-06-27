@@ -229,12 +229,14 @@ define([
                     "valueAxes": [{
                         "id": "v1",
                         "position": "left",
+                        "stackType": design.leftAxisStackType,
                         "autoGridCount": false,
                         "fontSize": design.fontSizeY,
                         "title": leftValueAxisTitle
                     }, {
                         "id": "v2",
                         "position": "right",
+                        "stackType": design.rightAxisStackType,
                         "autoGridCount": false,
                         "fontSize": design.fontSizeY,
                         "title": rightValueAxisTitle

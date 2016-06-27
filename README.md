@@ -7,19 +7,22 @@ At the moment the project is an implementation of a waterfall chart in the amWat
 
 Please rate & give feedback! If you wan't to contribute feel free to message me on github.
 
-### Latest Change
+### Latest 5 Changes
+* Added setting to select stacking type of an axis (stacks measure of similar type reffering to the same axis: 3d/regular/none/100%).
+
 * Added alpha fill settings on measures. For bars this just changes opacity. For lines this creates an area beneath the line (area chart).
 
 * Cleaned up folders & added zipping to build functionality.
 * Added new screeenshots of the combo chart, which should be functional now, albeit not very tested.
 * Made the connection between all the appearance settings & the chart API (you can now 3d, choose clustered bars, handrawn, change fontsize/family etc. etc.)
-* Fixed an error that made the combo only work with precisly 4 measures.
 
 ## Screenshots
 ### Combo Chart
 ![Combo Chart Screens](comboPictures/womboCombo.png)
 ### Combo Chart (New measure Opacity)
 ![Combo Chart Opacity](comboPictures/areaOpacity.PNG)
+### Combo Chart (New stacking settings)
+![Combo Chart Opacity](comboPictures/stacking.PNG)
 ### Waterfall Chart
 ![Waterfall Chart Screens](waterfallPictures/waterFall.png)
 
