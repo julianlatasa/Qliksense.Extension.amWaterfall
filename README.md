@@ -8,13 +8,16 @@ At the moment the project is an implementation of a waterfall chart in the amWat
 Please rate & give feedback! If you wan't to contribute feel free to message me on github.
 
 ### Latest 5 Changes
+* Added line bullet settings to change size color and type of bullet. Also allowed lines to have a thickness of 0, effectively allowing line types to work as a scatterplot with only bullets showing.
+
 * Added setting to select stacking type of an axis (stacks measure of similar type reffering to the same axis: 3d/regular/none/100%).
 
 * Added alpha fill settings on measures. For bars this just changes opacity. For lines this creates an area beneath the line (area chart).
 
 * Cleaned up folders & added zipping to build functionality.
+
 * Added new screeenshots of the combo chart, which should be functional now, albeit not very tested.
-* Made the connection between all the appearance settings & the chart API (you can now 3d, choose clustered bars, handrawn, change fontsize/family etc. etc.)
+
 
 ## Screenshots
 ### Combo Chart
