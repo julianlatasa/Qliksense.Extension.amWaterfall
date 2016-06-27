@@ -274,6 +274,20 @@ define([], function() {
         }],
         defaultValue: false
     };
+    var forceLinesBehindColumns = {
+        type: "boolean",
+        component: "switch",
+        label: "Force lines & areas behind columns",
+        ref: "props.design.forceLinesBehindColumns",
+        options: [{
+            value: true,
+            label: "On"
+        }, {
+            value: false,
+            label: "Off"
+        }],
+        defaultValue: false
+    };
     var titleString = {
         type: "string",
         label: "Title",
@@ -496,7 +510,8 @@ define([], function() {
             rotateDim: rotateDim,
             handDrawn: handDrawn,
             depth: depth,
-            angle: angle
+            angle: angle,
+            forceLinesBehindColumns: forceLinesBehindColumns
         }
     };
 

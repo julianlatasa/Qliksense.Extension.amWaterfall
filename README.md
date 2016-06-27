@@ -21,7 +21,8 @@ Please rate & give feedback! If you wan't to contribute feel free to message me 
 
 ## Screenshots
 ### Combo Chart
-![Combo Chart Screens](comboPictures/womboCombo.png)
+The goal of the combo chart is to give the user alooot of settings to mess around with, the below examples are just a small subset of outcomes you can produce.
+![Combo Chart Screens](comboPictures/comboRandom.PNG)
 ### Combo Chart (New measure Opacity)
 ![Combo Chart Opacity](comboPictures/areaOpacity.PNG)
 ### Combo Chart (New stacking settings)
