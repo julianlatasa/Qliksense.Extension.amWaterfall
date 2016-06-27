@@ -60,10 +60,10 @@ define([], function() {
         component: "slider",
         label: "Area fill Opacity",
         ref: "qDef.props.lineAreaAlpha",
-        min: 0,
-        max: 1,
+        min: 0.0,
+        max: 1.0,
         step: 0.1,
-        defaultValue: 0
+        defaultValue: 0.0
     };
     var columnAreaAlpha = {
         type: "number",
@@ -118,7 +118,7 @@ define([], function() {
         label: "Bullet Size",
         ref: "qDef.props.lineBulletSize",
         min: 0,
-        max: 10,
+        max: 20,
         step: 1,
         defaultValue: 5
     };
@@ -156,6 +156,20 @@ define([], function() {
         step: 0.1,
         defaultValue: 0.5
     };
+    var stackable = {
+        type: "boolean",
+        component: "switch",
+        label: "Stackable",
+        ref: "qDef.props.stackable",
+        options: [{
+            value: true,
+            label: "On"
+        }, {
+            value: false,
+            label: "Off"
+        }],
+        defaultValue: true
+    };
     var measureColumn = {
         type: "items",
         items: {
@@ -184,7 +198,8 @@ define([], function() {
         items: {
             measureColor: measureColor,
             measureAxis: measureAxis,
-            measureType: measureType
+            measureType: measureType,
+            stackable: stackable
         }
     };
 
