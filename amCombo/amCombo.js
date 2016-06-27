@@ -226,6 +226,7 @@ define([
                 var chart = AmCharts.makeChart($element[0], {
                     "type": "serial",
                     "theme": "none",
+                    "usePrefixes": design.useNumberPrefixes,
                     "depth3D": design.depth,
                     "angle": design.angle,
                     "rotate": design.rotateGraph,

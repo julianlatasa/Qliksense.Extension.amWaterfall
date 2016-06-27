@@ -274,6 +274,20 @@ define([], function() {
         }],
         defaultValue: false
     };
+    var useNumberPrefixes = {
+        type: "boolean",
+        component: "switch",
+        label: "Use number prefixes for large numbers",
+        ref: "props.design.useNumberPrefixes",
+        options: [{
+            value: true,
+            label: "On"
+        }, {
+            value: false,
+            label: "Off"
+        }],
+        defaultValue: false
+    };
     var forceLinesBehindColumns = {
         type: "boolean",
         component: "switch",
@@ -503,6 +517,7 @@ define([], function() {
         label: "Design",
         items: {
             showLegends: showLegends,
+            useNumberPrefixes: useNumberPrefixes,
             conLegendPosition: conLegendPosition,
             columnClustered: columnClustered,
             leftValueAxisStackType: leftAxisStackType,
