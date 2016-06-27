@@ -11,21 +11,11 @@ At the moment the project is an implementation of a waterfall chart in the amWat
 * Made the connection between all the appearance settings & the chart API (you can now 3d, choose clustered bars, handrawn, change fontsize/family etc. etc.)
 * Fixed an error that made the combo only work with precisly 4 measures.
 
-
 ## Screenshots
 ### Combo Chart
 ![Combo Chart Screens](comboPictures/womboCombo.png)
-### Standard Look
-![Standard Look](waterfallPictures/StandardLook.PNG)
-### Title Settings
-![Title Settings](waterfallPictures/TitleSettings.PNG)
-### 3D Effects
-![3D Effects](waterfallPictures/3DEffects.PNG)
-### Font Styling
-![Font Styling And Balloon](waterfallPictures/fontStylingAndBalloon.PNG)
-### Hand Drawn Effects
-![Hand Drawn Effect](waterfallPictures/HandDrawnEffect.PNG)
-
+### Waterfall Chart
+![Waterfall Chart Screens](waterfallPictures/waterFall.png)
 
 ## How to use
 Import amCombo.zip & amWaterfall.zip into your qliksense dev-hub.
