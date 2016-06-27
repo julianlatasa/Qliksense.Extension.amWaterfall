@@ -15,15 +15,15 @@ At the moment the project is an implementation of a waterfall chart in the amWat
 ### Combo Chart
 ![Combo Chart Screens](comboPictures/womboCombo.png)
 ### Standard Look
-![Standard Look](standardLook.PNG)
+![Standard Look](waterfallPictures/standardLook.PNG)
 ### Title Settings
-![Title Settings](TitleSettings.PNG)
+![Title Settings](waterfallPictures/TitleSettings.PNG)
 ### 3D Effects
-![3D Effects](3DEffects.PNG)
+![3D Effects](waterfallPictures/3DEffects.PNG)
 ### Font Styling
-![Font Styling And Balloon](fontStylingAndBalloon.PNG)
+![Font Styling And Balloon](waterfallPictures/fontStylingAndBalloon.PNG)
 ### Hand Drawn Effects
-![Hand Drawn Effect](HandDrawnEffect.PNG)
+![Hand Drawn Effect](waterfallPictures/HandDrawnEffect.PNG)
 
 
 ## How to use
