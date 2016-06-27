@@ -16,7 +16,7 @@ At the moment the project is an implementation of a waterfall chart in the amWat
 ### Combo Chart
 ![Combo Chart Screens](comboPictures/womboCombo.png)
 ### Standard Look
-![Standard Look](waterfallPictures/standardLook.PNG)
+![Standard Look](waterfallPictures/StandardLook.PNG)
 ### Title Settings
 ![Title Settings](waterfallPictures/TitleSettings.PNG)
 ### 3D Effects
