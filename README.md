@@ -8,6 +8,7 @@ At the moment the project is an implementation of a waterfall chart in the amWat
 Please rate & give feedback! If you wan't to contribute feel free to message me on github.
 
 ### Latest 5 Changes
+* Add dashing of measure lines functionality (see screenshots below).
 * Added setting to prefix large numbers automatically.
 
 * Added line bullet settings to change size color and type of bullet. Also allowed lines to have a thickness of 0, effectively allowing line types to work as a scatterplot with only bullets showing.
@@ -16,13 +17,12 @@ Please rate & give feedback! If you wan't to contribute feel free to message me 
 
 * Added alpha fill settings on measures. For bars this just changes opacity. For lines this creates an area beneath the line (area chart).
 
-* Cleaned up folders & added zipping to build functionality.
-
-
 ## Screenshots
 ### Combo Chart
 The goal of the combo chart is to give the user alooot of settings to mess around with, the below examples are just a small subset of outcomes you can produce.
 ![Combo Chart Screens](comboPictures/comboRandom.PNG)
+### Combo chart (silly visualizations)
+![Really stupid combo charts](comboPictures/sillyGraphs.PNG)
 ### Combo Chart (New measure Opacity)
 ![Combo Chart Opacity](comboPictures/areaOpacity.PNG)
 ### Combo Chart (New stacking settings)

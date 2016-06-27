@@ -56,6 +56,7 @@ define([
                     "measureType": "column",
                     "measureAxis": "v1",
                     "barWidth": 0.5,
+                    "dashLength": 0,
                     "columnAreaAlpha": 1,
                     "measureColor": cheerUpEmoKid[0]
                 }
@@ -71,6 +72,7 @@ define([
                     "measureType": "column",
                     "measureAxis": "v1",
                     "barWidth": 0.3,
+                    "dashLength": 0,
                     "columnAreaAlpha": 1,
                     "measureColor": cheerUpEmoKid[1]
                 }
@@ -86,6 +88,7 @@ define([
                     "measureType": "smoothedLine",
                     "measureAxis": "v2",
                     "lineThickness": 2,
+                    "dashLength": 0,
                     "lineBulletType": "round",
                     "lineBulletSize": 5,
                     "lineBulletColor": "#FFFFFF",
@@ -103,6 +106,7 @@ define([
                     "measureType": "smoothedLine",
                     "measureAxis": "v2",
                     "lineThickness": 2,
+                    "dashLength": 0,
                     "lineBulletType": "round",
                     "lineBulletSize": 5,
                     "lineBulletColor": "#FFFFFF",
@@ -170,6 +174,7 @@ define([
                             "lineColor": measureDef.props.measureColor,
                             "fillColors": measureDef.props.measureColor,
                             "fillAlphas": measureDef.props.columnAreaAlpha,
+                            "dashLength": measureDef.props.dashLength,
                             "type": measureDef.props.measureType,
                             "title": hc.qMeasureInfo[index].qFallbackTitle,
                             "valueField": measureDef.cId,
@@ -185,6 +190,7 @@ define([
                             "valueAxis": measureDef.props.measureAxis,
                             "bullet": measureDef.props.lineBulletType,
                             "behindColumns": design.forceLinesBehindColumns,
+                            "dashLength": measureDef.props.dashLength,
                             "bulletBorderAlpha": 1,
                             "bulletColor": measureDef.props.lineBulletColor,
                             "bulletSize": measureDef.props.lineBulletSize,
@@ -207,6 +213,7 @@ define([
                             "valueAxis": measureDef.props.measureAxis,
                             "bullet": measureDef.props.lineBulletType,
                             "behindColumns": design.forceLinesBehindColumns,
+                            "dashLength": measureDef.props.dashLength,
                             "bulletBorderAlpha": 1,
                             "bulletColor": measureDef.props.lineBulletColor,
                             "bulletSize": measureDef.props.lineBulletSize,

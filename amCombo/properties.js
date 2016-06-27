@@ -128,7 +128,16 @@ define([], function() {
         ref: "qDef.props.lineBulletColor",
         defaultValue: "#FFFFFF"
     };
-
+    var dashLength = {
+        type: "number",
+        component: "slider",
+        label: "Dash Length",
+        ref: "qDef.props.dashLength",
+        min: 0,
+        max: 20,
+        step: 1,
+        defaultValue: 0
+    };
     var measureLine = {
         type: "items",
         items: {
@@ -184,7 +193,8 @@ define([], function() {
         items: {
             measureColor: measureColor,
             measureAxis: measureAxis,
-            measureType: measureType
+            measureType: measureType,
+            dashLength: dashLength
         }
     };
 
