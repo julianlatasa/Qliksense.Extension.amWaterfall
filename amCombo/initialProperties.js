@@ -1,5 +1,4 @@
 define([], function() {
-    'use strict';
     var defaultDimensionString = "=valuelist('dim1val1', 'dim1val2', 'dim1val3', 'dim1val4', 'dim1val5')";
     var defaultDimension = {
         qLibraryId: "",
@@ -11,16 +10,22 @@ define([], function() {
             qFieldLabels: ["Category Axis Label"]
         }
     };
+    var cheerUpEmoKid = [
+        "#556270",
+        "#4ECDC4",
+        "#C7F464",
+        "#FF6B6B",
+        "#C44D58"
+    ];
+    var defaultMeasure;
+    var bullet;
+    var lineThickness;
+    var columnWidth;
+    var valueAxis;
+    var amGraphType;
+    var fillAlphas;
     var measureArr = [];
     for (i = 0; i < 4; i++) {
-        var cheerUpEmoKid = ["#556270", "#4ECDC4", "#C7F464", "#FF6B6B", "#C44D58"];
-        var defaultMeasure;
-        var bullet;
-        var lineThickness;
-        var columnWidth;
-        var valueAxis;
-        var amGraphType;
-        var fillAlphas;
         switch (i) {
             case 0:
                 defaultMeasure = "pick(match(valuelist('dim1val1', 'dim1val2', 'dim1val3', 'dim1val4', 'dim1val5'),'dim1val1', 'dim1val2', 'dim1val3', 'dim1val4', 'dim1val5'),35,20,60,15,40)";
@@ -58,8 +63,6 @@ define([], function() {
                 amGraphType = "line";
                 fillAlphas = 0;
                 break;
-            default:
-                break;
         }
         measureArr.push({
             "qDef": {
@@ -93,7 +96,7 @@ define([], function() {
             }
         });
     }
-    var initialProperties = {
+    return {
         qHyperCubeDef: {
             qDimensions: [defaultDimension],
             qMeasures: measureArr,
@@ -103,5 +106,4 @@ define([], function() {
             }]
         }
     };
-    return initialProperties;
 });

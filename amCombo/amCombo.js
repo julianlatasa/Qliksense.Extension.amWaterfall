@@ -1,7 +1,7 @@
 requirejs.config({
     paths: {
         "amcharts": "http://www.amcharts.com/lib/3/amcharts",
-        "amcharts.serial": "http://www.amcharts.com/lib/3/serial"
+        "amcharts.serial": "http://www.amcharts.com/lib/3/serial",
     },
     shim: {
         "amcharts.serial": {
@@ -13,148 +13,21 @@ requirejs.config({
         }
     }
 });
-// *****************************************************************************
-// Color palette for initial colors
-// credits: http://www.colourlovers.com/palette/1930/cheer_up_emo_kid
-// *****************************************************************************
 define([
         'jquery',
         './properties',
+        './initialProperties',
         'amcharts.serial'
     ],
-    function($, props) {
-        var defaultDimensionString = "=valuelist('dim1val1', 'dim1val2', 'dim1val3', 'dim1val4', 'dim1val5')";
-        var defaultDimension = {
-            qLibraryId: "",
-            qNullSuprresion: false,
-            qDef: {
-                qGrouping: "N",
-                qFieldDefs: [defaultDimensionString],
-                cId: "defaultDimension",
-                qFieldLabels: ["Category Axis Label"]
-            }
-        };
-        var cheerUpEmoKid = [
-            "#556270",
-            "#4ECDC4",
-            "#C7F464",
-            "#FF6B6B",
-            "#C44D58"
-        ];
-        var defaultMeasure;
-        var bullet;
-        var lineThickness;
-        var columnWidth;
-        var valueAxis;
-        var amGraphType;
-        var fillAlphas;
-        var measureArr = [];
-        for (i = 0; i < 4; i++) {
-            switch (i) {
-                case 0:
-                    defaultMeasure = "pick(match(valuelist('dim1val1', 'dim1val2', 'dim1val3', 'dim1val4', 'dim1val5'),'dim1val1', 'dim1val2', 'dim1val3', 'dim1val4', 'dim1val5'),35,20,60,15,40)";
-                    bullet = "none";
-                    lineThickness = 1;
-                    columnWidth = 0.5;
-                    valueAxis = "v1";
-                    amGraphType = "column";
-                    fillAlphas = 1;
-                    break;
-                case 1:
-                    defaultMeasure = "pick(match(valuelist('dim1val1', 'dim1val2', 'dim1val3', 'dim1val4', 'dim1val5'),'dim1val1', 'dim1val2', 'dim1val3', 'dim1val4', 'dim1val5'),15,10,5,45,60)";
-                    bullet = "none";
-                    lineThickness = 1;
-                    columnWidth = 0.3;
-                    valueAxis = "v1";
-                    amGraphType = "column";
-                    fillAlphas = 1;
-                    break;
-                case 2:
-                    defaultMeasure = "pick(match(valuelist('dim1val1', 'dim1val2', 'dim1val3', 'dim1val4', 'dim1val5'),'dim1val1', 'dim1val2', 'dim1val3', 'dim1val4', 'dim1val5'),100,200,300,400,500)";
-                    bullet = "round";
-                    lineThickness = 2;
-                    columnWidth = 0;
-                    valueAxis = "v2";
-                    amGraphType = "smoothedLine";
-                    fillAlphas = 0;
-                    break;
-                case 3:
-                    defaultMeasure = "pick(match(valuelist('dim1val1', 'dim1val2', 'dim1val3', 'dim1val4', 'dim1val5'),'dim1val1', 'dim1val2', 'dim1val3', 'dim1val4', 'dim1val5'),250,37,430,220,330)";
-                    bullet = "square";
-                    lineThickness = 2;
-                    columnWidth = 0;
-                    valueAxis = "v2";
-                    amGraphType = "line";
-                    fillAlphas = 0;
-                    break;
-            }
-            measureArr.push({
-                "qDef": {
-                    "qGrouping": "N",
-                    "qDef": defaultMeasure,
-                    "qLabel": "Measure" + i,
-                    "cId": "defaultMes" + i,
-                    "amGraph": {
-                        "type": amGraphType,
-                        "valueAxis": valueAxis,
-                        "fillColors": cheerUpEmoKid[i],
-                        "fillAlphas": fillAlphas,
-                        "fontSize": 12,
-                        "columnWidth": columnWidth,
-                        "clustered": false,
-                        "lineColor": cheerUpEmoKid[i],
-                        "lineThickness": lineThickness,
-                        "dashLength": 0,
-                        "balloonColor": cheerUpEmoKid[i],
-                        "balloonText": "<b>[[title]]</b><br/>[[value]]",
-                        "bullet": bullet,
-                        "bulletAlpha": 1,
-                        "bulletColor": cheerUpEmoKid[i],
-                        "bulletSize": 5,
-                        "labelOffset": 0,
-                        "labelPosition": "top",
-                        "labelRotation": 0,
-                        "labelText": "",
-                        "behindColumns": false
-                    }
-                }
-            });
-        }
+    function($, props, initProps) {
         return {
             definition: props,
-            initialProperties: {
-                qHyperCubeDef: {
-                    qDimensions: [defaultDimension],
-                    qMeasures: measureArr,
-                    qInitialDataFetch: [{
-                        qWidth: 5,
-                        qHeight: 100
-                    }]
-                }
-            },
+            initialProperties: initProps,
             paint: function($element, layout) {
                 var hc = layout.qHyperCube;
                 var dataProvider = [];
-                var measureDefinition = [];
-                var data = hc.qDataPages[0].qMatrix;
-                var design = layout.props.design;
-                var chartTitle;
-                var leftValueAxisTitle;
-                var rightValueAxisTitle;
-                var categoryTitle;
-                if (design.chartTitle) {
-                    chartTitle = [{
-                        "text": design.titleString
-                    }];
-                }
-                if (design.showValueAxisTitle) {
-                    leftValueAxisTitle = design.leftValueAxisTitle;
-                    rightValueAxisTitle = design.rightValueAxisTitle;
-                }
-                if (design.categoryTitle) {
-                    categoryTitle = hc.qDimensionInfo[0].qFallbackTitle;
-                }
-                data.forEach(function(row, index) {
+                var amGraphs = [];
+                hc.qDataPages[0].qMatrix.forEach(function(row, index) {
                     var dataProviderObj = {};
                     row.forEach(function(cell, index) {
                         var cId;
@@ -172,7 +45,7 @@ define([
                     dataProvider.push(dataProviderObj);
                 });
                 hc.qMeasureInfo.forEach(function(measureDef, index) {
-                    measureDefinition.push({
+                    amGraphs.push({
                         "id": measureDef.cId,
                         "valueField": measureDef.cId,
                         "title": hc.qMeasureInfo[index].qFallbackTitle,
@@ -206,31 +79,36 @@ define([
                 var chart = AmCharts.makeChart($element[0], {
                     "type": "serial",
                     "theme": "none",
-                    "usePrefixes": design.useNumberPrefixes,
-                    "depth3D": design.depth,
-                    "angle": design.angle,
-                    "rotate": design.rotateGraph,
-                    "fontFamily": design.fontFamily,
-                    "fontSize": design.titleSize,
-                    "titles": chartTitle,
-                    "handDrawn": design.handDrawn,
+                    "usePrefixes": layout.amChart.usePrefixes,
+                    "depth3D": layout.amChart.depth3D,
+                    "angle": layout.amChart.angle,
+                    "fontFamily": layout.amChart.fontFamily,
+                    "fontSize": layout.amChart.fontSize,
+                    "handDrawn": layout.amChart.handDrawn,
                     "precision": 2,
+                    "titles": [{
+                        text: layout.amChart.titles.text,
+                        alpha: layout.amChart.titles.alpha,
+                        bold: layout.amChart.titles.bold,
+                        color: layout.amChart.titles.color,
+                        size: layout.amChart.titles.size
+                    }],
                     "valueAxes": [{
                         "id": "v1",
                         "position": "left",
-                        "stackType": design.leftAxisStackType,
+                        "stackType": layout.amChart.valueAxis.leftStackType,
                         "autoGridCount": false,
-                        "fontSize": design.fontSizeY,
-                        "title": leftValueAxisTitle
+                        "fontSize": layout.amChart.valueAxis.fontSize,
+                        "title": layout.amChart.valueAxis.leftTitle
                     }, {
                         "id": "v2",
                         "position": "right",
-                        "stackType": design.rightAxisStackType,
+                        "stackType": layout.amChart.valueAxis.rightStackType,
                         "autoGridCount": false,
-                        "fontSize": design.fontSizeY,
-                        "title": rightValueAxisTitle
+                        "fontSize": layout.amChart.valueAxis.fontSize,
+                        "title": layout.amChart.valueAxis.rightTitle
                     }],
-                    "graphs": measureDefinition,
+                    "graphs": amGraphs,
                     "chartCursor": {
                         "pan": true,
                         "valueLineEnabled": true,
@@ -243,28 +121,24 @@ define([
                         "parseDates": false,
                         "dashLength": 1,
                         "minorGridEnabled": true,
-                        "labelRotation": design.rotateDim,
-                        "fontSize": design.fontSizeDim,
-                        "title": categoryTitle
+                        "labelRotation": layout.amChart.categoryAxis.labelRotation,
+                        "fontSize": layout.amChart.categoryAxis.fontSize,
+                        "title": layout.amChart.categoryAxis.title
                     },
                     "legend": {
-                        "enabled": design.showLegends,
+                        "enabled": layout.amChart.legend.enabled,
                         "useGraphSettings": true,
-                        "position": design.legendPosition
-                    },
-                    "balloon": {
-                        "borderThickness": 1,
-                        "shadowAlpha": 0
+                        "position": layout.amChart.legend.position
                     },
                     "export": {
                         "enabled": true
                     },
                     "dataProvider": dataProvider
                 });
-                if (design.handDrawn) {
+                if (layout.amChart.handDrawn) {
                     $element.find("*").css("font-family", "Kristen ITC");
                 } else {
-                    $element.find("*").css("font-family", design.fontFamily);
+                    $element.find("*").css("font-family", layout.amChart.fontFamily);
                 }
             }
         };

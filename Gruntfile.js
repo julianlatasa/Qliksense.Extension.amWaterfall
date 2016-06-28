@@ -3,21 +3,21 @@ module.exports = function(grunt) {
         copy: {
             main: {
                 files: [{
-                    expand: false,
-                    cwd: '',
-                    src: ['amWaterfall/amWaterfall.js', 'amWaterfall/amWaterfall.qext', 'amWaterfall/properties.js', 'amWaterfall/wbFolder.wbl'],
-                    dest: 'C:/Users/Niels/Documents/Qlik/Sense/Extensions/'
+                    expand: true,
+                    src: ['amWaterfall/*'],
+                    dest: 'C:/Users/Niels/Documents/Qlik/Sense/Extensions/',
+                    filter: 'isFile'
                 }, {
-                    expand: false,
-                    cwd: '',
-                    src: ['amCombo/amCombo.js', 'amCombo/amCombo.qext', 'amCombo/properties.js', 'amCombo/initialProperties.js','amCombo/amGraph.js', 'amCombo/wbFolder.wbl'],
-                    dest: 'C:/Users/Niels/Documents/Qlik/Sense/Extensions/'
+                    expand: true,
+                    src: ['amCombo/*'],
+                    dest: 'C:/Users/Niels/Documents/Qlik/Sense/Extensions/',
+                    filter: 'isFile'
                 }]
             }
         },
         zip: {
-            'amWaterfall.zip': ['amWaterfall/amWaterfall.js', 'amWaterfall/amWaterfall.qext', 'amWaterfall/properties.js', 'amWaterfall/wbFolder.wbl'],
-            'amCombo.zip': ['amCombo/amCombo.js', 'amCombo/amCombo.qext', 'amCombo/properties.js', 'amCombo/initialProperties.js', 'amCombo/amGraph.js', 'amCombo/wbFolder.wbl']
+            'amWaterfall.zip': ['amWaterfall/*'],
+            'amCombo.zip': ['amCombo/*']
         }
     });
 

@@ -132,6 +132,41 @@ define([], function() {
         }
     };
     // *****************************************************************************
+    // Standard Settings Grouping
+    // *****************************************************************************
+    var showStandard = {
+        ref: "qDef.amGraph.showStandard",
+        type: "boolean",
+        label: "Show Standard amGraph Settings",
+        component: "switch",
+        options: [{
+            value: true,
+            label: "On"
+        }, {
+            value: false,
+            label: "off"
+        }],
+        defaultValue: false
+    };
+
+    var groupStandard = {
+        type: "items",
+        label: "amGraph Settings",
+        items: {
+            amGraphType: amGraphType,
+            valueAxis: valueAxis,
+            fillColors: fillColors,
+            fillAlphas: fillAlphas,
+            fontSize: fontSize,
+            groupColumn: groupColumn,
+            groupLine: groupLine
+        },
+        show: function(m) {
+            return m.qDef.amGraph.showStandard;
+        }
+    };
+
+    // *****************************************************************************
     // Advanced Settings > Ballooons
     // *****************************************************************************
     var balloonColor = {
@@ -276,9 +311,6 @@ define([], function() {
             value: "bottom",
             label: "Bottom"
         }, {
-            value: "top",
-            label: "Top"
-        }, {
             value: "right",
             label: "Right"
         }, {
@@ -340,7 +372,7 @@ define([], function() {
     // *****************************************************************************
     var behindColumns = {
         type: "boolean",
-        component: "switch",
+        component: "dropdown",
         label: "line graphs behind columns",
         ref: "qDef.amGraph.behindColumns",
         options: [{
@@ -379,20 +411,15 @@ define([], function() {
     // RETURN OBJECT
     // *****************************************************************************
     return {
-        amGraphType: amGraphType,
-        valueAxis: valueAxis,
-        fillColors: fillColors,
-        fillAlphas: fillAlphas,
-        fontSize: fontSize,
-        groupColumn: groupColumn,
-        groupLine: groupLine,
-        showBalloon: showBalloon,
-        groupBalloon: groupBalloon,
-        showBullet: showBullet,
-        groupBullet: groupBullet,
-        showLabel: showLabel,
-        groupLabel: groupLabel,
-        showVarious: showVarious,
-        groupVarious: groupVarious
+            showStandard: showStandard,
+            groupStandard: groupStandard,
+            showBalloon: showBalloon,
+            groupBalloon: groupBalloon,
+            showBullet: showBullet,
+            groupBullet: groupBullet,
+            showLabel: showLabel,
+            groupLabel: groupLabel,
+            showVarious: showVarious,
+            groupVarious: groupVarious
     };
 });
