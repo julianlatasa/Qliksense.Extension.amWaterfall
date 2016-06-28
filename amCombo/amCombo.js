@@ -62,7 +62,6 @@ define([
                         "lineColor": measureDef.amGraph.lineColor,
                         "lineThickness": measureDef.amGraph.lineThickness,
                         "dashLength": measureDef.amGraph.dashLength,
-                        "balloonColor": measureDef.amGraph.balloonColor,
                         "balloonText": measureDef.amGraph.balloonText,
                         "bullet": measureDef.amGraph.bullet,
                         "bulletAlpha": measureDef.amGraph.bulletAlpha,

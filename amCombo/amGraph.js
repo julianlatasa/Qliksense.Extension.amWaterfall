@@ -169,11 +169,6 @@ define([], function() {
     // *****************************************************************************
     // Advanced Settings > Ballooons
     // *****************************************************************************
-    var balloonColor = {
-        ref: "qDef.amGraph.balloonColor",
-        label: "Balloon Color",
-        type: "string"
-    };
     var balloonText = {
         ref: "qDef.amGraph.balloonText",
         label: "Balloon Text",
@@ -197,7 +192,6 @@ define([], function() {
     var groupBalloon = {
         type: "items",
         items: {
-            balloonColor: balloonColor,
             balloonText: balloonText
         },
         show: function(m) {
@@ -246,7 +240,8 @@ define([], function() {
     var bulletColor = {
         type: "string",
         label: "Bullet Color",
-        ref: "qDef.amGraph.bulletColor"
+        ref: "qDef.amGraph.bulletColor",
+        defaultValue: "#FFFFFF"
     };
     var bulletSize = {
         type: "number",
