@@ -8,14 +8,11 @@ At the moment the project is an implementation of a waterfall chart in the amWat
 Please rate & give feedback! If you wan't to contribute feel free to message me on github.
 
 ### Latest 5 Changes
+* Changed the properties structrue & optimized code. The structure and naming of properties should closely mimic the amCharts object structure, making it possible to use the amCharts documentation when both trying to understand the interface and the code. See below in the amCombo documentation section.
 * Add dashing of measure lines functionality (see screenshots below).
 * Added setting to prefix large numbers automatically.
-
 * Added line bullet settings to change size color and type of bullet. Also allowed lines to have a thickness of 0, effectively allowing line types to work as a scatterplot with only bullets showing.
-
 * Added setting to select stacking type of an axis (stacks measure of similar type reffering to the same axis: 3d/regular/none/100%).
-
-* Added alpha fill settings on measures. For bars this just changes opacity. For lines this creates an area beneath the line (area chart).
 
 ## Screenshots
 ### Combo Chart
@@ -40,6 +37,12 @@ case1 = statement1, return mes1..
 case2 = statement2, return mes2.
 The structure is more
 case1,case2,..statement1,statement2..mes1,mes2...
+
+## Documentation
+When using the amCombo chart the naming and structure follows that of the amCharts API.
+* The additional properties on the measures are a subset of the API properties [amGraph](https://docs.amcharts.com/3/javascriptcharts/AmGraph).
+* The properties in the amCharts section are a subset of the API properties of the [amSerialChart](https://docs.amcharts.com/3/javascriptcharts/AmSerialChart) and its descendant objects (valueAxes, legend, titles & categoryAxis).
+
 
 ## Known issues
 * The axis rotation API settings doesn't seem to work if you rotate the whole graph via the rotate graph setting.
