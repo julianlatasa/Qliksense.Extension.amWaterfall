@@ -17,13 +17,6 @@ requirejs.config({
 // Color palette for initial colors
 // credits: http://www.colourlovers.com/palette/1930/cheer_up_emo_kid
 // *****************************************************************************
-    var cheerUpEmoKid = [
-    "#556270",
-    "#4ECDC4",
-    "#C7F464",
-    "#FF6B6B",
-    "#C44D58"
-    ];
 define([
         'jquery',
         './properties',
@@ -31,11 +24,6 @@ define([
     ],
     function($, props) {
         var defaultDimensionString = "=valuelist('dim1val1', 'dim1val2', 'dim1val3', 'dim1val4', 'dim1val5')";
-        var defaultMeasure1 = "pick(match(valuelist('dim1val1', 'dim1val2', 'dim1val3', 'dim1val4', 'dim1val5'),'dim1val1', 'dim1val2', 'dim1val3', 'dim1val4', 'dim1val5'),35,20,60,15,40)";
-        var defaultMeasure2 = "pick(match(valuelist('dim1val1', 'dim1val2', 'dim1val3', 'dim1val4', 'dim1val5'),'dim1val1', 'dim1val2', 'dim1val3', 'dim1val4', 'dim1val5'),15,10,5,45,60)";
-        var defaultMeasure3 = "pick(match(valuelist('dim1val1', 'dim1val2', 'dim1val3', 'dim1val4', 'dim1val5'),'dim1val1', 'dim1val2', 'dim1val3', 'dim1val4', 'dim1val5'),100,200,300,400,500)";
-        var defaultMeasure4 = "pick(match(valuelist('dim1val1', 'dim1val2', 'dim1val3', 'dim1val4', 'dim1val5'),'dim1val1', 'dim1val2', 'dim1val3', 'dim1val4', 'dim1val5'),250,37,430,220,330)";
-        var measureArr = [];
         var defaultDimension = {
             qLibraryId: "",
             qNullSuprresion: false,
@@ -46,75 +34,92 @@ define([
                 qFieldLabels: ["Category Axis Label"]
             }
         };
-        measureArr.push({
-            "qDef": {
-                "qGrouping": "N",
-                "qDef": defaultMeasure1,
-                "qLabel": "Measure1",
-                "cId": "defaultMes1",
-                "props": {
-                    "measureType": "column",
-                    "measureAxis": "v1",
-                    "barWidth": 0.5,
-                    "dashLength": 0,
-                    "columnAreaAlpha": 1,
-                    "measureColor": cheerUpEmoKid[0]
-                }
+        var cheerUpEmoKid = [
+            "#556270",
+            "#4ECDC4",
+            "#C7F464",
+            "#FF6B6B",
+            "#C44D58"
+        ];
+        var defaultMeasure;
+        var bullet;
+        var lineThickness;
+        var columnWidth;
+        var valueAxis;
+        var amGraphType;
+        var fillAlphas;
+        var measureArr = [];
+        for (i = 0; i < 4; i++) {
+            switch (i) {
+                case 0:
+                    defaultMeasure = "pick(match(valuelist('dim1val1', 'dim1val2', 'dim1val3', 'dim1val4', 'dim1val5'),'dim1val1', 'dim1val2', 'dim1val3', 'dim1val4', 'dim1val5'),35,20,60,15,40)";
+                    bullet = "none";
+                    lineThickness = 1;
+                    columnWidth = 0.5;
+                    valueAxis = "v1";
+                    amGraphType = "column";
+                    fillAlphas = 1;
+                    break;
+                case 1:
+                    defaultMeasure = "pick(match(valuelist('dim1val1', 'dim1val2', 'dim1val3', 'dim1val4', 'dim1val5'),'dim1val1', 'dim1val2', 'dim1val3', 'dim1val4', 'dim1val5'),15,10,5,45,60)";
+                    bullet = "none";
+                    lineThickness = 1;
+                    columnWidth = 0.3;
+                    valueAxis = "v1";
+                    amGraphType = "column";
+                    fillAlphas = 1;
+                    break;
+                case 2:
+                    defaultMeasure = "pick(match(valuelist('dim1val1', 'dim1val2', 'dim1val3', 'dim1val4', 'dim1val5'),'dim1val1', 'dim1val2', 'dim1val3', 'dim1val4', 'dim1val5'),100,200,300,400,500)";
+                    bullet = "round";
+                    lineThickness = 2;
+                    columnWidth = 0;
+                    valueAxis = "v2";
+                    amGraphType = "smoothedLine";
+                    fillAlphas = 0;
+                    break;
+                case 3:
+                    defaultMeasure = "pick(match(valuelist('dim1val1', 'dim1val2', 'dim1val3', 'dim1val4', 'dim1val5'),'dim1val1', 'dim1val2', 'dim1val3', 'dim1val4', 'dim1val5'),250,37,430,220,330)";
+                    bullet = "square";
+                    lineThickness = 2;
+                    columnWidth = 0;
+                    valueAxis = "v2";
+                    amGraphType = "line";
+                    fillAlphas = 0;
+                    break;
             }
-        });
-        measureArr.push({
-            "qDef": {
-                "qGrouping": "N",
-                "qDef": defaultMeasure2,
-                "qLabel": "Measure2",
-                "cId": "defaultMes2",
-                "props": {
-                    "measureType": "column",
-                    "measureAxis": "v1",
-                    "barWidth": 0.3,
-                    "dashLength": 0,
-                    "columnAreaAlpha": 1,
-                    "measureColor": cheerUpEmoKid[1]
+            measureArr.push({
+                "qDef": {
+                    "qGrouping": "N",
+                    "qDef": defaultMeasure,
+                    "qLabel": "Measure" + i,
+                    "cId": "defaultMes" + i,
+                    "amGraph": {
+                        "type": amGraphType,
+                        "valueAxis": valueAxis,
+                        "fillColors": cheerUpEmoKid[i],
+                        "fillAlphas": fillAlphas,
+                        "fontSize": 12,
+                        "columnWidth": columnWidth,
+                        "clustered": false,
+                        "lineColor": cheerUpEmoKid[i],
+                        "lineThickness": lineThickness,
+                        "dashLength": 0,
+                        "balloonColor": cheerUpEmoKid[i],
+                        "balloonText": "<b>[[title]]</b><br/>[[value]]",
+                        "bullet": bullet,
+                        "bulletAlpha": 1,
+                        "bulletColor": cheerUpEmoKid[i],
+                        "bulletSize": 5,
+                        "labelOffset": 0,
+                        "labelPosition": "top",
+                        "labelRotation": 0,
+                        "labelText": "",
+                        "behindColumns": false
+                    }
                 }
-            }
-        });
-        measureArr.push({
-            "qDef": {
-                "qGrouping": "N",
-                "qDef": defaultMeasure3,
-                "qLabel": "Measure3",
-                "cId": "defaultMes3",
-                "props": {
-                    "measureType": "smoothedLine",
-                    "measureAxis": "v2",
-                    "lineThickness": 2,
-                    "dashLength": 0,
-                    "lineBulletType": "round",
-                    "lineBulletSize": 5,
-                    "lineBulletColor": "#FFFFFF",
-                    "measureColor": cheerUpEmoKid[2]
-                }
-            }
-        });
-        measureArr.push({
-            "qDef": {
-                "qGrouping": "N",
-                "qDef": defaultMeasure4,
-                "qLabel": "Measure4",
-                "cId": "defaultMes4",
-                "props": {
-                    "measureType": "smoothedLine",
-                    "measureAxis": "v2",
-                    "lineThickness": 2,
-                    "dashLength": 0,
-                    "lineBulletType": "round",
-                    "lineBulletSize": 5,
-                    "lineBulletColor": "#FFFFFF",
-                    "measureColor": cheerUpEmoKid[3]
-                }
-            }
-        });
-
+            });
+        }
         return {
             definition: props,
             initialProperties: {
@@ -137,16 +142,16 @@ define([
                 var leftValueAxisTitle;
                 var rightValueAxisTitle;
                 var categoryTitle;
-                if(design.chartTitle) {
+                if (design.chartTitle) {
                     chartTitle = [{
                         "text": design.titleString
                     }];
                 }
-                if(design.showValueAxisTitle) {
+                if (design.showValueAxisTitle) {
                     leftValueAxisTitle = design.leftValueAxisTitle;
                     rightValueAxisTitle = design.rightValueAxisTitle;
                 }
-                if(design.categoryTitle) {
+                if (design.categoryTitle) {
                     categoryTitle = hc.qDimensionInfo[0].qFallbackTitle;
                 }
                 data.forEach(function(row, index) {
@@ -167,69 +172,37 @@ define([
                     dataProvider.push(dataProviderObj);
                 });
                 hc.qMeasureInfo.forEach(function(measureDef, index) {
-                    if (measureDef.props.measureType == "column") {
-                        measureDefinition.push({
-                            "id": measureDef.cId,
-                            "valueAxis": measureDef.props.measureAxis,
-                            "lineColor": measureDef.props.measureColor,
-                            "fillColors": measureDef.props.measureColor,
-                            "fillAlphas": measureDef.props.columnAreaAlpha,
-                            "dashLength": measureDef.props.dashLength,
-                            "type": measureDef.props.measureType,
-                            "title": hc.qMeasureInfo[index].qFallbackTitle,
-                            "valueField": measureDef.cId,
-                            "clustered": design.columnClustered,
-                            "columnWidth": measureDef.props.barWidth,
-                            "fontSize": design.fontSizeVal,
-                            "balloonText": "<b>[[title]]</b><br/>[[value]]"
-                        });
-                    }
-                    if (measureDef.props.measureType == "smoothedLine") {
-                        measureDefinition.push({
-                            "id": measureDef.cId,
-                            "valueAxis": measureDef.props.measureAxis,
-                            "bullet": measureDef.props.lineBulletType,
-                            "behindColumns": design.forceLinesBehindColumns,
-                            "dashLength": measureDef.props.dashLength,
-                            "bulletBorderAlpha": 1,
-                            "bulletColor": measureDef.props.lineBulletColor,
-                            "bulletSize": measureDef.props.lineBulletSize,
-                            "hideBulletsCount": 50,
-                            "lineThickness": measureDef.props.lineThickness,
-                            "lineColor": measureDef.props.measureColor,
-                            "fillColor": measureDef.props.measureColor,
-                            "fillAlphas": measureDef.props.lineAreaAlpha,
-                            "type": measureDef.props.measureType,
-                            "title": hc.qMeasureInfo[index].qFallbackTitle,
-                            "useLineColorForBulletBorder": true,
-                            "valueField": measureDef.cId,
-                            "fontSize": design.fontSizeVal,
-                            "balloonText": "<b>[[title]]</b><br/>[[value]]"
-                        });
-                    }
-                    if (measureDef.props.measureType == "Line") {
-                        measureDefinition.push({
-                            "id": measureDef.cId,
-                            "valueAxis": measureDef.props.measureAxis,
-                            "bullet": measureDef.props.lineBulletType,
-                            "behindColumns": design.forceLinesBehindColumns,
-                            "dashLength": measureDef.props.dashLength,
-                            "bulletBorderAlpha": 1,
-                            "bulletColor": measureDef.props.lineBulletColor,
-                            "bulletSize": measureDef.props.lineBulletSize,
-                            "hideBulletsCount": 50,
-                            "lineThickness": measureDef.props.lineThickness,
-                            "lineColor": measureDef.props.measureColor,
-                            "fillColor": measureDef.props.measureColor,
-                            "fillAlphas": measureDef.props.lineAreaAlpha,
-                            "title": hc.qMeasureInfo[index].qFallbackTitle,
-                            "useLineColorForBulletBorder": true,
-                            "valueField": measureDef.cId,
-                            "fontSize": design.fontSizeVal,
-                            "balloonText": "<b>[[title]]</b><br/>[[value]]"
-                        });
-                    }
+                    measureDefinition.push({
+                        "id": measureDef.cId,
+                        "valueField": measureDef.cId,
+                        "title": hc.qMeasureInfo[index].qFallbackTitle,
+                        "bulletBorderAlpha": 1,
+                        "hideBulletsCount": 50,
+                        "useLineColorForBulletBorder": true,
+                        "type": measureDef.amGraph.type,
+                        "valueAxis": measureDef.amGraph.valueAxis,
+                        "fillColors": measureDef.amGraph.fillColors,
+                        "fillAlphas": measureDef.amGraph.fillAlphas,
+                        "fontSize": measureDef.amGraph.fontSize,
+                        "columnWidth": measureDef.amGraph.columnWidth,
+                        "clustered": measureDef.amGraph.clustered,
+                        "lineColor": measureDef.amGraph.lineColor,
+                        "lineThickness": measureDef.amGraph.lineThickness,
+                        "dashLength": measureDef.amGraph.dashLength,
+                        "balloonColor": measureDef.amGraph.balloonColor,
+                        "balloonText": measureDef.amGraph.balloonText,
+                        "bullet": measureDef.amGraph.bullet,
+                        "bulletAlpha": measureDef.amGraph.bulletAlpha,
+                        "bulletColor": measureDef.amGraph.bulletColor,
+                        "bulletSize": measureDef.amGraph.bulletSize,
+                        "labelOffset": measureDef.amGraph.labelOffset,
+                        "labelPosition": measureDef.amGraph.labelPosition,
+                        "labelRotation": measureDef.amGraph.labelRotation,
+                        "labelText": measureDef.amGraph.labelText,
+                        "behindColumns": measureDef.amGraph.behindColumns
+                    });
                 });
+
                 var chart = AmCharts.makeChart($element[0], {
                     "type": "serial",
                     "theme": "none",
@@ -281,9 +254,7 @@ define([
                     },
                     "balloon": {
                         "borderThickness": 1,
-                        "shadowAlpha": 0,
-                        fontSize: design.fontSizeBalloon,
-                        fontFamily: design.fontFamily
+                        "shadowAlpha": 0
                     },
                     "export": {
                         "enabled": true
