@@ -36,7 +36,7 @@ define([], function() {
     };
     var fillColors = {
         type: "string",
-        label: "Color",
+        label: "Fill Color",
         ref: "qDef.amGraph.fillColors"
     };
     var fillAlphas = {
@@ -100,7 +100,7 @@ define([], function() {
     // *****************************************************************************
     var lineColor = {
         type: "string",
-        label: "Color",
+        label: "Line Color",
         ref: "qDef.amGraph.lineColor"
     };
     var lineThickness = {
@@ -172,8 +172,7 @@ define([], function() {
     var balloonColor = {
         ref: "qDef.amGraph.balloonColor",
         label: "Balloon Color",
-        type: "string",
-        defaultValue: ""
+        type: "string"
     };
     var balloonText = {
         ref: "qDef.amGraph.balloonText",
@@ -232,7 +231,7 @@ define([], function() {
             value: "bubble",
             label: "Bubble"
         }],
-        defaultValue: "round"
+        defaultValue: "none"
     };
     var bulletAlpha = {
         type: "number",
@@ -247,8 +246,7 @@ define([], function() {
     var bulletColor = {
         type: "string",
         label: "Bullet Color",
-        ref: "qDef.amGraph.bulletColor",
-        defaultValue: "#FFFFFF"
+        ref: "qDef.amGraph.bulletColor"
     };
     var bulletSize = {
         type: "number",
@@ -331,7 +329,7 @@ define([], function() {
         label: "Rotate Value Labels",
         ref: "qDef.amGraph.labelRotation",
         min: 0,
-        max: 90,
+        max: 360,
         step: 1,
         defaultValue: 0
     };
@@ -339,7 +337,7 @@ define([], function() {
         ref: "qDef.amGraph.labelText",
         label: "Label Text",
         type: "string",
-        defaultValue: "[[labelText]]"
+        defaultValue: "[[value]]"
     };
     var showLabel = {
         ref: "qDef.amGraph.showLabel",
