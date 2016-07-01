@@ -66,6 +66,7 @@ define([], function() {
         defaultValue: "none"
     };
 
+
     return {
         type: "items",
         label: "amChart.valueAxis",

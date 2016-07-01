@@ -23,6 +23,7 @@ define([], function() {
         step: 1,
         defaultValue: 0
     };
+
     return {
         type: "items",
         label: "amChart.categoryAxis",

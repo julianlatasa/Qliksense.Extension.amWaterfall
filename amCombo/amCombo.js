@@ -14,35 +14,47 @@ requirejs.config({
     }
 });
 define([
+        'qlik',
         'jquery',
         './properties',
-        './initialProperties',
         'amcharts.serial'
     ],
-    function($, props, initProps) {
+    function(qlik, $, props) {
         return {
             definition: props,
-            initialProperties: initProps,
+            initialProperties: {
+                qHyperCubeDef: {
+                    qDimensions: [],
+                    qMeasures: [],
+                    qInitialDataFetch: [{
+                        qWidth: 5,
+                        qHeight: 100
+                    }]
+                }
+            },
             paint: function($element, layout) {
                 var hc = layout.qHyperCube;
                 var dataProvider = [];
                 var amGraphs = [];
-                hc.qDataPages[0].qMatrix.forEach(function(row, index) {
-                    var dataProviderObj = {};
-                    row.forEach(function(cell, index) {
-                        var cId;
-                        if (index < hc.qDimensionInfo.length) {
-                            cId = hc.qDimensionInfo[index].cId;
-                        } else {
-                            cId = hc.qMeasureInfo[index - hc.qDimensionInfo.length].cId;
-                        }
-                        if (cell.qNum == 'NaN') {
-                            dataProviderObj[cId] = cell.qText;
-                        } else {
-                            dataProviderObj[cId] = cell.qNum;
-                        }
+                hc.qDataPages.forEach(function(page, index) {
+                    page.qMatrix.forEach(function(row, index) {
+                        var dataProviderObj = {};
+                        row.forEach(function(cell, index) {
+                            var cId;
+                            if (index < hc.qDimensionInfo.length) {
+                                cId = hc.qDimensionInfo[index].cId;
+                                dataProviderObj.dimText = cell.qText;
+                            } else {
+                                cId = hc.qMeasureInfo[index - hc.qDimensionInfo.length].cId;
+                            }
+                            if (cell.qNum == 'NaN') {
+                                dataProviderObj[cId] = cell.qText;
+                            } else {
+                                dataProviderObj[cId] = cell.qNum;
+                            }
+                        });
+                        dataProvider.push(dataProviderObj);
                     });
-                    dataProvider.push(dataProviderObj);
                 });
                 hc.qMeasureInfo.forEach(function(measureDef, index) {
                     amGraphs.push({
@@ -92,30 +104,37 @@ define([
                         color: layout.amChart.titles.color,
                         size: layout.amChart.titles.size
                     }],
+                    "numberFormatter": {
+                        precision: layout.amChart.numberFormatter.precision,
+                        decimalSeparator: layout.amChart.numberFormatter.decimalSeparator,
+                        thousandsSeparator: layout.amChart.numberFormatter.thousandsSeparator
+                    },
                     "valueAxes": [{
                         "id": "v1",
                         "position": "left",
-                        "stackType": layout.amChart.valueAxis.leftStackType,
                         "autoGridCount": false,
+                        "stackType": layout.amChart.valueAxis.leftStackType,
                         "fontSize": layout.amChart.valueAxis.fontSize,
-                        "title": layout.amChart.valueAxis.leftTitle
+                        "title": layout.amChart.valueAxis.leftTitle,
+                        "precision": layout.amChart.numberFormatter.precision
                     }, {
                         "id": "v2",
                         "position": "right",
-                        "stackType": layout.amChart.valueAxis.rightStackType,
                         "autoGridCount": false,
+                        "stackType": layout.amChart.valueAxis.rightStackType,
                         "fontSize": layout.amChart.valueAxis.fontSize,
-                        "title": layout.amChart.valueAxis.rightTitle
+                        "title": layout.amChart.valueAxis.rightTitle,
+                        "precision": layout.amChart.numberFormatter.precision
                     }],
                     "graphs": amGraphs,
                     "chartCursor": {
-                        "pan": true,
+                        "pan": false,
                         "valueLineEnabled": true,
                         "valueLineBalloonEnabled": true,
                         "cursorAlpha": 0,
                         "valueLineAlpha": 0.2
                     },
-                    "categoryField": hc.qDimensionInfo[0].cId,
+                    "categoryField": "dimText",
                     "categoryAxis": {
                         "parseDates": false,
                         "dashLength": 1,
@@ -125,8 +144,9 @@ define([
                         "title": layout.amChart.categoryAxis.title
                     },
                     "legend": {
-                        "enabled": layout.amChart.legend.enabled,
+                        "equalWidths": false,
                         "useGraphSettings": true,
+                        "enabled": layout.amChart.legend.enabled,
                         "position": layout.amChart.legend.position
                     },
                     "export": {
@@ -139,6 +159,15 @@ define([
                 } else {
                     $element.find("*").css("font-family", layout.amChart.fontFamily);
                 }
+
+                /* tak Simon :o */
+                chart.addListener("clickGraphItem", handleClickGraphItem);
+
+                function handleClickGraphItem(event) {
+                    qlik.currApp().field(layout.qHyperCube.qDimensionInfo[0].qGroupFieldDefs[0]).selectValues([event.item.category], true, false);
+                }
             }
+
         };
+
     });

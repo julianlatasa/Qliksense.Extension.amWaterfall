@@ -17,7 +17,55 @@ define([
             value: false,
             label: "Off"
         }],
-        defaultValue: false
+        defaultValue: true
+    };
+
+    var precision = {
+        type: "number",
+        label: "Number of decimals in values",
+        ref: "amChart.numberFormatter.precision",
+        defaultValue: 2
+    };
+
+    var decimalSeparator = {
+        type: "string",
+        component: "dropdown",
+        label: "Character used for decimal separation",
+        ref: "amChart.numberFormatter.decimalSeparator",
+        options: [{
+            value: ".",
+            label: "."
+        }, {
+            value: ",",
+            label: ","
+        }],
+        defaultValue: "."
+    };
+
+    var thousandsSeparator = {
+        type: "string",
+        component: "dropdown",
+        label: "Character used for thousands separation",
+        ref: "amChart.numberFormatter.thousandsSeparator",
+        options: [{
+            value: ".",
+            label: "."
+        }, {
+            value: ",",
+            label: ","
+        }],
+        defaultValue: ","
+    };
+
+    var numberFormatter = {
+        type: "items",
+        label: "amChart.numberFormatter",
+        items: {
+            usePrefixes: usePrefixes,
+            precision: precision,
+            decimalSeparator: decimalSeparator,
+            thousandsSeparator: thousandsSeparator
+        }
     };
 
     var depth3D = {
@@ -73,7 +121,6 @@ define([
         type: "items",
         label: "amChart settings",
         items: {
-            usePrefixes: usePrefixes,
             fontFamily: fontFamily,
             fontSize: fontSize,
             handDrawn: handDrawn,
@@ -87,6 +134,7 @@ define([
         label: "amChart",
         items: {
             standardSettings: standardSettings,
+            numberFormatter: numberFormatter,
             titles: amChartTitles,
             valueAxis: amChartValueAxis,
             categoryAxis: amChartCategoryAxis,

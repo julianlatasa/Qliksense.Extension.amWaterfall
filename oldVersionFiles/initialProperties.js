@@ -98,8 +98,8 @@ define([], function() {
     }
     return {
         qHyperCubeDef: {
-            qDimensions: [defaultDimension],
-            qMeasures: measureArr,
+            qDimensions: [],
+            qMeasures: [],
             qInitialDataFetch: [{
                 qWidth: 5,
                 qHeight: 100

@@ -8,11 +8,12 @@ At the moment the project is an implementation of a waterfall chart in the amWat
 Please rate & give feedback! If you wan't to contribute feel free to message me on github.
 
 ### Latest 5 Changes
+* Added various settings including number formatting on a chart level (thats how it is in amCharts). Changed dimension to display its text property to correctly display e.g. dates. Made the chart clickable which makes it select in the app dimensions (thanks to Simon Haughbølle for that code). I also removed the initial dimensions and measures that were being parsed on initiation as i felt like they were being more annoying than helpfull, when you actually had to use the charts and not develop them.
 * Changed the properties structrue & optimized code. The structure and naming of properties should closely mimic the amCharts object structure, making it possible to use the amCharts documentation when both trying to understand the interface and the code. See below in the amCombo documentation section.
 * Add dashing of measure lines functionality (see screenshots below).
 * Added setting to prefix large numbers automatically.
 * Added line bullet settings to change size color and type of bullet. Also allowed lines to have a thickness of 0, effectively allowing line types to work as a scatterplot with only bullets showing.
-* Added setting to select stacking type of an axis (stacks measure of similar type reffering to the same axis: 3d/regular/none/100%).
+
 
 ## Screenshots
 ### Combo Chart
