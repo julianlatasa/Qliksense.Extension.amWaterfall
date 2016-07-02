@@ -8,15 +8,20 @@ At the moment this project is an implementation of a combo chart that includes a
 Please rate & give feedback! If you wan't to contribute feel free to message me on github.
 
 ### Latest 5 Changes
+* Changed the chart to use the standard numberformatting settings on the measures instead. (These will be reflected on labels and balloons however they wont be reflected in the value axis which can be a minor problem for % graphs where the actual numbers are different:*100, also with this setup you can't change the labeltext and balloon text but only select wether to show them or not.). This also fixes an issue with the waterfall type measure; before label numbers were accumulative, now they represent the single observation value.
 * Changed the refference to the amCharts library to be local instead of CDN.
 * Instead of having the waterfall chart in a seperate extension, you can now choose 'Waterfall' as the measure type next to (column/line/smoothedLine).
 * Added various settings including number formatting on a chart level (thats how it is in amCharts). Changed dimension to display its text property to correctly display e.g. dates. Made the chart clickable which makes it select in the app dimensions (thanks to Simon Haughbølle for that code). I also removed the initial dimensions and measures that were being parsed on initiation as i felt like they were being more annoying than helpfull, when you actually had to use the charts and not develop them.
 * Changed the properties structrue & optimized code. The structure and naming of properties should closely mimic the amCharts object structure, making it possible to use the amCharts documentation when both trying to understand the interface and the code. See below in the amCombo documentation section.
-* Add dashing of measure lines functionality (see screenshots below).
 
 ## Screenshots
 ### Combo Chart
 The goal of the combo chart is to give the user alooot of settings to mess around with, the below examples are just a small subset of outcomes you can produce.
+### New numberformat settings on measures.
+![New Format Settings](comboPictures/comboNumberFormat.PNG)
+### Combo chart (waterfall measure type)
+![Waterfall Chart Screens](comboPictures/comboFall.PNG)
+### Random settings screens.
 ![Combo Chart Screens](comboPictures/comboRandom.PNG)
 ### Combo chart (silly visualizations)
 ![Really stupid combo charts](comboPictures/sillyGraphs.PNG)
@@ -24,8 +29,6 @@ The goal of the combo chart is to give the user alooot of settings to mess aroun
 ![Combo Chart Opacity](comboPictures/areaOpacity.PNG)
 ### Combo Chart (New stacking settings)
 ![Combo Chart Opacity](comboPictures/stacking.PNG)
-### Combo chart (waterfall measure type)
-![Waterfall Chart Screens](comboPictures/comboFall.PNG)
 
 ## How to use
 Import amCombo.zip into your qliksense dev-hub extensions folder.

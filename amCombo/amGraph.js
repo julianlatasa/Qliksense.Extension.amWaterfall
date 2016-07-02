@@ -137,21 +137,6 @@ define([], function() {
     // *****************************************************************************
     // Standard Settings Grouping
     // *****************************************************************************
-    var showStandard = {
-        ref: "qDef.amGraph.showStandard",
-        type: "boolean",
-        label: "Show Standard amGraph Settings",
-        component: "switch",
-        options: [{
-            value: true,
-            label: "On"
-        }, {
-            value: false,
-            label: "off"
-        }],
-        defaultValue: false
-    };
-
     var groupStandard = {
         type: "items",
         label: "amGraph Settings",
@@ -163,44 +148,9 @@ define([], function() {
             fontSize: fontSize,
             groupColumn: groupColumn,
             groupLine: groupLine
-        },
-        show: function(m) {
-            return m.qDef.amGraph.showStandard;
         }
     };
 
-    // *****************************************************************************
-    // Advanced Settings > Ballooons
-    // *****************************************************************************
-    var balloonText = {
-        ref: "qDef.amGraph.balloonText",
-        label: "Balloon Text",
-        type: "string",
-        defaultValue: "<b>[[title]]</b><br/>[[value]]"
-    };
-    var showBalloon = {
-        ref: "qDef.amGraph.showBalloon",
-        type: "boolean",
-        label: "Show Balloon Settings",
-        component: "switch",
-        options: [{
-            value: true,
-            label: "On"
-        }, {
-            value: false,
-            label: "off"
-        }],
-        defaultValue: false
-    };
-    var groupBalloon = {
-        type: "items",
-        items: {
-            balloonText: balloonText
-        },
-        show: function(m) {
-            return m.qDef.amGraph.showBalloon;
-        }
-    };
     // *****************************************************************************
     // Advanced Settings > Bullets
     // *****************************************************************************
@@ -256,20 +206,6 @@ define([], function() {
         step: 1,
         defaultValue: 5
     };
-    var showBullet = {
-        ref: "qDef.amGraph.showBullet",
-        type: "boolean",
-        label: "Show Bullet Settings",
-        component: "switch",
-        options: [{
-            value: true,
-            label: "On"
-        }, {
-            value: false,
-            label: "off"
-        }],
-        defaultValue: false
-    };
     var groupBullet = {
         type: "items",
         items: {
@@ -277,9 +213,6 @@ define([], function() {
             bulletAlpha: bulletAlpha,
             bulletColor: bulletColor,
             bulletSize: bulletSize
-        },
-        show: function(m) {
-            return m.qDef.amGraph.showBullet;
         }
     };
     // *****************************************************************************
@@ -331,16 +264,10 @@ define([], function() {
         step: 1,
         defaultValue: 0
     };
-    var labelText = {
-        ref: "qDef.amGraph.labelText",
-        label: "Label Text",
-        type: "string",
-        defaultValue: "[[value]]"
-    };
     var showLabel = {
         ref: "qDef.amGraph.showLabel",
         type: "boolean",
-        label: "Show Label Settings",
+        label: "Show Labels",
         component: "switch",
         options: [{
             value: true,
@@ -349,18 +276,15 @@ define([], function() {
             value: false,
             label: "off"
         }],
-        defaultValue: false
+        defaultValue: true
     };
     var groupLabel = {
         type: "items",
         items: {
+            showLabel: showLabel,
             labelOffset: labelOffset,
             labelPosition: labelPosition,
-            labelRotation: labelRotation,
-            labelText: labelText
-        },
-        show: function(m) {
-            return m.qDef.amGraph.showLabel;
+            labelRotation: labelRotation
         }
     };
     // *****************************************************************************
@@ -380,42 +304,19 @@ define([], function() {
         }],
         defaultValue: false
     };
-    var showVarious = {
-        ref: "qDef.amGraph.showVarious",
-        type: "boolean",
-        label: "Show Various Settings",
-        component: "switch",
-        options: [{
-            value: true,
-            label: "On"
-        }, {
-            value: false,
-            label: "off"
-        }],
-        defaultValue: false
-    };
     var groupVarious = {
         type: "items",
         items: {
             behindColumns: behindColumns
-        },
-        show: function(m) {
-            return m.qDef.amGraph.showVarious;
         }
     };
     // *****************************************************************************
     // RETURN OBJECT
     // *****************************************************************************
     return {
-            showStandard: showStandard,
             groupStandard: groupStandard,
-            showBalloon: showBalloon,
-            groupBalloon: groupBalloon,
-            showBullet: showBullet,
             groupBullet: groupBullet,
-            showLabel: showLabel,
             groupLabel: groupLabel,
-            showVarious: showVarious,
             groupVarious: groupVarious
     };
 });

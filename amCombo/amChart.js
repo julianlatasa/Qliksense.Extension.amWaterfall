@@ -5,67 +5,20 @@ define([
     './amChartLegend'
 ], function(amChartTitles, amChartValueAxis, amChartCategoryAxis, amChartLegend) {
     'use strict';
-    var usePrefixes = {
+    var showBalloon = {
         type: "boolean",
         component: "switch",
-        label: "Use number prefixes for large numbers",
-        ref: "amChart.usePrefixes",
+        label: "Show balloons",
+        ref: "amChart.balloon.enabled",
         options: [{
             value: true,
             label: "On"
-        }, {
+        },
+        {
             value: false,
             label: "Off"
         }],
         defaultValue: true
-    };
-
-    var precision = {
-        type: "number",
-        label: "Number of decimals in values",
-        ref: "amChart.numberFormatter.precision",
-        defaultValue: 2
-    };
-
-    var decimalSeparator = {
-        type: "string",
-        component: "dropdown",
-        label: "Character used for decimal separation",
-        ref: "amChart.numberFormatter.decimalSeparator",
-        options: [{
-            value: ".",
-            label: "."
-        }, {
-            value: ",",
-            label: ","
-        }],
-        defaultValue: "."
-    };
-
-    var thousandsSeparator = {
-        type: "string",
-        component: "dropdown",
-        label: "Character used for thousands separation",
-        ref: "amChart.numberFormatter.thousandsSeparator",
-        options: [{
-            value: ".",
-            label: "."
-        }, {
-            value: ",",
-            label: ","
-        }],
-        defaultValue: ","
-    };
-
-    var numberFormatter = {
-        type: "items",
-        label: "amChart.numberFormatter",
-        items: {
-            usePrefixes: usePrefixes,
-            precision: precision,
-            decimalSeparator: decimalSeparator,
-            thousandsSeparator: thousandsSeparator
-        }
     };
 
     var depth3D = {
@@ -123,6 +76,7 @@ define([
         items: {
             fontFamily: fontFamily,
             fontSize: fontSize,
+            showBalloon: showBalloon,
             handDrawn: handDrawn,
             depth3D: depth3D,
             angle: angle
@@ -134,7 +88,6 @@ define([
         label: "amChart",
         items: {
             standardSettings: standardSettings,
-            numberFormatter: numberFormatter,
             titles: amChartTitles,
             valueAxis: amChartValueAxis,
             categoryAxis: amChartCategoryAxis,

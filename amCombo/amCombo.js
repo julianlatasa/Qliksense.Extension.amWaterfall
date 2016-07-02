@@ -44,11 +44,14 @@ define([
                         var trendLinesObj = {};
                         row.forEach(function(cell, index) {
                             var cId;
+
                             if (index < hc.qDimensionInfo.length) {
                                 cId = hc.qDimensionInfo[index].cId;
+                                dataProviderObj["text" + cId] = cell.qText;
                                 dataProviderObj.dimText = cell.qText;
                             } else {
                                 cId = hc.qMeasureInfo[index - hc.qDimensionInfo.length].cId;
+                                dataProviderObj["text" + cId] = cell.qText;
 
                                 if (rindex > 0 && rindex < hc.qSize.qcy - 1 && hc.qMeasureInfo[index - hc.qDimensionInfo.length].amGraph.type == 'Waterfall' && rindex > 0) {
                                     dataProviderObj["open" + cId] = dataProvider[rindex - 1]["close" + cId];
@@ -98,14 +101,17 @@ define([
                         amGraph.fillColors = measureDef.amGraph.fillColors;
                         amGraph.lineColor = measureDef.amGraph.lineColor;
                     }
+                    if (measureDef.amGraph.showLabel === true) {
+                        amGraph.labelText = "[[text" + measureDef.cId + "]]";
+                    }
                     amGraph.id = measureDef.cId;
                     amGraph.openField = "open" + measureDef.cId;
                     amGraph.valueField = "close" + measureDef.cId;
                     amGraph.title = hc.qMeasureInfo[index].qFallbackTitle;
-                    amGraph.labelText = measureDef.amGraph.labelText;
                     amGraph.bulletBorderAlpha = 1;
                     amGraph.hideBulletsCount = 50;
                     amGraph.useLineColorForBulletBorder = true;
+                    amGraph.balloonText = "<b>[[title]]</b><br/>[[text" + measureDef.cId + "]]";
                     amGraph.valueAxis = measureDef.amGraph.valueAxis;
                     amGraph.fillAlphas = measureDef.amGraph.fillAlphas;
                     amGraph.fontSize = measureDef.amGraph.fontSize;
@@ -113,7 +119,6 @@ define([
                     amGraph.clustered = measureDef.amGraph.clustered;
                     amGraph.lineThickness = measureDef.amGraph.lineThickness;
                     amGraph.dashLength = measureDef.amGraph.dashLength;
-                    amGraph.balloonText = measureDef.amGraph.balloonText;
                     amGraph.bullet = measureDef.amGraph.bullet;
                     amGraph.bulletAlpha = measureDef.amGraph.bulletAlpha;
                     amGraph.bulletColor = measureDef.amGraph.bulletColor;
@@ -128,7 +133,6 @@ define([
                 var chart = AmCharts.makeChart($element[0], {
                     "type": "serial",
                     "theme": "none",
-                    "usePrefixes": layout.amChart.usePrefixes,
                     "depth3D": layout.amChart.depth3D,
                     "angle": layout.amChart.angle,
                     "fontFamily": layout.amChart.fontFamily,
@@ -142,27 +146,20 @@ define([
                         color: layout.amChart.titles.color,
                         size: layout.amChart.titles.size
                     }],
-                    "numberFormatter": {
-                        precision: layout.amChart.numberFormatter.precision,
-                        decimalSeparator: layout.amChart.numberFormatter.decimalSeparator,
-                        thousandsSeparator: layout.amChart.numberFormatter.thousandsSeparator
-                    },
                     "valueAxes": [{
                         "id": "v1",
                         "position": "left",
                         "autoGridCount": false,
                         "stackType": layout.amChart.valueAxis.leftStackType,
                         "fontSize": layout.amChart.valueAxis.fontSize,
-                        "title": layout.amChart.valueAxis.leftTitle,
-                        "precision": layout.amChart.numberFormatter.precision
+                        "title": layout.amChart.valueAxis.leftTitle
                     }, {
                         "id": "v2",
                         "position": "right",
                         "autoGridCount": false,
                         "stackType": layout.amChart.valueAxis.rightStackType,
                         "fontSize": layout.amChart.valueAxis.fontSize,
-                        "title": layout.amChart.valueAxis.rightTitle,
-                        "precision": layout.amChart.numberFormatter.precision
+                        "title": layout.amChart.valueAxis.rightTitle
                     }],
                     "graphs": amGraphs,
                     "trendLines": trendLines,
@@ -173,7 +170,7 @@ define([
                         "cursorAlpha": 0,
                         "valueLineAlpha": 0.2
                     },
-                    "categoryField": "dimText",
+                    "categoryField": "text" + hc.qDimensionInfo[0].cId,
                     "categoryAxis": {
                         "parseDates": false,
                         "dashLength": 1,
@@ -187,6 +184,9 @@ define([
                         "useGraphSettings": true,
                         "enabled": layout.amChart.legend.enabled,
                         "position": layout.amChart.legend.position
+                    },
+                    "balloon": {
+                        "enabled": layout.amChart.balloon.enabled
                     },
                     "export": {
                         "enabled": true
