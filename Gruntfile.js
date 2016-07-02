@@ -11,10 +11,9 @@ module.exports = function(grunt) {
             }
         },
         zip: {
-            'amCombo.zip': ['amCombo/*']
+            'amCombo.zip': ['amCombo/**']
         }
     });
-
 
     grunt.loadNpmTasks('grunt-zip');
     grunt.loadNpmTasks('grunt-contrib-copy');
