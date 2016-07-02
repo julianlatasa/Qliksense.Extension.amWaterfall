@@ -35,49 +35,85 @@ define([
             paint: function($element, layout) {
                 var hc = layout.qHyperCube;
                 var dataProvider = [];
+                var dataProviderStart = {};
+                var dataProviderEnd = {};
                 var trendLines = [];
+                var trendLinesEnd = {};
                 var amGraphs = [];
-
                 hc.qDataPages.forEach(function(page, index) {
+
                     page.qMatrix.forEach(function(row, rindex) {
                         var dataProviderObj = {};
                         var trendLinesObj = {};
+
                         row.forEach(function(cell, index) {
                             var cId;
-
                             if (index < hc.qDimensionInfo.length) {
+
                                 cId = hc.qDimensionInfo[index].cId;
                                 dataProviderObj["text" + cId] = cell.qText;
                                 dataProviderObj.dimText = cell.qText;
                             } else {
                                 cId = hc.qMeasureInfo[index - hc.qDimensionInfo.length].cId;
+
+                                // Create initial object for start values (waterfall)
+                                if (rindex === 0 && hc.qMeasureInfo[index - hc.qDimensionInfo.length].amGraph.type == 'Waterfall') {
+
+                                    dataProviderStart["text" + hc.qDimensionInfo[0].cId] = hc.qMeasureInfo[index - hc.qDimensionInfo.length].waterfall.startLabel;
+                                    dataProviderStart["text" + cId] = hc.qMeasureInfo[index - hc.qDimensionInfo.length].waterfall.start;
+                                    dataProviderStart["open" + cId] = 0;
+                                    dataProviderStart["close" + cId] = hc.qMeasureInfo[index - hc.qDimensionInfo.length].waterfall.start;
+                                    dataProviderStart["color" + cId] = "#1c8ceb";
+                                    dataProviderStart.dimText = hc.qMeasureInfo[index - hc.qDimensionInfo.length].waterfall.startLabel;
+                                    dataProvider.push(dataProviderStart);
+                                }
+
+                                // Create last object for end values (waterfall)
+                                if (rindex == hc.qSize.qcy - 1 && hc.qMeasureInfo[index - hc.qDimensionInfo.length].amGraph.type == 'Waterfall') {
+
+                                    dataProviderEnd["text" + hc.qDimensionInfo[0].cId] = hc.qMeasureInfo[index - hc.qDimensionInfo.length].waterfall.endLabel;
+                                    dataProviderEnd["text" + cId] = hc.qMeasureInfo[index - hc.qDimensionInfo.length].waterfall.end;
+                                    dataProviderEnd["open" + cId] = 0;
+                                    dataProviderEnd["close" + cId] = hc.qMeasureInfo[index - hc.qDimensionInfo.length].waterfall.end;
+                                    dataProviderEnd["color" + cId] = "#1c8ceb";
+                                    dataProviderEnd.dimText = hc.qMeasureInfo[index - hc.qDimensionInfo.length].waterfall.endLabel;
+                                }
+
                                 dataProviderObj["text" + cId] = cell.qText;
 
-                                if (rindex > 0 && rindex < hc.qSize.qcy - 1 && hc.qMeasureInfo[index - hc.qDimensionInfo.length].amGraph.type == 'Waterfall' && rindex > 0) {
-                                    dataProviderObj["open" + cId] = dataProvider[rindex - 1]["close" + cId];
-                                    if (dataProviderObj["open" + cId] + cell.qNum > dataProvider[rindex - 1]["close" + cId]) {
+                                if (hc.qMeasureInfo[index - hc.qDimensionInfo.length].amGraph.type == 'Waterfall') {
+                                    dataProviderObj["open" + cId] = dataProvider[rindex]["close" + cId];
+                                    if (dataProviderObj["open" + cId] + cell.qNum > dataProvider[rindex]["close" + cId]) {
                                         dataProviderObj["color" + cId] = "#54cb6a";
                                     } else {
                                         dataProviderObj["color" + cId] = "#cc4b48";
                                     }
                                 } else {
                                     dataProviderObj["open" + cId] = 0;
-                                    dataProviderObj["color" + cId] = "#1c8ceb";
                                 }
 
-                                if (hc.qMeasureInfo[index - hc.qDimensionInfo.length].amGraph.type == 'Waterfall' && rindex > 0) {
+                                if (hc.qMeasureInfo[index - hc.qDimensionInfo.length].amGraph.type == 'Waterfall') {
                                     trendLinesObj.dashLength = 3;
                                     trendLinesObj.finalCategory = dataProviderObj.dimText;
-                                    trendLinesObj.initialCategory = dataProvider[rindex - 1].dimText;
-                                    trendLinesObj.initialValue = dataProvider[rindex - 1]["close" + hc.qMeasureInfo[index - hc.qDimensionInfo.length].cId];
+                                    trendLinesObj.initialCategory = dataProvider[rindex].dimText;
+                                    trendLinesObj.initialValue = dataProvider[rindex]["close" + hc.qMeasureInfo[index - hc.qDimensionInfo.length].cId];
                                     trendLinesObj.lineColor = "#888888";
-                                    if (rindex < hc.qSize.qcy - 1) {
-                                        trendLinesObj.finalValue = dataProviderObj["open" + cId];
-                                    } else {
-                                        trendLinesObj.finalValue = dataProviderObj["open" + cId] + cell.qNum;
-                                    }
+                                    trendLinesObj.finalValue = dataProviderObj["open" + cId];
                                     trendLines.push(trendLinesObj);
+
+                                    //add last trend line (waterfall)
+                                    if (rindex == hc.qSize.qcy - 1) {
+                                        trendLinesEnd.dashLength = 3;
+                                        trendLinesEnd.finalCategory = hc.qMeasureInfo[index - hc.qDimensionInfo.length].waterfall.endLabel;
+                                        trendLinesEnd.initialCategory = dataProviderObj.dimText;
+                                        trendLinesEnd.initialValue = dataProviderObj["open" + cId] + cell.qNum;
+                                        trendLinesEnd.lineColor = "#888888";
+                                        trendLinesEnd.finalValue = hc.qMeasureInfo[index - hc.qDimensionInfo.length].waterfall.end;
+                                        console.log(trendLinesEnd);
+                                        trendLines.push(trendLinesEnd);
+                                    }
                                 }
+
                                 dataProviderObj["close" + cId] = dataProviderObj["open" + cId] + cell.qNum;
                             }
                             if (cell.qNum == 'NaN') {
@@ -89,6 +125,15 @@ define([
                         });
                         dataProvider.push(dataProviderObj);
                     });
+                    var waterfallCount = 0;
+                    hc.qMeasureInfo.forEach(function(mes, index) {
+                        if (mes.amGraph.type == 'Waterfall') {
+                            waterfallCount++;
+                        }
+                    });
+                    if (waterfallCount > 0) {
+                        dataProvider.push(dataProviderEnd);
+                    }
                 });
                 hc.qMeasureInfo.forEach(function(measureDef, index) {
                     var amGraph = {};

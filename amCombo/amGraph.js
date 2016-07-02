@@ -23,6 +23,45 @@ define([], function() {
         }]
     };
 
+    var waterfallStart = {
+        type: "number",
+        label: "Start value for waterfall",
+        ref: "qDef.waterfall.start",
+        expression: "always",
+        defaultValue: 0,
+        show: function(m) {
+            return m.qDef.amGraph.type == 'Waterfall';
+        }
+    };
+    var waterfallStartLabel = {
+        type: "string",
+        label: "Start Label for waterfall",
+        ref: "qDef.waterfall.startLabel",
+        defaultValue: "Start",
+        show: function(m) {
+            return m.qDef.amGraph.type == 'Waterfall';
+        }
+    };
+    var waterfallEnd = {
+        type: "number",
+        label: "End value for waterfall",
+        ref: "qDef.waterfall.end",
+        expression: "always",
+        defaultValue: 0,
+        show: function(m) {
+            return m.qDef.amGraph.type == 'Waterfall';
+        }
+    };
+    var waterfallEndLabel = {
+        type: "string",
+        label: "Start Label for waterfall",
+        ref: "qDef.waterfall.endLabel",
+        defaultValue: "End",
+        show: function(m) {
+            return m.qDef.amGraph.type == 'Waterfall';
+        }
+    };
+
     var valueAxis = {
         type: "string",
         component: "dropdown",
@@ -142,6 +181,10 @@ define([], function() {
         label: "amGraph Settings",
         items: {
             amGraphType: amGraphType,
+            waterfallStart: waterfallStart,
+            waterfallStartLabel: waterfallStartLabel,
+            waterfallEnd: waterfallEnd,
+            waterfallEndLabel: waterfallEndLabel,
             valueAxis: valueAxis,
             fillColors: fillColors,
             fillAlphas: fillAlphas,
