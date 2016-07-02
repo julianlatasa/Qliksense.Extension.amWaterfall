@@ -4,7 +4,7 @@ module.exports = function(grunt) {
             main: {
                 files: [{
                     expand: true,
-                    src: ['amCombo/*'],
+                    src: ['amCombo/**'],
                     dest: 'C:/Users/Niels/Documents/Qlik/Sense/Extensions/',
                     filter: 'isFile'
                 }]

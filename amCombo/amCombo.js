@@ -1,7 +1,7 @@
 requirejs.config({
     paths: {
-        "amcharts": "http://www.amcharts.com/lib/3/amcharts",
-        "amcharts.serial": "http://www.amcharts.com/lib/3/serial",
+        "amcharts": "/extensions/amCombo/library/amcharts",
+        "amcharts.serial": "/extensions/amCombo/library/serial",
     },
     shim: {
         "amcharts.serial": {

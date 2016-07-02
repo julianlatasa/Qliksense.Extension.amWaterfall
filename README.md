@@ -8,11 +8,11 @@ At the moment this project is an implementation of a combo chart that includes a
 Please rate & give feedback! If you wan't to contribute feel free to message me on github.
 
 ### Latest 5 Changes
+* Changed the refference to the amCharts library to be local instead of CDN.
 * Instead of having the waterfall chart in a seperate extension, you can now choose 'Waterfall' as the measure type next to (column/line/smoothedLine).
 * Added various settings including number formatting on a chart level (thats how it is in amCharts). Changed dimension to display its text property to correctly display e.g. dates. Made the chart clickable which makes it select in the app dimensions (thanks to Simon Haughbølle for that code). I also removed the initial dimensions and measures that were being parsed on initiation as i felt like they were being more annoying than helpfull, when you actually had to use the charts and not develop them.
 * Changed the properties structrue & optimized code. The structure and naming of properties should closely mimic the amCharts object structure, making it possible to use the amCharts documentation when both trying to understand the interface and the code. See below in the amCombo documentation section.
 * Add dashing of measure lines functionality (see screenshots below).
-* Added setting to prefix large numbers automatically.
 
 ## Screenshots
 ### Combo Chart
