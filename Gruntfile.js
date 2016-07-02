@@ -4,11 +4,6 @@ module.exports = function(grunt) {
             main: {
                 files: [{
                     expand: true,
-                    src: ['amWaterfall/*'],
-                    dest: 'C:/Users/Niels/Documents/Qlik/Sense/Extensions/',
-                    filter: 'isFile'
-                }, {
-                    expand: true,
                     src: ['amCombo/*'],
                     dest: 'C:/Users/Niels/Documents/Qlik/Sense/Extensions/',
                     filter: 'isFile'
@@ -16,7 +11,6 @@ module.exports = function(grunt) {
             }
         },
         zip: {
-            'amWaterfall.zip': ['amWaterfall/*'],
             'amCombo.zip': ['amCombo/*']
         }
     });

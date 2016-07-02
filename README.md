@@ -35,9 +35,5 @@ When using the amCombo chart the naming and structure follows that of the amChar
 * The additional properties on the measures are a subset of the API properties [amGraph](https://docs.amcharts.com/3/javascriptcharts/AmGraph).
 * The properties in the amCharts section are a subset of the API properties of the [amSerialChart](https://docs.amcharts.com/3/javascriptcharts/AmSerialChart) and its descendant objects (valueAxes, legend, titles & categoryAxis).
 
-
-## Known issues
-* The axis rotation API settings doesn't seem to work if you rotate the whole graph via the rotate graph setting.
-
 ## Disclaimer
 I'm in no way affiliated with amcharts.com. Their library is free to use for commercial purposes with the caveate that you must include the link to their website in the charts (as seen on the top left of the chart screenshots). If you would want a version without links to amcharts.com they would have to implement a solution to market.qlik.
