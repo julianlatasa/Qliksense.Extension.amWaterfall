@@ -17,6 +17,9 @@ define([], function() {
         }, {
             value: "smoothedLine",
             label: "Smoothed Line"
+        }, {
+            value: "Waterfall",
+            label: "Waterfall"
         }]
     };
 
@@ -77,7 +80,7 @@ define([], function() {
             value: false,
             label: "Off"
         }],
-        defaultValue: false
+        defaultValue: true
     };
 
     var groupColumn = {
@@ -87,7 +90,7 @@ define([], function() {
             columnClustered: clustered
         },
         show: function(m) {
-            if (m.qDef.amGraph.type == "column") {
+            if (m.qDef.amGraph.type == "column" || m.qDef.amGraph.type == "Waterfall") {
                 return true;
             } else {
                 return false;

@@ -3,17 +3,16 @@
 ## Introduction
 This is a work in progress project for integrating [amCharts](https://www.amcharts.com/) charting library into qliksense extension(s).
 
-At the moment the project is an implementation of a waterfall chart in the amWaterfall folder and a combo chart in the amCombo folder.
+At the moment this project is an implementation of a combo chart that includes a waterfall type measure.
 
 Please rate & give feedback! If you wan't to contribute feel free to message me on github.
 
 ### Latest 5 Changes
+* Instead of having the waterfall chart in a seperate extension, you can now choose 'Waterfall' as the measure type next to (column/line/smoothedLine).
 * Added various settings including number formatting on a chart level (thats how it is in amCharts). Changed dimension to display its text property to correctly display e.g. dates. Made the chart clickable which makes it select in the app dimensions (thanks to Simon Haughbølle for that code). I also removed the initial dimensions and measures that were being parsed on initiation as i felt like they were being more annoying than helpfull, when you actually had to use the charts and not develop them.
 * Changed the properties structrue & optimized code. The structure and naming of properties should closely mimic the amCharts object structure, making it possible to use the amCharts documentation when both trying to understand the interface and the code. See below in the amCombo documentation section.
 * Add dashing of measure lines functionality (see screenshots below).
 * Added setting to prefix large numbers automatically.
-* Added line bullet settings to change size color and type of bullet. Also allowed lines to have a thickness of 0, effectively allowing line types to work as a scatterplot with only bullets showing.
-
 
 ## Screenshots
 ### Combo Chart
@@ -25,19 +24,11 @@ The goal of the combo chart is to give the user alooot of settings to mess aroun
 ![Combo Chart Opacity](comboPictures/areaOpacity.PNG)
 ### Combo Chart (New stacking settings)
 ![Combo Chart Opacity](comboPictures/stacking.PNG)
-### Waterfall Chart
-![Waterfall Chart Screens](waterfallPictures/waterFall.png)
+### Combo chart (waterfall measure type)
+![Waterfall Chart Screens](comboPictures/comboFall.PNG)
 
 ## How to use
-Import amCombo.zip & amWaterfall.zip into your qliksense dev-hub extensions folder.
-
-I've included some default 'synthetic' dimensions and expressions that should help you understand how dimensions and measures are used in the chart. If you don't know how the valuelist & pick & match functions work, especially in relation to synthetic dimensions there is a post [here](https://community.qlik.com/blogs/qlikviewdesignblog/2013/07/01/valuelist-for-those-tricky-situations) by Alexander Karlsson explaining valuelist together with an IF statement.
-
-The pick(match()) structure does the same thing as the if sentence in this case. Where instead of having
-case1 = statement1, return mes1..
-case2 = statement2, return mes2.
-The structure is more
-case1,case2,..statement1,statement2..mes1,mes2...
+Import amCombo.zip into your qliksense dev-hub extensions folder.
 
 ## Documentation
 When using the amCombo chart the naming and structure follows that of the amCharts API.
