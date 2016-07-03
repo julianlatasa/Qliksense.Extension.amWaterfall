@@ -62,7 +62,7 @@ define([
 
                                     dataProviderStart["text" + hc.qDimensionInfo[0].cId] = hc.qMeasureInfo[index - hc.qDimensionInfo.length].waterfall.startLabel;
                                     dataProviderStart["text" + cId] = hc.qMeasureInfo[index - hc.qDimensionInfo.length].waterfall.start;
-                                    dataProviderStart["elemNumber" + hc.qDimensionInfo[0].cId] = 0;
+                                    dataProviderStart["elemNumber" + hc.qDimensionInfo[0].cId] = -2;
                                     dataProviderStart["open" + cId] = 0;
                                     dataProviderStart["close" + cId] = hc.qMeasureInfo[index - hc.qDimensionInfo.length].waterfall.start;
                                     dataProviderStart["color" + cId] = "#1c8ceb";
@@ -75,7 +75,7 @@ define([
 
                                     dataProviderEnd["text" + hc.qDimensionInfo[0].cId] = hc.qMeasureInfo[index - hc.qDimensionInfo.length].waterfall.endLabel;
                                     dataProviderEnd["text" + cId] = hc.qMeasureInfo[index - hc.qDimensionInfo.length].waterfall.end;
-                                    dataProviderEnd["elemNumber" + hc.qDimensionInfo[0].cId] = 0;
+                                    dataProviderEnd["elemNumber" + hc.qDimensionInfo[0].cId] = -2;
                                     dataProviderEnd["open" + cId] = 0;
                                     dataProviderEnd["close" + cId] = hc.qMeasureInfo[index - hc.qDimensionInfo.length].waterfall.end;
                                     dataProviderEnd["color" + cId] = "#1c8ceb";
