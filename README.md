@@ -23,7 +23,7 @@ Below are the current changes I'm looking into based on feedback from other user
 
 ## Screenshots
 ### amChart themes.
-![New themezz](comboPictures/comboNewWaterfall.PNG)
+![New themezz](comboPictures/comboThemes.PNG)
 ### New method for creating waterfall's in the combo chart.
 ![New waterfall method](comboPictures/comboNewWaterfall.PNG)
 ### Combo chart (waterfall measure type)
