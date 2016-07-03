@@ -33,6 +33,7 @@ define([
                 }
             },
             paint: function($element, layout) {
+                var self = this;
                 var hc = layout.qHyperCube;
                 var dataProvider = [];
                 var dataProviderStart = {};
@@ -51,6 +52,7 @@ define([
                             if (index < hc.qDimensionInfo.length) {
 
                                 cId = hc.qDimensionInfo[index].cId;
+                                dataProviderObj["elemNumber" + cId] = cell.qElemNumber;
                                 dataProviderObj["text" + cId] = cell.qText;
                                 dataProviderObj.dimText = cell.qText;
                             } else {
@@ -61,6 +63,7 @@ define([
 
                                     dataProviderStart["text" + hc.qDimensionInfo[0].cId] = hc.qMeasureInfo[index - hc.qDimensionInfo.length].waterfall.startLabel;
                                     dataProviderStart["text" + cId] = hc.qMeasureInfo[index - hc.qDimensionInfo.length].waterfall.start;
+                                    dataProviderStart["elemNumber" + hc.qDimensionInfo[0].cId] = 0;
                                     dataProviderStart["open" + cId] = 0;
                                     dataProviderStart["close" + cId] = hc.qMeasureInfo[index - hc.qDimensionInfo.length].waterfall.start;
                                     dataProviderStart["color" + cId] = "#1c8ceb";
@@ -73,6 +76,7 @@ define([
 
                                     dataProviderEnd["text" + hc.qDimensionInfo[0].cId] = hc.qMeasureInfo[index - hc.qDimensionInfo.length].waterfall.endLabel;
                                     dataProviderEnd["text" + cId] = hc.qMeasureInfo[index - hc.qDimensionInfo.length].waterfall.end;
+                                    dataProviderEnd["elemNumber" + hc.qDimensionInfo[0].cId] = 0;
                                     dataProviderEnd["open" + cId] = 0;
                                     dataProviderEnd["close" + cId] = hc.qMeasureInfo[index - hc.qDimensionInfo.length].waterfall.end;
                                     dataProviderEnd["color" + cId] = "#1c8ceb";
@@ -209,6 +213,7 @@ define([
                     "graphs": amGraphs,
                     "trendLines": trendLines,
                     "chartCursor": {
+                        "selectWithoutZooming": true,
                         "pan": false,
                         "valueLineEnabled": true,
                         "valueLineBalloonEnabled": true,
@@ -244,11 +249,24 @@ define([
                     $element.find("*").css("font-family", layout.amChart.fontFamily);
                 }
 
-                /* tak Simon :o */
-                chart.addListener("clickGraphItem", handleClickGraphItem);
+                chart.chartCursor.addListener("selected", zoomy);
+                function zoomy(zomzom) {
+                    var dimValArray = [];
+                    dataProvider.forEach(function(row,index) {
+                        if(index >= zomzom.start && index <= zomzom.end && row["elemNumber" + hc.qDimensionInfo[0].cId] > 0) {
+                            dimValArray.push(row["elemNumber" + hc.qDimensionInfo[0].cId]);
+                        }
+                    });
+                    self.selectValues(0, dimValArray, false);
+                }
 
+                chart.addListener("clickGraphItem", handleClickGraphItem);
                 function handleClickGraphItem(event) {
-                    qlik.currApp().field(layout.qHyperCube.qDimensionInfo[0].qGroupFieldDefs[0]).selectValues([event.item.category], true, false);
+                    var dimValArray = [];
+                        if(dataProvider[event.index]["elemNumber" + hc.qDimensionInfo[0].cId] > 0) {
+                            dimValArray.push(dataProvider[event.index]["elemNumber" + hc.qDimensionInfo[0].cId]);
+                        }
+                    self.selectValues(0, dimValArray, false);
                 }
             }
 
