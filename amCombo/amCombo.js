@@ -27,8 +27,8 @@ define([
                     qDimensions: [],
                     qMeasures: [],
                     qInitialDataFetch: [{
-                        qWidth: 5,
-                        qHeight: 100
+                        qWidth: 6,
+                        qHeight: 1500
                     }]
                 }
             },
