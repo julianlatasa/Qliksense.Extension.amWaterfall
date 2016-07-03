@@ -5,6 +5,30 @@ define([
     './amChartLegend'
 ], function(amChartTitles, amChartValueAxis, amChartCategoryAxis, amChartLegend) {
     'use strict';
+    var theme = {
+        type: "string",
+        component: "dropdown",
+        label: "Theme",
+        ref: "amChart.theme",
+        options: [{
+            value: "light",
+            label: "Light"
+        }, {
+            value: "dark",
+            label: "Dark"
+        }, {
+            value: "chalk",
+            label: "Chalk"
+        }, {
+            value: "black",
+            label: "Black"
+        }, {
+            value: "none",
+            label: "None"
+        }],
+        defaultValue: "none"
+    };
+
     var showBalloon = {
         type: "boolean",
         component: "switch",
@@ -46,8 +70,7 @@ define([
     var fontFamily = {
         ref: "amChart.fontFamily",
         label: "Font Family",
-        type: "string",
-        defaultValue: "Verdana"
+        type: "string"
     };
 
     var fontSize = {
@@ -74,6 +97,7 @@ define([
         type: "items",
         label: "amChart settings",
         items: {
+            theme: theme,
             fontFamily: fontFamily,
             fontSize: fontSize,
             showBalloon: showBalloon,

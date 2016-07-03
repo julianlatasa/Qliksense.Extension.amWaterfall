@@ -2,10 +2,15 @@ requirejs.config({
     paths: {
         "amcharts": "/extensions/amCombo/library/amcharts",
         "amcharts.serial": "/extensions/amCombo/library/serial",
+        "amcharts.theme.dark": "/extensions/amCombo/library/dark",
+        "amcharts.theme.black": "/extensions/amCombo/library/black",
+        "amcharts.theme.chalk": "/extensions/amCombo/library/light",
+        "amcharts.theme.light": "/extensions/amCombo/library/chalk",
+        //"amcharts.theme.patterns": "/extensions/amCombo/library/patterns"
     },
     shim: {
         "amcharts.serial": {
-            deps: ["amcharts"],
+            deps: ["amcharts", "amcharts.theme.dark", "amcharts.theme.black", "amcharts.theme.chalk", "amcharts.theme.light"],
             exports: "AmCharts",
             init: function() {
                 AmCharts.isReady = true;
@@ -177,9 +182,15 @@ define([
                     amGraphs.push(amGraph);
                 });
 
+                //Set themes
+                AmCharts.themes.dark = amChartsThemesDark;
+                AmCharts.themes.light = amChartsThemesLight;
+                AmCharts.themes.black = amChartsThemesBlack;
+                AmCharts.themes.chalk = amChartsThemesChalk;
+
                 var chart = AmCharts.makeChart($element[0], {
                     "type": "serial",
-                    "theme": "none",
+                    "theme": layout.amChart.theme,
                     "depth3D": layout.amChart.depth3D,
                     "angle": layout.amChart.angle,
                     "fontFamily": layout.amChart.fontFamily,
@@ -246,6 +257,16 @@ define([
                 } else {
                     $element.find("*").css("font-family", layout.amChart.fontFamily);
                 }
+
+                if (layout.amChart.theme == 'dark' || layout.amChart.theme == 'chalk') {
+                $element.css("background-color", "#282828");
+            } else {
+                if (layout.amChart.theme == 'black') {
+                   $element.css("background-color", "#222222");
+                } else {
+                    $element.css("background-color", "#FFFFFF");
+                }
+            }
 
                 chart.chartCursor.addListener("selected", zoomy);
                 function zoomy(zomzom) {

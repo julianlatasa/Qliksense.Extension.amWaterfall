@@ -89,7 +89,7 @@ define([], function() {
         min: 0,
         max: 1,
         step: 0.1,
-        defaultValue: 0
+        defaultValue: 1
     };
     var fontSize = {
         type: "number",
@@ -319,7 +319,7 @@ define([], function() {
             value: false,
             label: "off"
         }],
-        defaultValue: true
+        defaultValue: false
     };
     var groupLabel = {
         type: "items",

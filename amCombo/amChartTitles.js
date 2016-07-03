@@ -36,8 +36,7 @@ define([], function() {
     var color = {
         type: "string",
         label: "Color",
-        ref: "amChart.titles.color",
-        defaultValue: "#000000"
+        ref: "amChart.titles.color"
     };
 
     var size = {
