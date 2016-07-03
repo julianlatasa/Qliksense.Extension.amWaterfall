@@ -7,6 +7,11 @@ At the moment this project is an implementation of a combo chart that includes a
 
 Please rate & give feedback! If you wan't to contribute feel free to message me on github.
 
+### Current Development
+Below are the current changes I'm looking into based on feedback from other users.
+* Look into bugs with chart zooming.
+* Look into handling drill down dimensions.
+
 ### Latest 5 Changes
 * When you choose the waterfall measure type, you are now prompted to enter an expression for start and end values. See screenshot below regarding how to use this setup. THe reason for this change was to avoid having to use complex valuelist synthetic dimensions to be able to create a waterfall.
 * Changed the chart to use the standard numberformatting settings on the measures instead. (These will be reflected on labels and balloons however they wont be reflected in the value axis which can be a minor problem for % graphs where the actual numbers are different:*100, also with this setup you can't change the labeltext and balloon text but only select wether to show them or not.). This also fixes an issue with the waterfall type measure; before label numbers were accumulative, now they represent the single observation value.
