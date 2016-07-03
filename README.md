@@ -5,6 +5,8 @@ This is a work in progress project for integrating [amCharts](https://www.amchar
 
 At the moment this project is an implementation of a combo chart that includes a waterfall type measure.
 
+The goal of the combo chart is to give the user alooot of settings to mess around with, the screenshot examples below are just a small subset of outcomes you can produce. It is definatly possible to make visualizations that don't make sense or don't follow best practices or similar. I think the standard QlikSense charts are really good at helping the user make charts that make sense and follow best practices, but that sometimes removes alot of flexibility. When developing this extension I will to a greater degree choose flexibility even when it means giving the users settings that potentially can make graphs that don't make sense.
+
 Please rate & give feedback! If you wan't to contribute feel free to message me on github.
 
 ### Current Development
@@ -20,8 +22,6 @@ Below are the current changes I'm looking into based on feedback from other user
 * Added various settings including number formatting on a chart level (thats how it is in amCharts). Changed dimension to display its text property to correctly display e.g. dates. Made the chart clickable which makes it select in the app dimensions (thanks to Simon Haughbølle for that code). I also removed the initial dimensions and measures that were being parsed on initiation as i felt like they were being more annoying than helpfull, when you actually had to use the charts and not develop them.
 
 ## Screenshots
-### Combo Chart
-The goal of the combo chart is to give the user alooot of settings to mess around with, the below examples are just a small subset of outcomes you can produce.
 ### New method for creating waterfall's in the combo chart.
 ![New waterfall method](comboPictures/comboNewWaterfall.PNG)
 ### Combo chart (waterfall measure type)
