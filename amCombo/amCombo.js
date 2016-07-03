@@ -42,7 +42,6 @@ define([
                 var trendLinesEnd = {};
                 var amGraphs = [];
                 hc.qDataPages.forEach(function(page, index) {
-
                     page.qMatrix.forEach(function(row, rindex) {
                         var dataProviderObj = {};
                         var trendLinesObj = {};
@@ -113,7 +112,6 @@ define([
                                         trendLinesEnd.initialValue = dataProviderObj["open" + cId] + cell.qNum;
                                         trendLinesEnd.lineColor = "#888888";
                                         trendLinesEnd.finalValue = hc.qMeasureInfo[index - hc.qDimensionInfo.length].waterfall.end;
-                                        console.log(trendLinesEnd);
                                         trendLines.push(trendLinesEnd);
                                     }
                                 }
@@ -253,7 +251,7 @@ define([
                 function zoomy(zomzom) {
                     var dimValArray = [];
                     dataProvider.forEach(function(row,index) {
-                        if(index >= zomzom.start && index <= zomzom.end && row["elemNumber" + hc.qDimensionInfo[0].cId] > 0) {
+                        if(index >= zomzom.start && index <= zomzom.end && row["elemNumber" + hc.qDimensionInfo[0].cId] >= 0) {
                             dimValArray.push(row["elemNumber" + hc.qDimensionInfo[0].cId]);
                         }
                     });
@@ -263,7 +261,7 @@ define([
                 chart.addListener("clickGraphItem", handleClickGraphItem);
                 function handleClickGraphItem(event) {
                     var dimValArray = [];
-                        if(dataProvider[event.index]["elemNumber" + hc.qDimensionInfo[0].cId] > 0) {
+                        if(dataProvider[event.index]["elemNumber" + hc.qDimensionInfo[0].cId] >= 0) {
                             dimValArray.push(dataProvider[event.index]["elemNumber" + hc.qDimensionInfo[0].cId]);
                         }
                     self.selectValues(0, dimValArray, false);
