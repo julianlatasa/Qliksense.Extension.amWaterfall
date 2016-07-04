@@ -245,6 +245,7 @@ define([
                     "legend": {
                         "equalWidths": false,
                         "useGraphSettings": true,
+                        "valueText": "",
                         "enabled": layout.amChart.legend.enabled,
                         "position": layout.amChart.legend.position
                     },
