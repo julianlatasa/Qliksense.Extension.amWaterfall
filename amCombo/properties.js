@@ -26,7 +26,7 @@ define([
             dimensions: dimensions,
             measures: measures,
             sorting: sorting,
-            amChart: amChart,
+            amChart: amChart
         }
     };
 });

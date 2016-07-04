@@ -206,7 +206,6 @@ define([
                         text: layout.amChart.titles.text,
                         alpha: layout.amChart.titles.alpha,
                         bold: layout.amChart.titles.bold,
-                        color: layout.amChart.titles.color,
                         size: layout.amChart.titles.size
                     }],
                     "valueAxes": [{
@@ -257,6 +256,8 @@ define([
                     },
                     "dataProvider": dataProvider
                 });
+
+                //CSS STUFF
                 if (layout.amChart.handDrawn) {
                     $element.find("*").css("font-family", "Kristen ITC");
                 } else {
@@ -273,6 +274,9 @@ define([
                     }
                 }
 
+                $element.css('border-radius', '10px');
+
+                //EVENTS
                 chart.chartCursor.addListener("selected", zoomy);
 
                 function zoomy(zomzom) {

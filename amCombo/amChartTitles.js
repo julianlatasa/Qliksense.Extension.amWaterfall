@@ -53,7 +53,6 @@ define([], function() {
             text: text,
             alpha: alpha,
             bold: bold,
-            color: color,
             size: size
         }
     };
