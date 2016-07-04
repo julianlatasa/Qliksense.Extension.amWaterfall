@@ -79,7 +79,9 @@ define([], function() {
     var fillColors = {
         type: "string",
         label: "Fill Color",
-        ref: "qDef.amGraph.fillColors"
+        ref: "qAttributeExpressions.0.qExpression",
+        expression: "optional",
+        defaultValue: ""
     };
     var fillAlphas = {
         type: "number",
@@ -142,8 +144,10 @@ define([], function() {
     // *****************************************************************************
     var lineColor = {
         type: "string",
-        label: "Line Color",
-        ref: "qDef.amGraph.lineColor"
+        label: "line Color",
+        ref: "qAttributeExpressions.1.qExpression",
+        expression: "optional",
+        defaultValue: ""
     };
     var lineThickness = {
         type: "number",

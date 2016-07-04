@@ -50,7 +50,6 @@ define([
                     page.qMatrix.forEach(function(row, rindex) {
                         var dataProviderObj = {};
                         var trendLinesObj = {};
-
                         row.forEach(function(cell, index) {
                             var cId;
                             if (index < hc.qDimensionInfo.length) {
@@ -71,6 +70,7 @@ define([
                                     dataProviderStart["open" + cId] = 0;
                                     dataProviderStart["close" + cId] = hc.qMeasureInfo[index - hc.qDimensionInfo.length].waterfall.start;
                                     dataProviderStart["color" + cId] = "#1c8ceb";
+                                    dataProviderStart["lineColor" + cId] = "#888888";
                                     dataProviderStart.dimText = hc.qMeasureInfo[index - hc.qDimensionInfo.length].waterfall.startLabel;
                                     dataProvider.push(dataProviderStart);
                                 }
@@ -84,6 +84,7 @@ define([
                                     dataProviderEnd["open" + cId] = 0;
                                     dataProviderEnd["close" + cId] = hc.qMeasureInfo[index - hc.qDimensionInfo.length].waterfall.end;
                                     dataProviderEnd["color" + cId] = "#1c8ceb";
+                                    dataProviderEnd["lineColor" + cId] = "#888888";
                                     dataProviderEnd.dimText = hc.qMeasureInfo[index - hc.qDimensionInfo.length].waterfall.endLabel;
                                 }
 
@@ -91,6 +92,8 @@ define([
 
                                 if (hc.qMeasureInfo[index - hc.qDimensionInfo.length].amGraph.type == 'Waterfall') {
                                     dataProviderObj["open" + cId] = dataProvider[rindex]["close" + cId];
+                                    dataProviderObj["lineColor" + cId] = "#888888";
+
                                     if (dataProviderObj["open" + cId] + cell.qNum > dataProvider[rindex]["close" + cId]) {
                                         dataProviderObj["color" + cId] = "#54cb6a";
                                     } else {
@@ -98,6 +101,8 @@ define([
                                     }
                                 } else {
                                     dataProviderObj["open" + cId] = 0;
+                                    dataProviderObj["color" + cId] = cell.qAttrExps.qValues[0].qText;
+                                    dataProviderObj["lineColor" + cId] = cell.qAttrExps.qValues[1].qText;
                                 }
 
                                 if (hc.qMeasureInfo[index - hc.qDimensionInfo.length].amGraph.type == 'Waterfall') {
@@ -146,16 +151,15 @@ define([
                     var amGraph = {};
                     if (measureDef.amGraph.type == 'Waterfall') {
                         amGraph.type = 'column';
-                        amGraph.colorField = 'color' + measureDef.cId;
-                        amGraph.lineColor = '#BBBBBB';
                     } else {
                         amGraph.type = measureDef.amGraph.type;
-                        amGraph.fillColors = measureDef.amGraph.fillColors;
-                        amGraph.lineColor = measureDef.amGraph.lineColor;
                     }
                     if (measureDef.amGraph.showLabel === true) {
                         amGraph.labelText = "[[text" + measureDef.cId + "]]";
                     }
+                    amGraph.fillColorsField = 'color' + measureDef.cId;
+                    amGraph.colorField = 'color' + measureDef.cId;
+                    amGraph.lineColorField = 'lineColor' + measureDef.cId;
                     amGraph.id = measureDef.cId;
                     amGraph.openField = "open" + measureDef.cId;
                     amGraph.valueField = "close" + measureDef.cId;
@@ -259,20 +263,21 @@ define([
                 }
 
                 if (layout.amChart.theme == 'dark' || layout.amChart.theme == 'chalk') {
-                $element.css("background-color", "#282828");
-            } else {
-                if (layout.amChart.theme == 'black') {
-                   $element.css("background-color", "#222222");
+                    $element.css("background-color", "#282828");
                 } else {
-                    $element.css("background-color", "#FFFFFF");
+                    if (layout.amChart.theme == 'black') {
+                        $element.css("background-color", "#222222");
+                    } else {
+                        $element.css("background-color", "#FFFFFF");
+                    }
                 }
-            }
 
                 chart.chartCursor.addListener("selected", zoomy);
+
                 function zoomy(zomzom) {
                     var dimValArray = [];
-                    dataProvider.forEach(function(row,index) {
-                        if(index >= zomzom.start && index <= zomzom.end && row["elemNumber" + hc.qDimensionInfo[0].cId] >= 0) {
+                    dataProvider.forEach(function(row, index) {
+                        if (index >= zomzom.start && index <= zomzom.end && row["elemNumber" + hc.qDimensionInfo[0].cId] >= 0) {
                             dimValArray.push(row["elemNumber" + hc.qDimensionInfo[0].cId]);
                         }
                     });
@@ -280,11 +285,12 @@ define([
                 }
 
                 chart.addListener("clickGraphItem", handleClickGraphItem);
+
                 function handleClickGraphItem(event) {
                     var dimValArray = [];
-                        if(dataProvider[event.index]["elemNumber" + hc.qDimensionInfo[0].cId] >= 0) {
-                            dimValArray.push(dataProvider[event.index]["elemNumber" + hc.qDimensionInfo[0].cId]);
-                        }
+                    if (dataProvider[event.index]["elemNumber" + hc.qDimensionInfo[0].cId] >= 0) {
+                        dimValArray.push(dataProvider[event.index]["elemNumber" + hc.qDimensionInfo[0].cId]);
+                    }
                     self.selectValues(0, dimValArray, false);
                 }
             }

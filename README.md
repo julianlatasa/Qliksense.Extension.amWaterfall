@@ -10,15 +10,15 @@ The goal of the combo chart is to give the user alooot of settings to mess aroun
 Please rate & give feedback! If you wan't to contribute feel free to message me on github.
 
 ### Current Development
-Below are the current changes I'm looking into based on feedback from other users.
-* None yay.
+Below are the current changes I'm looking into.
+* Implementing multi-dimensionality
 
 ### Latest 5 Changes
+* The line & fill colors on the measures are now entered via expression and applied on each dimension/x-axis value. Which means that you can color stuff based on your data e.g. if(sum(x)>sum(y), 'rgb(0,220,0)', 'rgb(220,0,0)'). Another usefull way that I usually use this for is when you have a dimensional heirarchy that is the 'center-piece' of your application, then you can load in RGB/Hex values that correspond to that heirarchy e.g. ProductGroup=FX,Hex=#123123. And then color your data consistently based on that. However for that to be more usefull I have to look into implementing multidimensionality in the amCombo chart.
 * Added theme's setting in the amChart settings. If you make any setting that conflicts with the theme it will choose your setting. E.g. choosing to change color of a measure. See screenshots below of the themes.
 * Drill down dimensions works now. If you have a drill heirarchy dim1>dim2>dim3 and you select 1 value in dim1 then dim2 will be the category split.
 * When you select an area (zoom) or click a value in the chart, instead of zooming through the amCharts API the dimension values are instead selected in the QlikSense application, so that it works similar to other QlikSense objects. (shared zooming/selection between objects).
 * When you choose the waterfall measure type, you are now prompted to enter an expression for start and end values. See screenshot below regarding how to use this setup. THe reason for this change was to avoid having to use complex valuelist synthetic dimensions to be able to create a waterfall.
-* Changed the chart to use the standard numberformatting settings on the measures instead. (These will be reflected on labels and balloons however they wont be reflected in the value axis which can be a minor problem for % graphs where the actual numbers are different:*100, also with this setup you can't change the labeltext and balloon text but only select wether to show them or not.). This also fixes an issue with the waterfall type measure; before label numbers were accumulative, now they represent the single observation value.
 
 ## Screenshots
 ### amChart themes.
