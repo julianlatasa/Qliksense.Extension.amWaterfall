@@ -194,6 +194,7 @@ define([
 
                 var chart = AmCharts.makeChart($element[0], {
                     "type": "serial",
+                    "rotate": layout.amChart.rotate,
                     "theme": layout.amChart.theme,
                     "depth3D": layout.amChart.depth3D,
                     "angle": layout.amChart.angle,

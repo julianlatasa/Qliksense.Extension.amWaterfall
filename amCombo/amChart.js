@@ -29,6 +29,22 @@ define([
         defaultValue: "none"
     };
 
+    var rotate = {
+    type: "boolean",
+        component: "switch",
+        label: "Rotate Chart",
+        ref: "amChart.rotate",
+        options: [{
+            value: true,
+            label: "On"
+        },
+        {
+            value: false,
+            label: "Off"
+        }],
+        defaultValue: false
+    };
+
     var showBalloon = {
         type: "boolean",
         component: "switch",
@@ -98,6 +114,7 @@ define([
         label: "amChart settings",
         items: {
             theme: theme,
+            rotate: rotate,
             fontFamily: fontFamily,
             fontSize: fontSize,
             showBalloon: showBalloon,
