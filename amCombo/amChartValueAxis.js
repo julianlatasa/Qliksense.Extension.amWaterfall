@@ -66,6 +66,20 @@ define([], function() {
         defaultValue: "none"
     };
 
+    var leftMinimum = {
+        type: "number",
+        label: "Left Axis Minimum",
+        ref: "amChart.valueAxis.leftMinimum",
+        expression: "always",
+        defaultValue: ""
+    };
+    var rightMinimum = {
+        type: "number",
+        label: "Right Axis Minimum",
+        ref: "amChart.valueAxis.rightMinimum",
+        expression: "always",
+        defaultValue: ""
+    };
 
     return {
         type: "items",
@@ -74,8 +88,10 @@ define([], function() {
             fontSize: fontSize,
             leftTitle: leftTitle,
             leftStackType: leftStackType,
+            leftMinimum: leftMinimum,
             rightTitle: rightTitle,
-            rightStackType: rightStackType
+            rightStackType: rightStackType,
+            rightMinimum: rightMinimum
         }
     };
 

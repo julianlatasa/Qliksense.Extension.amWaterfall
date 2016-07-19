@@ -12,6 +12,7 @@ define([
     var measures = {
         uses: "measures",
         min: 1,
+        max: 5,
         items: amGraph
     };
 

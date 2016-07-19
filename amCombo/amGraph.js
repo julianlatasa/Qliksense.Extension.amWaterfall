@@ -80,8 +80,15 @@ define([], function() {
         type: "string",
         label: "Fill Color",
         ref: "qAttributeExpressions.0.qExpression",
-        expression: "optional",
-        defaultValue: ""
+        expression: "never",
+        defaultValue: "",
+        change: function(data) {
+            data.qDef.amGraph.fillColors = data.qDef.amGraph.fillColors || {};
+            data.qDef.amGraph.fillColors.qStringExpression = data.qAttributeExpressions[0].qExpression;
+            if (data.qAttributeExpressions[0].qExpression === "") {
+                data.qDef.amGraph.lineColor = "";
+            }
+        }
     };
     var fillAlphas = {
         type: "number",
@@ -146,8 +153,15 @@ define([], function() {
         type: "string",
         label: "line Color",
         ref: "qAttributeExpressions.1.qExpression",
-        expression: "optional",
-        defaultValue: ""
+        expression: "never",
+        defaultValue: "",
+        change: function(data) {
+            data.qDef.amGraph.lineColor = data.qDef.amGraph.lineColor || {};
+            data.qDef.amGraph.lineColor.qStringExpression = data.qAttributeExpressions[1].qExpression;
+            if (data.qAttributeExpressions[1].qExpression === "") {
+                data.qDef.amGraph.lineColor = "";
+            }
+        }
     };
     var lineThickness = {
         type: "number",
@@ -361,9 +375,9 @@ define([], function() {
     // RETURN OBJECT
     // *****************************************************************************
     return {
-            groupStandard: groupStandard,
-            groupBullet: groupBullet,
-            groupLabel: groupLabel,
-            groupVarious: groupVarious
+        groupStandard: groupStandard,
+        groupBullet: groupBullet,
+        groupLabel: groupLabel,
+        groupVarious: groupVarious
     };
 });

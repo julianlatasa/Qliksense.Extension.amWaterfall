@@ -86,7 +86,8 @@ define([
     var fontFamily = {
         ref: "amChart.fontFamily",
         label: "Font Family",
-        type: "string"
+        type: "string",
+        defaultValue: "QlikSense Sans"
     };
 
     var fontSize = {

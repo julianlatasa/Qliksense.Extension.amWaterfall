@@ -46,6 +46,7 @@ define([
                 var trendLines = [];
                 var trendLinesEnd = {};
                 var amGraphs = [];
+                console.log(layout);
                 hc.qDataPages.forEach(function(page, index) {
                     page.qMatrix.forEach(function(row, rindex) {
                         var dataProviderObj = {};
@@ -101,7 +102,12 @@ define([
                                     }
                                 } else {
                                     dataProviderObj["open" + cId] = 0;
+                                }
+
+                                if (typeof cell.qAttrExps.qValues[0].qText != "undefined") {
                                     dataProviderObj["color" + cId] = cell.qAttrExps.qValues[0].qText;
+                                }
+                                if (typeof cell.qAttrExps.qValues[1].qText != "undefined") {
                                     dataProviderObj["lineColor" + cId] = cell.qAttrExps.qValues[1].qText;
                                 }
 
@@ -133,7 +139,6 @@ define([
                             } else {
                                 dataProviderObj[cId] = cell.qNum;
                             }
-
                         });
                         dataProvider.push(dataProviderObj);
                     });
@@ -160,6 +165,7 @@ define([
                     amGraph.fillColorsField = 'color' + measureDef.cId;
                     amGraph.colorField = 'color' + measureDef.cId;
                     amGraph.lineColorField = 'lineColor' + measureDef.cId;
+                    amGraph.lineColor = measureDef.amGraph.fillColors;
                     amGraph.id = measureDef.cId;
                     amGraph.openField = "open" + measureDef.cId;
                     amGraph.valueField = "close" + measureDef.cId;
@@ -191,7 +197,29 @@ define([
                 AmCharts.themes.light = amChartsThemesLight;
                 AmCharts.themes.black = amChartsThemesBlack;
                 AmCharts.themes.chalk = amChartsThemesChalk;
+                var valueAxesLeft = {
+                    "id": "v1",
+                    "position": "left",
+                    "autoGridCount": false,
+                    "stackType": layout.amChart.valueAxis.leftStackType,
+                    "fontSize": layout.amChart.valueAxis.fontSize,
+                    "title": layout.amChart.valueAxis.leftTitle
+                };
+                if (layout.amChart.valueAxis.leftMinimum !== "") {
+                    valueAxesLeft.minimum = layout.amChart.valueAxis.leftMinimum;
+                }
+                var valueAxesRight = {
+                    "id": "v2",
+                    "position": "right",
+                    "autoGridCount": false,
+                    "stackType": layout.amChart.valueAxis.rightStackType,
+                    "fontSize": layout.amChart.valueAxis.fontSize,
+                    "title": layout.amChart.valueAxis.rightTitle,
 
+                };
+                if (layout.amChart.valueAxis.rightMinimum !== "") {
+                    valueAxesRight.minimum = layout.amChart.valueAxis.rightMinimum;
+                }
                 var chart = AmCharts.makeChart($element[0], {
                     "type": "serial",
                     "rotate": layout.amChart.rotate,
@@ -208,21 +236,7 @@ define([
                         bold: layout.amChart.titles.bold,
                         size: layout.amChart.titles.size
                     }],
-                    "valueAxes": [{
-                        "id": "v1",
-                        "position": "left",
-                        "autoGridCount": false,
-                        "stackType": layout.amChart.valueAxis.leftStackType,
-                        "fontSize": layout.amChart.valueAxis.fontSize,
-                        "title": layout.amChart.valueAxis.leftTitle
-                    }, {
-                        "id": "v2",
-                        "position": "right",
-                        "autoGridCount": false,
-                        "stackType": layout.amChart.valueAxis.rightStackType,
-                        "fontSize": layout.amChart.valueAxis.fontSize,
-                        "title": layout.amChart.valueAxis.rightTitle
-                    }],
+                    "valueAxes": [valueAxesLeft, valueAxesRight],
                     "graphs": amGraphs,
                     "trendLines": trendLines,
                     "chartCursor": {
