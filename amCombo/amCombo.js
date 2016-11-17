@@ -43,6 +43,7 @@ define([
         var hc = layout.qHyperCube;
         var dataProviderNew = new DataProvider(layout.qHyperCube);
         dataProviderNew.addData();
+        dataProviderNew.addGraphs();
         console.log(dataProviderNew);
         var dataProvider = [];
         var dataProviderStart = {};
@@ -53,7 +54,7 @@ define([
         // for each page
         hc.qDataPages.forEach(function(page, index) {
 
-            // for each row
+          // for each row
           page.qMatrix.forEach(function(row, rindex) {
             var dataProviderObj = {};
             var trendLinesObj = {};
@@ -198,6 +199,7 @@ define([
           amGraph.behindColumns = measureDef.amGraph.behindColumns;
           amGraphs.push(amGraph);
         });
+        console.log(amGraphs);
 
         //Set themes
         AmCharts.themes.dark = amChartsThemesDark;
@@ -244,7 +246,7 @@ define([
             size: layout.amChart.titles.size
           }],
           "valueAxes": [valueAxesLeft, valueAxesRight],
-          "graphs": amGraphs,
+          "graphs": dataProviderNew.amGraphs, //amGraphs,
           "trendLines": trendLines,
           "chartCursor": {
             "selectWithoutZooming": true,
@@ -276,7 +278,7 @@ define([
           "export": {
             "enabled": true
           },
-          "dataProvider": dataProvider
+          "dataProvider": dataProviderNew.dataProvider
         });
 
         //CSS STUFF
