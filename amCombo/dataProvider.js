@@ -328,7 +328,6 @@ var WaterfallPointBounds = function(hyperCube, rindex, cell, cindex, cellId, las
 WaterfallPointBounds.prototype = Object.create(WaterfallPoint.prototype);
 WaterfallPointBounds.prototype.constructor = WaterfallPointBounds;
 
-
 WaterfallPointBounds.prototype.addWaterfallBound = function() {
   var self = this;
   self.values['text' + self.hyperCube.qDimensionInfo[0].cId] = self[self.bound + 'label'];
