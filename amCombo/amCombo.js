@@ -198,9 +198,6 @@ define([
           amGraph.behindColumns = measureDef.amGraph.behindColumns;
           amGraphs.push(amGraph);
         });
-        console.log(amGraphs);
-        console.log(dataProvider);
-        console.log(dataProviderNew);
         //Set themes
         AmCharts.themes.dark = amChartsThemesDark;
         AmCharts.themes.light = amChartsThemesLight;
@@ -247,7 +244,7 @@ define([
           }],
           "valueAxes": [valueAxesLeft, valueAxesRight],
           "graphs": dataProviderNew.amGraphs, //amGraphs,
-          "trendLines": trendLines,
+          "trendLines": dataProviderNew.trendLines,
           "chartCursor": {
             "selectWithoutZooming": true,
             "pan": false,

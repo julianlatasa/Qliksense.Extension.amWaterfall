@@ -15,6 +15,7 @@ DataProvider.prototype.addGraphs = function() {
     } else {
       graph = new DataGraph(measureDef);
     }
+    graph.showColors();
     graph.showLabel();
     self.amGraphs.push(graph);
   });
@@ -24,8 +25,9 @@ var DataGraph = function(measureDef) {
   var self = this;
   self.measureDef = measureDef;
   self.type = measureDef.amGraph.type;
-  self.fillColorsField = 'color' + measureDef.cId;
+  self.colorField = 'color' + measureDef.cId;
   self.lineColorField = 'lineColor' + measureDef.cId;
+  self.fillColorsField = 'color' + measureDef.cId;
   self.id = measureDef.cId;
   self.title = measureDef.qFallbackTitle;
   self.bulletBorderAlpha = 1;
@@ -57,6 +59,13 @@ DataGraph.prototype.showLabel = function() {
   }
 };
 
+DataGraph.prototype.showColors = function() {
+  var self = this;
+  if (self.measureDef.amGraph.fillColors != 'Error: Invalid or Empty Expression.') {
+    self.lineColor = self.measureDef.amGraph.fillColors;
+  }
+};
+
 var DataGraphWaterfall = function(measureDef) {
   var self = this;
   DataGraph.call(self, measureDef);
@@ -67,6 +76,15 @@ var DataGraphWaterfall = function(measureDef) {
 
 DataGraphWaterfall.prototype = Object.create(DataGraph.prototype);
 DataGraphWaterfall.prototype.constructor = DataGraphWaterfall;
+
+DataGraph.prototype.showColors = function() {
+  var self = this;
+  if (self.measureDef.amGraph.fillColors != 'Error: Invalid or Empty Expression.') {
+    self.lineColor = self.measureDef.amGraph.fillColors;
+  } else {
+    self.lineColor = (self.measureDef.waterfall.start < self.measureDef.waterfall.end ? '#54cb6a' : '#cc4b48');
+  }
+};
 
 DataProvider.prototype.addData = function() {
   var self = this;
@@ -110,45 +128,93 @@ DataRow.prototype.addRowData = function() {
   var self = this;
   var dataPointStart = {};
   var dataPointEnd;
+
   self.row.forEach(function(cell, cindex) {
     var isDimension = self.isCellDimension(cindex);
     var cellId = self.findCellId(isDimension, cindex);
     var dataPoint;
     var lastClose;
+
     switch (isDimension) {
+      // DIMENSION
       case true:
         dataPoint = new DimensionPoint(self.hyperCube, self.rindex, cell, cindex, cellId);
+        dataPoint.addAllData();
+        self.rowObject = Object.assign(self.rowObject, dataPoint.values);
         break;
+
+        // MEASURE
       case false:
         var isWaterfall = self.isCellWaterfall(cindex);
+
         switch (isWaterfall) {
+
+          // WATERFALL MEASURE
           case true:
             switch (self.rindex) {
+
+              // START OF WATERFALL
               case 0:
                 dataPointStart = new WaterfallPointBounds(self.hyperCube, self.rindex, cell, cindex, cellId, 0, 'start');
                 dataPointStart.addAllData();
                 self.dataProvider.dataProvider.push(dataPointStart.values);
                 break;
+
+                // END OF WATERFALL
               case self.hyperCube.qSize.qcy - 1:
                 dataPointEnd = new WaterfallPointBounds(self.hyperCube, self.rindex, cell, cindex, cellId, 0, 'end');
                 dataPointEnd.addAllData();
                 break;
             }
+
+            // ALL OTHER POINTS OF WATERFALL
             lastClose = self.dataProvider.dataProvider[self.rindex]['close' + cellId];
             dataPoint = new WaterfallPoint(self.hyperCube, self.rindex, cell, cindex, cellId, lastClose);
+            dataPoint.addAllData();
+            self.rowObject = Object.assign(self.rowObject, dataPoint.values);
+            trendLinePoint = new TrendLinePoint(self.dataProvider, dataPoint, self.rowObject);
+            self.dataProvider.trendLines.push(trendLinePoint);
             break;
+
+            // STANDARD MEASURE
           case false:
             dataPoint = new MeasurePoint(self.hyperCube, self.rindex, cell, cindex, cellId);
+            dataPoint.addAllData();
+            self.rowObject = Object.assign(self.rowObject, dataPoint.values);
             break;
         }
     }
-    dataPoint.addAllData();
-    self.rowObject = Object.assign(self.rowObject, dataPoint.values);
+
   });
+
+  // FINAL WATERFALL VALUE
   self.dataProvider.dataProvider.push(self.rowObject);
   if (self.hyperCube.qSize.qcy - 1 === self.rindex && typeof dataPointEnd != 'undefined') {
     self.dataProvider.dataProvider.push(dataPointEnd.values);
+    trendLinePoint = new TrendLinePoint(self.dataProvider, dataPointEnd , self.rowObject);
+    trendLinePoint.alterLastPoint();
+    self.dataProvider.trendLines.push(trendLinePoint);
   }
+};
+
+var TrendLinePoint = function(dataProvider, dataPoint, rowObject) {
+  var self = this;
+  self.dataPoint = dataPoint;
+  self.rowObject = rowObject;
+  self.dashLength = 3;
+  self.finalCategory = rowObject.dimText;
+  self.initialCategory = dataProvider.dataProvider[dataPoint.rindex].dimText;
+  self.initialValue = dataPoint.lastClose;
+  self.finalValue = rowObject['open' + dataPoint.cellId];
+  self.lineColor = '#888888';
+};
+
+TrendLinePoint.prototype.alterLastPoint = function() {
+  var self = this;
+  self.initialCategory = self.rowObject.dimText;
+  self.initialValue = self.rowObject['close' + self.dataPoint.cellId];
+  self.finalValue = self.dataPoint.hyperCube.qMeasureInfo[self.dataPoint.cindex - self.dataPoint.hyperCube.qDimensionInfo.length].waterfall.end;
+  self.finalCategory = self.dataPoint.hyperCube.qMeasureInfo[self.dataPoint.cindex - self.dataPoint.hyperCube.qDimensionInfo.length].waterfall.endLabel;
 };
 
 var DataPoint = function(hyperCube, rindex, cell, cindex, cellId) {
@@ -156,6 +222,7 @@ var DataPoint = function(hyperCube, rindex, cell, cindex, cellId) {
   self.hyperCube = hyperCube;
   self.cell = cell;
   self.cindex = cindex;
+  self.rindex = rindex;
   self.cellId = cellId;
   self.values = {};
 };
