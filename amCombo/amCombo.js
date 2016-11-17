@@ -159,7 +159,6 @@ define([
             dataProvider.push(dataProviderEnd);
           }
         });
-        console.log(dataProvider);
         hc.qMeasureInfo.forEach(function(measureDef, index) {
           var amGraph = {};
           if (measureDef.amGraph.type == 'Waterfall') {
@@ -200,7 +199,8 @@ define([
           amGraphs.push(amGraph);
         });
         console.log(amGraphs);
-
+        console.log(dataProvider);
+        console.log(dataProviderNew);
         //Set themes
         AmCharts.themes.dark = amChartsThemesDark;
         AmCharts.themes.light = amChartsThemesLight;

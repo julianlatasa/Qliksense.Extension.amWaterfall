@@ -3,6 +3,7 @@ var DataProvider = function(hyperCube) {
   self.hyperCube = hyperCube;
   self.dataProvider = [];
   self.amGraphs = [];
+  self.trendLines = [];
 };
 
 DataProvider.prototype.addGraphs = function() {
@@ -23,9 +24,7 @@ var DataGraph = function(measureDef) {
   var self = this;
   self.measureDef = measureDef;
   self.type = measureDef.amGraph.type;
-  self.lineColor = measureDef.amGraph.fillColors;
   self.fillColorsField = 'color' + measureDef.cId;
-  self.colorField = 'color' + measureDef.cId;
   self.lineColorField = 'lineColor' + measureDef.cId;
   self.id = measureDef.cId;
   self.title = measureDef.qFallbackTitle;
@@ -54,7 +53,7 @@ var DataGraph = function(measureDef) {
 DataGraph.prototype.showLabel = function() {
   var self = this;
   if (self.measureDef.amGraph.showLabel === true) {
-    amGraph.labelText = "[[text" + self.measureDef.cId + "]]";
+    self.labelText = "[[text" + self.measureDef.cId + "]]";
   }
 };
 
@@ -110,7 +109,7 @@ DataRow.prototype.findCellId = function(isDimension, cindex) {
 DataRow.prototype.addRowData = function() {
   var self = this;
   var dataPointStart = {};
-  var dataPointEnd = {};
+  var dataPointEnd;
   self.row.forEach(function(cell, cindex) {
     var isDimension = self.isCellDimension(cindex);
     var cellId = self.findCellId(isDimension, cindex);
@@ -126,24 +125,20 @@ DataRow.prototype.addRowData = function() {
           case true:
             switch (self.rindex) {
               case 0:
-                lastClose = 0;
-                dataPointStart = new WaterfallPointBounds(self.hyperCube, self.rindex, cell, cindex, cellId, lastClose, 'start');
+                dataPointStart = new WaterfallPointBounds(self.hyperCube, self.rindex, cell, cindex, cellId, 0, 'start');
                 dataPointStart.addAllData();
                 self.dataProvider.dataProvider.push(dataPointStart.values);
                 break;
               case self.hyperCube.qSize.qcy - 1:
-                lastClose = 0;
-                dataPointEnd = new WaterfallPointBounds(self.hyperCube, self.rindex, cell, cindex, cellId, lastClose, 'end');
+                dataPointEnd = new WaterfallPointBounds(self.hyperCube, self.rindex, cell, cindex, cellId, 0, 'end');
                 dataPointEnd.addAllData();
                 break;
-              default:
-                lastClose = self.dataProvider.dataProvider[self.rindex]['close' + cellId];
-                break;
             }
+            lastClose = self.dataProvider.dataProvider[self.rindex]['close' + cellId];
             dataPoint = new WaterfallPoint(self.hyperCube, self.rindex, cell, cindex, cellId, lastClose);
             break;
           case false:
-            dataPoint = new DataPoint(self.hyperCube, self.rindex, cell, cindex, cellId);
+            dataPoint = new MeasurePoint(self.hyperCube, self.rindex, cell, cindex, cellId);
             break;
         }
     }
@@ -151,7 +146,7 @@ DataRow.prototype.addRowData = function() {
     self.rowObject = Object.assign(self.rowObject, dataPoint.values);
   });
   self.dataProvider.dataProvider.push(self.rowObject);
-  if (self.hyperCube.qSize.qcy - 1 === self.rindex) {
+  if (self.hyperCube.qSize.qcy - 1 === self.rindex && typeof dataPointEnd != 'undefined') {
     self.dataProvider.dataProvider.push(dataPointEnd.values);
   }
 };
@@ -214,6 +209,12 @@ MeasurePoint.prototype.addMeasureData = function() {
   }
 };
 
+MeasurePoint.prototype.addAllData = function() {
+  var self = this;
+  self.addPointData();
+  self.addMeasureData();
+};
+
 var WaterfallPoint = function(hyperCube, rindex, cell, cindex, cellId, lastClose) {
   var self = this;
   MeasurePoint.call(self, hyperCube, rindex, cell, cindex, cellId);
@@ -232,7 +233,7 @@ WaterfallPoint.prototype.addWaterfallData = function() {
   self.values['close' + self.cellId] = close;
 
   if (typeof self.cell.qAttrExps.qValues[0].qText == 'undefined') {
-    self.values['color' + self.cellId] = open > close ? '#54cb6a' : '#cc4b48';
+    self.values['color' + self.cellId] = open < close ? '#54cb6a' : '#cc4b48';
   }
   if (typeof self.cell.qAttrExps.qValues[1].qText == 'undefined') {
     self.values['lineColor' + self.cellId] = '#888888';
