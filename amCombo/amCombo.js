@@ -42,9 +42,9 @@ define([
       paint: function($element, layout) {
         var self = this;
         var hc = layout.qHyperCube;
-        var dataProviderNew = new DataProvider(layout.qHyperCube);
-        dataProviderNew.addData();
-        dataProviderNew.addGraphs();
+        var dataProvider = new DataProvider(layout.qHyperCube);
+        dataProvider.addData();
+        dataProvider.addGraphs();
 
         //Set themes
         AmCharts.themes.dark = amChartsThemesDark;
@@ -91,8 +91,8 @@ define([
             size: layout.amChart.titles.size
           }],
           "valueAxes": [valueAxesLeft, valueAxesRight],
-          "graphs": dataProviderNew.amGraphs, //amGraphs,
-          "trendLines": dataProviderNew.trendLines,
+          "graphs": dataProvider.amGraphs, //amGraphs,
+          "trendLines": dataProvider.trendLines,
           "chartCursor": {
             "selectWithoutZooming": true,
             "pan": false,
@@ -123,7 +123,7 @@ define([
           "export": {
             "enabled": true
           },
-          "dataProvider": dataProviderNew.dataProvider
+          "dataProvider": dataProvider.dataProvider
         });
 
         //CSS STUFF
@@ -150,7 +150,7 @@ define([
 
         function zoomy(zomzom) {
           var dimValArray = [];
-          dataProvider.forEach(function(row, index) {
+          dataProvider.dataProvider.forEach(function(row, index) {
             if (index >= zomzom.start && index <= zomzom.end && row["elemNumber" + hc.qDimensionInfo[0].cId] >= 0) {
               dimValArray.push(row["elemNumber" + hc.qDimensionInfo[0].cId]);
             }
@@ -162,8 +162,8 @@ define([
 
         function handleClickGraphItem(event) {
           var dimValArray = [];
-          if (dataProvider[event.index]["elemNumber" + hc.qDimensionInfo[0].cId] >= 0) {
-            dimValArray.push(dataProvider[event.index]["elemNumber" + hc.qDimensionInfo[0].cId]);
+          if (dataProvider.dataProvider[event.index]["elemNumber" + hc.qDimensionInfo[0].cId] >= 0) {
+            dimValArray.push(dataProvider.dataProvider[event.index]["elemNumber" + hc.qDimensionInfo[0].cId]);
           }
           self.selectValues(0, dimValArray, false);
         }
