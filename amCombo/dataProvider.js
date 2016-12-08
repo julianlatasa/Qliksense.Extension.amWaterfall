@@ -337,6 +337,9 @@ WaterfallPointBounds.prototype.addWaterfallBound = function() {
   self.values['close' + self.cellId] = self.lastClose + self[self.bound];
   self.values['color' + self.cellId] = self[self.bound + 'color'];
   self.values.dimText = self[self.bound + 'label'];
+  var qFormat = self.hyperCube.qMeasureInfo[self.cindex - self.hyperCube.qDimensionInfo.length].qNumFormat.qFmt;
+  console.log(numeral(self[self.bound]).format(qFormat));
+
 };
 
 WaterfallPointBounds.prototype.addAllData = function() {

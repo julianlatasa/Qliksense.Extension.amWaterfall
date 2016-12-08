@@ -22,10 +22,11 @@ define([
     'qlik',
     'jquery',
     './properties',
+    './library/numeral',
     './dataProvider',
     'amcharts.serial'
   ],
-  function(qlik, $, props) {
+  function(qlik, $, props, numeral) {
     return {
       definition: props,
       initialProperties: {
@@ -33,8 +34,8 @@ define([
           qDimensions: [],
           qMeasures: [],
           qInitialDataFetch: [{
-            qWidth: 6,
-            qHeight: 1500
+            qWidth: 7,
+            qHeight: 1250
           }]
         }
       },
