@@ -92,7 +92,24 @@ define([
           }],
           "valueAxes": [valueAxesLeft, valueAxesRight],
           "graphs": dataProvider.amGraphs, //amGraphs,
-          "trendLines": dataProvider.trendLines,
+          "chartScrollbar": {
+            "enabled": layout.amChart.categoryAxis.chartScrollbar.show,
+            "graph": typeof dataProvider.amGraphs[layout.amChart.categoryAxis.chartScrollbar.graph] !== 'undefined' ?
+              dataProvider.amGraphs[layout.amChart.categoryAxis.chartScrollbar.graph].id : dataProvider.amGraphs[0].id,
+            "oppositeAxis": false,
+            "offset": 30,
+            "scrollbarHeight": layout.amChart.categoryAxis.chartScrollbar.scrollbarHeight,
+            "backgroundAlpha": layout.amChart.categoryAxis.chartScrollbar.backgroundAlpha,
+            "selectedBackgroundAlpha": layout.amChart.categoryAxis.chartScrollbar.selectedBackgroundAlpha,
+            "selectedBackgroundColor": layout.amChart.categoryAxis.chartScrollbar.selectedBackgroundColor,
+            "graphFillAlpha": layout.amChart.categoryAxis.chartScrollbar.graphFillAlpha,
+            "graphLineAlpha": layout.amChart.categoryAxis.chartScrollbar.graphLineAlpha,
+            "selectedGraphFillAlpha": layout.amChart.categoryAxis.chartScrollbar.selectedGraphFillAlpha,
+            "selectedGraphLineAlpha": layout.amChart.categoryAxis.chartScrollbar.selectedGraphLineAlpha,
+            "autoGridCount": true,
+            "color": layout.amChart.categoryAxis.chartScrollbar.color
+          },
+            "trendLines": dataProvider.trendLines,
           "chartCursor": {
             "selectWithoutZooming": true,
             "pan": false,

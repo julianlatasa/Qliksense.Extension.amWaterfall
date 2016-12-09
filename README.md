@@ -13,14 +13,16 @@ Please rate & give feedback! If you wan't to contribute feel free to message me 
 Sorry that I havn't been able to do any updates, for the last 6 months. Doing this pro-bono makes it hard to justify spending 2 much time on it. I am reading all your messages & issues and reaching a critical mass will encourage me to do an update on the extension like i did today  (17/11/2016), albeit it being a code quality update only.
 
 ### Latest 5 Changes
+* Added option to add and modify a categoryaxis scrollbar after several people requested it.
 * Did a major change to the coding structure. The preperation of datainput into amCharts are now beeing done in an OOP solution in the 'dataProvider.js' file.
 This doesnt change anything on the front-end, but will make it alot easier to make changes going forward.
 * Made the calculated colors now appear on legends as a calculation disregarding the chart dimensions. (Think how the color calculations would calculate on a total row). Added a calculation field to calculate the minimum value for the left and right axis. Added a screenshot to explain usage of the the mentioned changes.
 * The line & fill colors on the measures are now entered via expression and applied on each dimension/x-axis value. Which means that you can color stuff based on your data e.g. if(sum(x)>sum(y), 'rgb(0,220,0)', 'rgb(220,0,0)'). Another usefull way that I usually use this for is when you have a dimensional heirarchy that is the 'center-piece' of your application, then you can load in RGB/Hex values that correspond to that heirarchy e.g. ProductGroup=FX,Hex=#123123. And then color your data consistently based on that. However for that to be more usefull I have to look into implementing multidimensionality in the amCombo chart.
 * Added theme's setting in the amChart settings. If you make any setting that conflicts with the theme it will choose your setting. E.g. choosing to change color of a measure. See screenshots below of the themes.
-* Drill down dimensions works now. If you have a drill heirarchy dim1>dim2>dim3 and you select 1 value in dim1 then dim2 will be the category split.
 
 ## Screenshots
+### Added scrollbar option for category axis
+![Category Axis Scrollbar](comboPictures/categoryAxisScrollbar.PNG)
 ### Calculated colors and calculated minimum axis values
 ![Calc colors & minimum axis values](comboPictures/comboColorFixes.PNG)
 ### amChart themes.
