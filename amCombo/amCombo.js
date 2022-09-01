@@ -57,7 +57,8 @@ define([
           "autoGridCount": false,
           "stackType": layout.amChart.valueAxis.leftStackType,
           "fontSize": layout.amChart.valueAxis.fontSize,
-          "title": layout.amChart.valueAxis.leftTitle
+          "title": layout.amChart.valueAxis.leftTitle,
+          "labelFunction" : function(value, valueText, valueAxis) { if (layout.amChart.valueAxis.leftCustomValue == "1") return (new Date(((value*86400) + ((new Date()).getTimezoneOffset() * 60) )*1000).toTimeString().split(' ')[0]); else if (layout.amChart.valueAxis.leftCustomValue == "2") return ((value * 100) + "%"); else return valueText; }
         };
         if (layout.amChart.valueAxis.leftMinimum !== "") {
           valueAxesLeft.minimum = layout.amChart.valueAxis.leftMinimum;
@@ -69,7 +70,7 @@ define([
           "stackType": layout.amChart.valueAxis.rightStackType,
           "fontSize": layout.amChart.valueAxis.fontSize,
           "title": layout.amChart.valueAxis.rightTitle,
-
+          "labelFunction" : function(value, valueText, valueAxis) { if (layout.amChart.valueAxis.rightCustomValue == "1") return (new Date(((value*86400) + ((new Date()).getTimezoneOffset() * 60) )*1000).toTimeString().split(' ')[0]); else if (layout.amChart.valueAxis.rightCustomValue == "2") return ((value * 100) + "%"); else return valueText; }
         };
         if (layout.amChart.valueAxis.rightMinimum !== "") {
           valueAxesRight.minimum = layout.amChart.valueAxis.rightMinimum;

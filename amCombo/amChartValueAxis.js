@@ -21,6 +21,26 @@ define([], function() {
         defaultValue: "Right Value Axis"
     };
 
+    var leftCustomValue = {
+        type: "string",
+        label: "Left Custom Value",
+        ref: "amChart.valueAxis.leftCustomValue",
+        defaultValue: "0",
+        component: "dropdown",
+        options: [{
+            value: "0",
+            label: "Default"
+        },
+        {
+            value: "1",
+            label: "Duration"
+        },
+        {
+            value: "2",
+            label: "Percentage"
+        }]
+    };
+
     var leftStackType = {
         type: "string",
         component: "dropdown",
@@ -65,6 +85,25 @@ define([], function() {
         }],
         defaultValue: "none"
     };
+    var rightCustomValue = {
+        type: "string",
+        label: "Right Custom Value",
+        ref: "amChart.valueAxis.rightCustomValue",
+        defaultValue: "0",
+        component: "dropdown",
+        options: [{
+            value: "0",
+            label: "Default"
+        },
+        {
+            value: "1",
+            label: "Duration"
+        },
+        {
+            value: "2",
+            label: "Percentage"
+        }]
+    };
 
     var leftMinimum = {
         type: "number",
@@ -89,8 +128,10 @@ define([], function() {
             leftTitle: leftTitle,
             leftStackType: leftStackType,
             leftMinimum: leftMinimum,
+            leftCustomValue: leftCustomValue,
             rightTitle: rightTitle,
             rightStackType: rightStackType,
+            rightCustomValue: rightCustomValue,
             rightMinimum: rightMinimum
         }
     };
